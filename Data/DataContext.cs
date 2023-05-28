@@ -1,8 +1,8 @@
-﻿using app.Entities;
+﻿using TractorMarket.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
-namespace app.Data;
+namespace TractorMarket.Data;
 
 public class DataContext : DbContext
 {

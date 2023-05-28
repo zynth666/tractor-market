@@ -5,6 +5,8 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
+using TractorMarket.Data;
+using TractorMarket.Helpers;
 using TractorMarket.Models;
 using TractorMarket.Services;
 using Wpf.Ui.Mvvm.Contracts;
@@ -55,6 +57,12 @@ namespace TractorMarket
                 services.AddScoped<ViewModels.SettingsViewModel>();
                 services.AddScoped<Views.Pages.LoginPage>();
                 services.AddScoped<ViewModels.LoginViewModel>();
+
+                // Services and Helpers
+                services.AddSingleton<TractorService>();
+                services.AddSingleton<UserService>();
+                services.AddSingleton<RefreshDatabase>();
+                services.AddDbContext<DataContext>();
 
                 // Configuration
                 services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));

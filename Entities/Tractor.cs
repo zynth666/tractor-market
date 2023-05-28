@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace app.Entities;
+namespace TractorMarket.Entities;
 
 public class Tractor
 {

@@ -3,69 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using app.Data;
+using TractorMarket.Data;
 
 #nullable disable
 
-namespace app.Migrations
+namespace TractorMarket.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230418114149_TractorAddonsAndNewTractors")]
-    partial class TractorAddonsAndNewTractors
+    [Migration("20230528222512_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
 
-            modelBuilder.Entity("TractorToAddon", b =>
-                {
-                    b.Property<int>("AddonsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TractorsId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AddonsId", "TractorsId");
-
-                    b.HasIndex("TractorsId");
-
-                    b.ToTable("TractorToAddon");
-                });
-
-            modelBuilder.Entity("app.Entities.NewTractor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Horsepower")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Manufacturer")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Velocity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Vintage")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NewTractors");
-                });
-
-            modelBuilder.Entity("app.Entities.Tractor", b =>
+            modelBuilder.Entity("TractorMarket.Entities.Tractor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,7 +53,7 @@ namespace app.Migrations
                     b.ToTable("Tractors");
                 });
 
-            modelBuilder.Entity("app.Entities.TractorAddon", b =>
+            modelBuilder.Entity("TractorMarket.Entities.TractorAddon", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,13 +74,16 @@ namespace app.Migrations
                     b.ToTable("TractorAddons");
                 });
 
-            modelBuilder.Entity("app.Entities.User", b =>
+            modelBuilder.Entity("TractorMarket.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<long>("Budget")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsAdmin")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -144,13 +101,28 @@ namespace app.Migrations
 
             modelBuilder.Entity("TractorToAddon", b =>
                 {
-                    b.HasOne("app.Entities.TractorAddon", null)
+                    b.Property<int>("AddonsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TractorsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AddonsId", "TractorsId");
+
+                    b.HasIndex("TractorsId");
+
+                    b.ToTable("TractorToAddon");
+                });
+
+            modelBuilder.Entity("TractorToAddon", b =>
+                {
+                    b.HasOne("TractorMarket.Entities.TractorAddon", null)
                         .WithMany()
                         .HasForeignKey("AddonsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("app.Entities.Tractor", null)
+                    b.HasOne("TractorMarket.Entities.Tractor", null)
                         .WithMany()
                         .HasForeignKey("TractorsId")
                         .OnDelete(DeleteBehavior.Cascade)

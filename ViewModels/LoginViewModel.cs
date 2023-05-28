@@ -12,7 +12,6 @@ namespace TractorMarket.ViewModels
         public LoginViewModel(RefreshDatabase refreshDatabaseHelper)
         {
             _refreshDatabaseHelper = refreshDatabaseHelper;
-            _refreshDatabaseHelper.Execute();
         }
 
         public void OnNavigatedTo()

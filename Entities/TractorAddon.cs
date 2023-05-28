@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace app.Entities;
+namespace TractorMarket.Entities;
 
 public class TractorAddon
 {

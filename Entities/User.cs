@@ -1,4 +1,4 @@
-﻿namespace app.Entities;
+﻿namespace TractorMarket.Entities;
 
 public class User
 {

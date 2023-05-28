@@ -1,9 +1,9 @@
-﻿using app.Data;
-using app.Entities;
+﻿using TractorMarket.Data;
+using TractorMarket.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace app.Services;
+namespace TractorMarket.Services;
 
 public class TractorService
 {

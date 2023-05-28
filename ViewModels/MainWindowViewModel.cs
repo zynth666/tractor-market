@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
+using TractorMarket.Helpers;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
@@ -24,10 +25,12 @@ namespace TractorMarket.ViewModels
         [ObservableProperty]
         private ObservableCollection<MenuItem> _trayMenuItems = new();
 
-        public MainWindowViewModel(INavigationService navigationService)
+        public MainWindowViewModel(INavigationService navigationService, RefreshDatabase refreshDatabaseHelper)
         {
             if (!_isInitialized)
                 InitializeViewModel();
+
+            refreshDatabaseHelper.Execute();
         }
 
         private void InitializeViewModel()
