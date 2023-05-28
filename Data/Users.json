@@ -1,0 +1,43 @@
+[
+  {
+    "Name": "Oskar",
+    "Budget": 750000,
+    "Password": "oskar",
+    "IsAdmin": false
+  },
+
+  {
+    "Name": "Benni",
+    "Budget": 1250000,
+    "Password": "benni",
+    "IsAdmin": false
+  },
+
+  {
+    "Name": "Daniela",
+    "Budget": 2250000,
+    "Password": "daniela",
+    "IsAdmin": false
+  },
+
+  {
+    "Name": "Horst",
+    "Budget": 3750000,
+    "Password": "horst",
+    "IsAdmin": false
+  },
+
+  {
+    "Name": "Sieglinde",
+    "Budget": 5000000,
+    "Password": "sieglinde",
+    "IsAdmin": false
+  },
+
+  {
+    "Name": "Klaus",
+    "Budget": 10000000,
+    "Password": "klaus",
+    "IsAdmin": true
+  }
+]

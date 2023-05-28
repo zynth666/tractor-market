@@ -1,0 +1,116 @@
+[
+  {
+    "Name": "Anbauegge_1",
+    "AssociatedTractors": [ "Fendt", "Claas", "John Deere", "Steyr", "Deutz", "Kubota", "New Holland", "JCB" ],
+    "Price": 1035,
+    "Stock": 120
+  },
+  {
+    "Name": "Wiesenschleppe_1",
+    "AssociatedTractors": [ "Claas", "Lindner", "Steyr", "JCB" ],
+    "Price": 735,
+    "Stock": 30
+  },
+  {
+    "Name": "Scheibenpflug_1",
+    "AssociatedTractors": [ "Fendt", "John Deere", "Deutz", "Steyr", "JCB" ],
+    "Price": 855,
+    "Stock": 86
+  },
+  {
+    "Name": "Striegel_1",
+    "AssociatedTractors": [ "New Holland", "Valtra", "Claas", "Deutz", "JCB" ],
+    "Price": 1150,
+    "Stock": 23
+  },
+  {
+    "Name": "Scheibenegge_1",
+    "AssociatedTractors": [ "Deutz", "Steyr", "Fendt", "Claas", "Lidner", "Massey Ferguson", "New Holland", "JCB" ],
+    "Price": 1945,
+    "Stock": 87
+  },
+  {
+    "Name": "Wiesenschleppe_2",
+    "AssociatedTractors": [ "Fendt", "Claas", "John Derre", "New Holland", "Kubota" ],
+    "Price": 1250,
+    "Stock": 97
+  },
+  {
+    "Name": "Pflug_1",
+    "AssociatedTractors": [ "John Deere", "Fendt", "Class", "New Holland", "Steyr", "JCB" ],
+    "Price": 1080,
+    "Stock": 95
+  },
+  {
+    "Name": "Pflug_2",
+    "AssociatedTractors": [ "John Deere", "Fendt", "Class", "New Holland", "Steyr", "JCB" ],
+    "Price": 3535,
+    "Stock": 42
+  },
+  {
+    "Name": "Mulcher_1",
+    "AssociatedTractors": [ "New Holland", "Valtra", "Deutz", "JCB" ],
+    "Price": 3815,
+    "Stock": 12
+  },
+  {
+    "Name": "Mulcher_2",
+    "AssociatedTractors": [ "Valtra", "Lindner", "Class", "New Holland", "John deere", "Fendt", "Deutz", "JCB" ],
+    "Price": 4690,
+    "Stock": 78
+  },
+  {
+    "Name": "Bodenfräse_1",
+    "AssociatedTractors": [ "Claas", "Steyr", "John Deere", "Deutz", "Fendt", "Valtra", "Kubota", "New Holland" ],
+    "Price": 2075,
+    "Stock": 74
+  },
+  {
+    "Name": "Bodenfräse_2",
+    "AssociatedTractors": [ "John Deere", "Lindner", "Valtra", "Claas", "Steyr", "Deutz", "JCB" ],
+    "Price": 2475,
+    "Stock": 38
+  },
+  {
+    "Name": "Mähwerk_1",
+    "AssociatedTractors": [ "Fendt", "Claas", "John Deere", "Steyr", "Deutz", "Kubota", "New Holland", "JCB" ],
+    "Price": 2125,
+    "Stock": 32
+  },
+  {
+    "Name": "Mähwerk_2",
+    "AssociatedTractors": [ "Fendt", "Claas", "John Deere", "Steyr", "Deutz", "Kubota", "New Holland", "Massey Ferguson", "Valtra" ],
+    "Price": 3790,
+    "Stock": 22
+  },
+  {
+    "Name": "Heuwender_1",
+    "AssociatedTractors": [ "Deutz", "Claas", "Fendt" ],
+    "Price": 2370,
+    "Stock": 12
+  },
+  {
+    "Name": "Heuwender_2",
+    "AssociatedTractors": [ "Claas", "John Deere", "Kubota", "JCB", "Steyr", "New Holland" ],
+    "Price": 2950,
+    "Stock": 4
+  },
+  {
+    "Name": "Heuwender_3",
+    "AssociatedTractors": [ "Massey Ferguson", "John Deere", "Fendt", "Deutz", "Claas", "New Holland", "JCB" ],
+    "Price": 2265,
+    "Stock": 2
+  },
+  {
+    "Name": "Kartoffelhäufler_1",
+    "AssociatedTractors": [ "Deutz", "John Deere", "New Holland", "Claas", "Massey Ferguson" ],
+    "Price": 665,
+    "Stock": 28
+  },
+  {
+    "Name": "Kartoffelhäufler_2",
+    "AssociatedTractors": [ "Massey Ferguson", "John Deere", "Fendt", "Deutz", "Claas", "New Holland", "JCB" ],
+    "Price": 1035,
+    "Stock": 14
+  }
+]
