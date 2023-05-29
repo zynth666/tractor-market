@@ -64,7 +64,6 @@ namespace TractorMarket
                 services.AddSingleton<RefreshDatabase>();
                 services.AddDbContext<DataContext>();
 
-
                 // Configuration
                 services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
             }).Build();

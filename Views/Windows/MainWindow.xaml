@@ -21,12 +21,11 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition  x:Name="NavigationColumnDefinition" Width="0" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <ui:NavigationCompact
-            Visibility="Hidden"
             x:Name="RootNavigation"
             Grid.Column="0"
             Footer="{Binding ViewModel.NavigationFooter, Mode=TwoWay}"
