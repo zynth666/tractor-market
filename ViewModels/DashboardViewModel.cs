@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics;
 using Wpf.Ui.Common.Interfaces;
 
 namespace TractorMarket.ViewModels
@@ -20,6 +21,7 @@ namespace TractorMarket.ViewModels
         [RelayCommand]
         private void OnCounterIncrement()
         {
+            Debug.WriteLine("AMENA");
             Counter++;
         }
     }

@@ -35,7 +35,7 @@ namespace TractorMarket.ViewModels
 
         private void InitializeViewModel()
         {
-            ApplicationTitle = "WPF UI - TractorMarket";
+            ApplicationTitle = "Big Boys - TractorMarket";
 
             NavigationItems = new ObservableCollection<INavigationControl>
             {

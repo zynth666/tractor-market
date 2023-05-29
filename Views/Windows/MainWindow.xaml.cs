@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using TractorMarket.ViewModels;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
@@ -16,14 +18,15 @@ namespace TractorMarket.Views.Windows
             get;
         }
 
-        public MainWindow(ViewModels.MainWindowViewModel viewModel, IPageService pageService, INavigationService navigationService)
+        public MainWindow(ViewModels.MainWindowViewModel viewModel, ViewModels.LoginViewModel loginviewmodel, IPageService pageService, INavigationService navigationService)
         {
             ViewModel = viewModel;
             DataContext = this;
 
+            loginviewmodel.ProcessLogin += DoLogin;
+
             InitializeComponent();
             SetPageService(pageService);
-
             navigationService.SetNavigationControl(RootNavigation);
         }
 
@@ -58,6 +61,13 @@ namespace TractorMarket.Views.Windows
 
             // Make sure that closing this window will begin the process of closing the application.
             Application.Current.Shutdown();
+        }
+
+        private void DoLogin()
+        {
+            NavigationColumnDefinition.Width = GridLength.Auto;
+            RootNavigation.Visibility = Visibility.Visible;
+            Navigate(typeof(Views.Pages.DashboardPage));
         }
     }
 }
