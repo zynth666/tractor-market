@@ -39,7 +39,6 @@
     <None Remove="Assets\applicationIcon-1024.png" />
     <None Remove="Assets\applicationIcon-256.png" />
     <None Remove="Assets\Images\Logos\bigboys_logo_big.png" />
-    <None Remove="Assets\Images\Logos\bigboys_logo_small.png" />
     <None Remove="Data\TractorAddons.json" />
     <None Remove="Data\Tractors.json" />
     <None Remove="Data\Users.json" />
@@ -49,9 +48,6 @@
     <Resource Include="Assets\applicationIcon-1024.png" />
     <Resource Include="Assets\applicationIcon-256.png" />
     <Resource Include="Assets\Images\Logos\bigboys_logo_big.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\Images\Logos\bigboys_logo_small.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
