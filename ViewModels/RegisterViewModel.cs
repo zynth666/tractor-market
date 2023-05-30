@@ -8,13 +8,13 @@ using Wpf.Ui.Mvvm.Contracts;
 
 namespace TractorMarket.ViewModels
 {
-    public partial class LoginViewModel : ObservableObject, INavigationAware
+    public partial class RegisterViewModel : ObservableObject, INavigationAware
     {
         private RefreshDatabase _refreshDatabaseHelper;
         private INavigationService _navigationService;
         public event Action? ProcessLogin;
 
-        public LoginViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService)
+        public RegisterViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService)
         {
             _refreshDatabaseHelper = refreshDatabaseHelper;
             _navigationService = navigationService;
@@ -41,9 +41,9 @@ namespace TractorMarket.ViewModels
         }
 
         [RelayCommand]
-        private void OnNavigateToRegisterPage()
+        private void OnNavigateToLoginPage()
         {
-            _navigationService.Navigate(typeof(RegisterPage));
+            _navigationService.Navigate(typeof(LoginPage));
         }
     }
 }
