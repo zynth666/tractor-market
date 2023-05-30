@@ -22,7 +22,7 @@ namespace TractorMarket.ViewModels
         [ObservableProperty]
         private string _passwordInput = "";
         [ObservableProperty]
-        private string _budgetInput = "";
+        private int _budgetInput = 0;
 
         public RegisterViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService, UserService userService)
         {
@@ -48,6 +48,7 @@ namespace TractorMarket.ViewModels
         [RelayCommand]
         private void OnRegister()
         {
+            _userService.RegisterUser(UsernameInput, PasswordInput, BudgetInput);
             ProcessRegister?.Invoke();
         }
 

@@ -47,9 +47,10 @@ namespace TractorMarket.ViewModels
         [RelayCommand]
         private void OnDoLogin()
         {
-            if (_userService.LoginUser(_usernameInput, _passwordInput) == false) {
+            if (!_userService.LoginUser(UsernameInput, PasswordInput)) {
                 return;
             }
+
             ProcessLogin?.Invoke();
         }
 

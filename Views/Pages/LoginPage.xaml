@@ -48,14 +48,13 @@
                 <RowDefinition Height="0.2*" />
             </Grid.RowDefinitions>
 
-            <ui:TextBox Text="{Binding ViewModel.UsernameInput}" x:Name="UserNameInput" Grid.Column="1" Grid.Row="0"/>
+            <ui:TextBox Text="{Binding ViewModel.UsernameInput}" x:Name="UserNameInput" Grid.Column="1" Grid.Row="0" PlaceholderText="Benutzername" />
+            <ui:PasswordBox Password="{Binding ViewModel.PasswordInput, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" PlaceholderText="Passwort" />
 
-            <ui:PasswordBox Password="{Binding ViewModel.PasswordInput, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"/>
-
-            <ui:Hyperlink Command="{Binding ViewModel.NavigateToRegisterPageCommand}" Content="Register here" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" />
+            <ui:Hyperlink Command="{Binding ViewModel.NavigateToRegisterPageCommand}" Content="Hier registrieren" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" />
             <ui:Button Command="{Binding ViewModel.DoLoginCommand}" Grid.Column="1" Grid.Row="3" Content="Login" HorizontalAlignment="Center"/>
         </Grid>
 
-        <ui:Button Grid.Row="2" Command="{Binding ViewModel.RefreshDatabaseCommand}" Content="Refresh Database" Appearance="Danger" />
+        <ui:Button Grid.Row="2" Command="{Binding ViewModel.RefreshDatabaseCommand}" Content="Datenbank zurücksetzen" Appearance="Danger" />
     </Grid>
 </ui:UiPage>
