@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
+using TractorMarket.Services;
 using Wpf.Ui.Common.Interfaces;
 
 namespace TractorMarket.ViewModels
@@ -22,6 +23,7 @@ namespace TractorMarket.ViewModels
         private void OnCounterIncrement()
         {
             Debug.WriteLine("AMENA");
+            Debug.WriteLine(UserService.LoggedInUser!.Name);
             Counter++;
         }
     }
