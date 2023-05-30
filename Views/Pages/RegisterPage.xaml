@@ -47,14 +47,14 @@
                 <RowDefinition Height="0.2*" />
             </Grid.RowDefinitions>
 
-            <ui:TextBox Grid.Column="1" Grid.Row="0" PlaceholderText="Benutzername" />
-            <ui:PasswordBox Grid.Column="1" Grid.Row="1" PlaceholderText="Passwort" />
-            <ui:NumberBox Grid.Column="1" Grid.Row="2" PlaceholderText="Initiales Budget" />
+            <ui:TextBox Text="{Binding ViewModel.UsernameInput}" Grid.Column="1" Grid.Row="0" PlaceholderText="Benutzername" />
+            <ui:PasswordBox Password="{Binding ViewModel.PasswordInput}" Grid.Column="1" Grid.Row="1" PlaceholderText="Passwort" />
+            <ui:NumberBox Text="{Binding ViewModel.BudgetInput}" Grid.Column="1" Grid.Row="2" PlaceholderText="Initiales Budget" />
 
             <ui:Hyperlink Command="{Binding ViewModel.NavigateToLoginPageCommand}" Content="Go to Login" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" />
-            <ui:Button Command="{Binding ViewModel.DoLoginCommand, Mode=OneWay}" Grid.Column="1" Grid.Row="4" Content="Register" HorizontalAlignment="Center"/>
+            <ui:Button Command="{Binding ViewModel.RegisterCommand}" Grid.Column="1" Grid.Row="4" Content="Register" HorizontalAlignment="Center"/>
         </Grid>
 
-        <ui:Button Grid.Row="2" Command="{Binding ViewModel.RefreshDatabaseCommand, Mode=OneWay}" Content="Refresh Database" Appearance="Danger" />
+        <ui:Button Grid.Row="2" Command="{Binding ViewModel.RefreshDatabaseCommand}" Content="Refresh Database" Appearance="Danger" />
     </Grid>
 </ui:UiPage>

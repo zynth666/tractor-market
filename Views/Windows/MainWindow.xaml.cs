@@ -13,17 +13,18 @@ namespace TractorMarket.Views.Windows
     /// </summary>
     public partial class MainWindow : INavigationWindow
     {
-        public ViewModels.MainWindowViewModel ViewModel
+        public MainWindowViewModel ViewModel
         {
             get;
         }
 
-        public MainWindow(ViewModels.MainWindowViewModel viewModel, ViewModels.LoginViewModel loginviewmodel, IPageService pageService, INavigationService navigationService)
+        public MainWindow(MainWindowViewModel viewModel, LoginViewModel loginViewModel, RegisterViewModel registerViewModel, IPageService pageService, INavigationService navigationService)
         {
             ViewModel = viewModel;
             DataContext = this;
 
-            loginviewmodel.ProcessLogin += DoLogin;
+            loginViewModel.ProcessLogin += ShowNavigation;
+            registerViewModel.ProcessRegister += ShowNavigation;
 
             InitializeComponent();
             SetPageService(pageService);
@@ -63,11 +64,11 @@ namespace TractorMarket.Views.Windows
             Application.Current.Shutdown();
         }
 
-        private void DoLogin()
+        private void ShowNavigation()
         {
             NavigationColumnDefinition.Width = GridLength.Auto;
             RootNavigation.Visibility = Visibility.Visible;
-            Navigate(typeof(Views.Pages.DashboardPage));
+            Navigate(typeof(Pages.DashboardPage));
         }
     }
 }

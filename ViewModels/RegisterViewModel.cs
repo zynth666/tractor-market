@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using TractorMarket.Helpers;
+using TractorMarket.Services;
 using TractorMarket.Views.Pages;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
@@ -12,12 +13,22 @@ namespace TractorMarket.ViewModels
     {
         private RefreshDatabase _refreshDatabaseHelper;
         private INavigationService _navigationService;
-        public event Action? ProcessLogin;
+        private UserService _userService;
 
-        public RegisterViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService)
+        public event Action? ProcessRegister;
+
+        [ObservableProperty]
+        private string _usernameInput = "";
+        [ObservableProperty]
+        private string _passwordInput = "";
+        [ObservableProperty]
+        private string _budgetInput = "";
+
+        public RegisterViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService, UserService userService)
         {
             _refreshDatabaseHelper = refreshDatabaseHelper;
             _navigationService = navigationService;
+            _userService = userService;
         }
 
         public void OnNavigatedTo()
@@ -35,9 +46,9 @@ namespace TractorMarket.ViewModels
         }
 
         [RelayCommand]
-        private void OnDoLogin()
+        private void OnRegister()
         {
-            ProcessLogin?.Invoke();
+            ProcessRegister?.Invoke();
         }
 
         [RelayCommand]
