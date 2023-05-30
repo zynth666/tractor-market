@@ -14,14 +14,15 @@ namespace TractorMarket.ViewModels
         private UserService _userService;
         private RefreshDatabase _refreshDatabaseHelper;
         private INavigationService _navigationService;
+
         public event Action? ProcessLogin;
+
         [ObservableProperty]
         private string _usernameInput = "";
         [ObservableProperty]
         private string _passwordInput = "";
 
-        public LoginViewModel(RefreshDatabase refreshDatabaseHelper, UserService userService)
-        public LoginViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService)
+        public LoginViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService, UserService userService)
         {
             _refreshDatabaseHelper = refreshDatabaseHelper;
             _userService = userService;
