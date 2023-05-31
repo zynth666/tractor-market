@@ -59,6 +59,8 @@ namespace TractorMarket
                 services.AddScoped<ViewModels.LoginViewModel>();
                 services.AddScoped<Views.Pages.RegisterPage>();
                 services.AddScoped<ViewModels.RegisterViewModel>();
+                services.AddScoped<Views.Pages.CartPage>();
+                services.AddScoped<ViewModels.CartViewModel>();
 
                 // Services and Helpers
                 services.AddSingleton<TractorService>();
