@@ -18,6 +18,25 @@
 
     <Page.Resources>
         <helpers:ImagePathHelper x:Key="ImagePathHelper" />
+        <Style TargetType="ListViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="5">
+                            <!-- Content Presenter -->
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Grid Margin="56,0">
@@ -26,7 +45,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView Grid.Column="0" ItemsSource="{Binding ViewModel.TractorsForCustomers}">
+        <ListView ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.TractorsForCustomers}">
             <ListView.ItemTemplate>
  		        <DataTemplate DataType="{x:Type entities:Tractor}" >
                     <Border CornerRadius="5" Background="{DynamicResource ControlFillColorDefaultBrush}">
@@ -59,7 +78,7 @@
                                     <RowDefinition Height="125"/>
                                 </Grid.RowDefinitions>
 
-                                <Grid Grid.Row="0" Grid.Column="0"  Background="Purple">
+                                <Grid Grid.Row="0" Grid.Column="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="0.3*"/>
                                         <ColumnDefinition Width="0.3*"/>
@@ -68,11 +87,30 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
+                                        <RowDefinition Height="0.50*"/>
+                                        <RowDefinition Height="0.50*"/>
                                     </Grid.RowDefinitions>
 
-                                    <Grid Grid.Column="0" Grid.Row="0" Background="Orange">
+                                    <Grid Grid.Column="0" Grid.Row="0" Background="Red">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.05*"/>
+                                            <ColumnDefinition Width="0.90*"/>
+                                            <ColumnDefinition Width="0.05*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Row="0" Grid.Column="1" Background="green">
+                                            <TextBlock VerticalAlignment="Top" FontSize="24" FontWeight="DemiBold" Foreground="White">Typ</TextBlock>
+                                        </Grid>
+                                        <Grid  VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Background="purple">
+                                            <TextBlock FontSize="18" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Foreground="White" Text="{Binding Type}"/>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Grid.Column="1" Grid.Row="0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="0.4*"/>
                                             <RowDefinition Height="0.6*"/>
@@ -84,17 +122,151 @@
                                             <ColumnDefinition Width="0.05*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Grid Grid.Row="0" Grid.Column="1" Background="Pink">
-                                            <TextBlock FontSize="18" FontWeight="DemiBold" Foreground="Black">TYP</TextBlock>
+                                        <Grid Grid.Row="0" Grid.Column="1">
+                                            <TextBlock FontSize="18" FontWeight="DemiBold" Foreground="White">Hersteller</TextBlock>
                                         </Grid>
-                                        <Grid Grid.Row="1" Grid.Column="1" Background="Yellow">
-                                            <TextBlock FontSize="24" FontWeight="DemiBold" Foreground="Black" Text="{Binding Price, StringFormat={}{0}€}"/>
+                                        <Grid Grid.Row="1" Grid.Column="1">
+                                            <TextBlock FontSize="24" FontWeight="DemiBold" Foreground="White" Text="{Binding Manufacturer}"/>
                                         </Grid>
                                     </Grid>
-                                    <Grid Grid.Column="1" Grid.Row="0" Background="Red"></Grid>
-                                    <Grid Grid.Column="2" Grid.Row="0" Background="Yellow"></Grid>
-                                    <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Background="Green">
-                                        
+                                    <Grid Grid.Column="2" Grid.Row="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.4*"/>
+                                            <RowDefinition Height="0.6*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.05*"/>
+                                            <ColumnDefinition Width="0.90*"/>
+                                            <ColumnDefinition Width="0.05*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Row="0" Grid.Column="1">
+                                            <TextBlock FontSize="18" FontWeight="DemiBold" Foreground="White">Preis</TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="1" Grid.Column="1">
+                                            <TextBlock FontSize="24" FontWeight="DemiBold" Foreground="White" Text="{Binding Price, StringFormat={}{0}€}"/>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Row="0" Grid.Column="0" Background="Black">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.05*"/>
+                                                <ColumnDefinition Width="0.90*"/>
+                                                <ColumnDefinition Width="0.05*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" Grid.Column="1" Background="Green">
+                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Leistung</TextBlock>
+                                            </Grid>
+                                            <Grid Grid.Row="1" Grid.Column="1" Background="Purple">
+                                                <TextBlock VerticalAlignment="Bottom" FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Horsepower, StringFormat={}{0} PS}"/>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Row="0" Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.4*"/>
+                                                <RowDefinition Height="0.6*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.05*"/>
+                                                <ColumnDefinition Width="0.90*"/>
+                                                <ColumnDefinition Width="0.05*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White">Max. Geschwindigkeit</TextBlock>
+                                            </Grid>
+                                            <Grid Grid.Row="1" Grid.Column="1">
+                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White" Text="{Binding Velocity, StringFormat={}{0} KM/h}"/>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Row="0" Grid.Column="2">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.05*"/>
+                                                <ColumnDefinition Width="0.75*"/>
+                                                <ColumnDefinition Width="0.15*"/>
+                                                <ColumnDefinition Width="0.05*"/>
+                                            </Grid.ColumnDefinitions>
+
+
+                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.4*"/>
+                                                    <RowDefinition Height="0.6*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <Grid Grid.Row="0" Grid.Column="0">
+                                                    <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White">Baujahr</TextBlock>
+                                                </Grid>
+                                                <Grid Grid.Row="1" Grid.Column="0">
+                                                    <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White" Text="{Binding Vintage}"/>
+                                                </Grid>
+                                            </Grid>
+
+
+
+                                            <Grid Grid.Row="0" Grid.Column="2">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.4*"/>
+                                                    <RowDefinition Height="0.6*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.05*"/>
+                                                    <ColumnDefinition Width="0.90*"/>
+                                                    <ColumnDefinition Width="0.05*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid Grid.Row="0" Grid.Column="1">
+                                                    <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White">Stückzahl</TextBlock>
+                                                </Grid>
+                                                <Grid Grid.Row="1" Grid.Column="1">
+                                                    <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White" Text="{Binding Stock}"/>
+                                                </Grid>
+                                            </Grid>
+
+
+
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.1*"/>
+                                            <ColumnDefinition Width="0.8*"/>
+                                            <ColumnDefinition Width="0.1*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <ui:NumberBox Grid.Row="0" Grid.Column="1" IntegersOnly="True" Min="1" Max="{Binding Stock}"></ui:NumberBox>
+
+
+                                        <ui:Button VerticalAlignment="Stretch" Margin="0, 7.5, 0, 7.5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Icon="Cart24" IconFilled="False" FontSize="30"></ui:Button>
                                     </Grid>
                                 </Grid>
                             </Grid>
