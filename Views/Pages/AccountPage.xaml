@@ -35,7 +35,7 @@
                 <TextBlock FontSize="24" FontWeight="DemiBold" Text="Budget" Grid.Column="1" Grid.Row="0" Margin="0,0,0,25" />
 
                 <TextBlock FontSize="18" Text="{Binding ViewModel.User.Name}" Grid.Column="0" Grid.Row="1" />
-                <TextBlock FontSize="18" Text="{Binding ViewModel.User.Budget}" Grid.Column="1" Grid.Row="1" />
+                <TextBlock FontSize="18" Text="{Binding ViewModel.User.Budget, StringFormat={}{0}€}" Grid.Column="1" Grid.Row="1" />
             </Grid>
         </ListView>
         <ui:Button Content="Warenkorb anzeigen" Grid.Row="1" Icon="Cart24" />
