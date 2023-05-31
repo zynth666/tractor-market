@@ -13,4 +13,9 @@ public class Tractor
     public int Price { get; set; }
     public int Vintage { get; set; }
     public int Stock { get; set; }
+
+    public string GetDisplayName()
+    {
+        return Type.Replace("_", " ");
+    }
 }

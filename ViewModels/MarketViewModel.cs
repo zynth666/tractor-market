@@ -12,10 +12,10 @@ namespace TractorMarket.ViewModels
         private TractorService _tractorService;
 
         [ObservableProperty]
-        public List<Tractor> tractorsForCustomers = new List<Tractor>();
+        private List<Tractor> _tractorsForCustomers = new List<Tractor>();
 
         [ObservableProperty]
-        public List<Tractor> tractorsForAdmin = new List<Tractor>();
+        private List<Tractor> _tractorsForAdmin = new List<Tractor>();
 
         public MarketViewModel(TractorService tractorService)
         {
@@ -34,9 +34,8 @@ namespace TractorMarket.ViewModels
 
         private void InitializeViewModel()
         {
-            tractorsForCustomers = _tractorService.GetTractorsForCustomers();
-            tractorsForAdmin = _tractorService.GetTractorsForAdmin();
-
+            TractorsForCustomers = _tractorService.GetTractorsForCustomers();
+            TractorsForAdmin = _tractorService.GetTractorsForAdmin();
             _isInitialized = true;
         }
     }
