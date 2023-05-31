@@ -1,7 +1,7 @@
 [
   {
     "Manufacturer": "Fendt",
-    "Type": "Vario_1050",
+    "Type": "Vario 1050",
     "Horsepower": 521,
     "Velocity": 60,
     "Price": 367000,
@@ -10,7 +10,7 @@
   },
   {
     "Manufacturer": "Fendt",
-    "Type": "Vario_1038",
+    "Type": "Vario 1038",
     "Horsepower": 395,
     "Velocity": 60,
     "Price": 298000,
@@ -19,7 +19,7 @@
   },
   {
     "Manufacturer": "Fendt",
-    "Type": "Vario_828",
+    "Type": "Vario 828",
     "Horsepower": 280,
     "Velocity": 60,
     "Price": 171000,
@@ -28,7 +28,7 @@
   },
   {
     "Manufacturer": "Fendt",
-    "Type": "Vario_500",
+    "Type": "Vario 500",
     "Horsepower": 149,
     "Velocity": 50,
     "Price": 98000,
@@ -37,7 +37,7 @@
   },
   {
     "Manufacturer": "Fendt",
-    "Type": "Vario_1100",
+    "Type": "Vario 1100",
     "Horsepower": 646,
     "Velocity": 40,
     "Price": 388000,
@@ -46,7 +46,7 @@
   },
   {
     "Manufacturer": "John Deere",
-    "Type": "9R_RT",
+    "Type": "9R RT",
     "Horsepower": 620,
     "Velocity": 40,
     "Price": 324000,
@@ -91,7 +91,7 @@
   },
   {
     "Manufacturer": "Claas",
-    "Type": "Xerion_5000",
+    "Type": "Xerion 5000",
     "Horsepower": 530,
     "Velocity": 75,
     "Price": 220000,
@@ -100,7 +100,7 @@
   },
   {
     "Manufacturer": "Claas",
-    "Type": "Axion_900",
+    "Type": "Axion 900",
     "Horsepower": 440,
     "Velocity": 70,
     "Price": 289000,
@@ -109,7 +109,7 @@
   },
   {
     "Manufacturer": "Claas",
-    "Type": "Axion_950",
+    "Type": "Axion 950",
     "Horsepower": 416,
     "Velocity": 75,
     "Price": 265000,
@@ -118,7 +118,7 @@
   },
   {
     "Manufacturer": "Claas",
-    "Type": "Axos_340_CX",
+    "Type": "Axos 340 CX",
     "Horsepower": 102,
     "Velocity": 85,
     "Price": 172000,
@@ -127,7 +127,7 @@
   },
   {
     "Manufacturer": "Steyr",
-    "Type": "6300_Terrus_CVT",
+    "Type": "6300 Terrus CVT",
     "Horsepower": 300,
     "Velocity": 50,
     "Price": 202000,
@@ -136,7 +136,7 @@
   },
   {
     "Manufacturer": "Steyr",
-    "Type": "6240_CVT",
+    "Type": "6240 CVT",
     "Horsepower": 241,
     "Velocity": 50,
     "Price": 172000,
@@ -145,7 +145,7 @@
   },
   {
     "Manufacturer": "Steyr",
-    "Type": "Profi_6000",
+    "Type": "Profi 6000",
     "Horsepower": 145,
     "Velocity": 55,
     "Price": 160000,
@@ -154,7 +154,7 @@
   },
   {
     "Manufacturer": "Steyr",
-    "Type": "Multi_4120",
+    "Type": "Multi 4120",
     "Horsepower": 117,
     "Velocity": 75,
     "Price": 187000,
@@ -163,7 +163,7 @@
   },
   {
     "Manufacturer": "Deutz",
-    "Type": "AgroXXL_1630",
+    "Type": "AgroXXL 1630",
     "Horsepower": 598,
     "Velocity": 45,
     "Price": 223000,
@@ -172,7 +172,7 @@
   },
   {
     "Manufacturer": "Deutz",
-    "Type": "11440_TTV",
+    "Type": "11440 TTV",
     "Horsepower": 401,
     "Velocity": 75,
     "Price": 245000,
@@ -181,7 +181,7 @@
   },
   {
     "Manufacturer": "Deutz",
-    "Type": "9340_TTV_Warrior",
+    "Type": "9340 TTV Warrior",
     "Horsepower": 336,
     "Velocity": 65,
     "Price": 279000,
@@ -190,7 +190,7 @@
   },
   {
     "Manufacturer": "Deutz",
-    "Type": "Agroton_TTV_7250",
+    "Type": "Agroton TTV 7250",
     "Horsepower": 245,
     "Velocity": 70,
     "Price": 195000,
@@ -199,7 +199,7 @@
   },
   {
     "Manufacturer": "Deutz",
-    "Type": "Agroton_M_600",
+    "Type": "Agroton M 600",
     "Horsepower": 183,
     "Velocity": 65,
     "Price": 175000,
@@ -226,7 +226,7 @@
   },
   {
     "Manufacturer": "JCB",
-    "Type": "3220_plus",
+    "Type": "3220 plus",
     "Horsepower": 223,
     "Velocity": 45,
     "Price": 95000,
@@ -289,7 +289,7 @@
   },
   {
     "Manufacturer": "Lindner",
-    "Type": "Lintrac_130",
+    "Type": "Lintrac 130",
     "Horsepower": 136,
     "Velocity": 70,
     "Price": 220000,
