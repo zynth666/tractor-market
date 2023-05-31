@@ -23,20 +23,17 @@ public class UserService
             .ToList();
     }
 
-    public bool LoginUser(string username_in, string password_in)
+    public bool LoginUser(string username, string password)
     {
         try
         {
-            User lookedupuser = _context.Users.Where(user => user.Name == username_in).First();
-            Debug.WriteLine(lookedupuser.ToString());
+            User user = _context.Users.Where(user => user.Name == username).First();
+            Debug.WriteLine(user.ToString());
 
-            if(lookedupuser.Password == password_in )
-            {
-                LoggedInUser = lookedupuser;
+            if (user.Password == password) {
+                LoggedInUser = user;
                 return true;
-            }
-            else
-            {
+            } else {
                 Debug.WriteLine("Password wrong");
                 return false;
             }
@@ -46,6 +43,20 @@ public class UserService
             Debug.WriteLine("User not found");
             return false;
         }
+    }
+
+    public void RegisterUser(string username, string password, int budget)
+    {
+        User user = new User();
+        user.Name = username;
+        user.Password = password;
+        user.Budget = budget;
+        user.IsAdmin = false;
+
+        _context.Users.Add(user);
+        _context.SaveChanges();
+
+        LoggedInUser = user;
     }
 
     public User GetAdmin()
