@@ -21,7 +21,7 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition  x:Name="NavigationColumnDefinition" Width="0" />
+            <ColumnDefinition x:Name="NavigationColumnDefinition" Width="0" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -70,6 +70,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         FontSize="28"
+                        x:Name="RootBreadcrumb"
                         Navigation="{Binding ElementName=RootNavigation, Mode=OneWay}" />
                 </Grid>
             </Border>

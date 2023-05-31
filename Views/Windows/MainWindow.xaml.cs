@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using TractorMarket.ViewModels;
@@ -25,6 +24,7 @@ namespace TractorMarket.Views.Windows
 
             loginViewModel.ProcessLogin += ShowNavigation;
             registerViewModel.ProcessRegister += ShowNavigation;
+            viewModel.ProcessLogout += HideNavigation;
 
             InitializeComponent();
             SetPageService(pageService);
@@ -68,7 +68,15 @@ namespace TractorMarket.Views.Windows
         {
             NavigationColumnDefinition.Width = GridLength.Auto;
             RootNavigation.Visibility = Visibility.Visible;
+            RootBreadcrumb.Visibility = Visibility.Visible;
             Navigate(typeof(Pages.DashboardPage));
+        }
+
+        private void HideNavigation()
+        {
+            NavigationColumnDefinition.Width = new GridLength(0);
+            RootNavigation.Visibility = Visibility.Hidden;
+            RootBreadcrumb.Visibility = Visibility.Hidden;
         }
     }
 }
