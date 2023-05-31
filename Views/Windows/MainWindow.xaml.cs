@@ -69,7 +69,7 @@ namespace TractorMarket.Views.Windows
             NavigationColumnDefinition.Width = GridLength.Auto;
             RootNavigation.Visibility = Visibility.Visible;
             RootBreadcrumb.Visibility = Visibility.Visible;
-            Navigate(typeof(Pages.DashboardPage));
+            Navigate(typeof(Pages.AccountPage));
         }
 
         private void HideNavigation()

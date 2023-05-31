@@ -49,8 +49,8 @@ namespace TractorMarket
                 services.AddScoped<ViewModels.MainWindowViewModel>();
 
                 // Views and ViewModels
-                services.AddScoped<Views.Pages.DashboardPage>();
-                services.AddScoped<ViewModels.DashboardViewModel>();
+                services.AddScoped<Views.Pages.AccountPage>();
+                services.AddScoped<ViewModels.AccountViewModel>();
                 services.AddScoped<Views.Pages.DataPage>();
                 services.AddScoped<ViewModels.DataViewModel>();
                 services.AddScoped<Views.Pages.SettingsPage>();

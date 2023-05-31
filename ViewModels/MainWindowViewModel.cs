@@ -48,10 +48,10 @@ namespace TractorMarket.ViewModels
             {
                 new NavigationItem()
                 {
-                    Content = "Home",
-                    PageTag = "dashboard",
-                    Icon = SymbolRegular.Home24,
-                    PageType = typeof(Views.Pages.DashboardPage)
+                    Content = "Account",
+                    PageTag = "account",
+                    Icon = SymbolRegular.Person24,
+                    PageType = typeof(Views.Pages.AccountPage)
                 },
                 new NavigationItem()
                 {
@@ -73,7 +73,7 @@ namespace TractorMarket.ViewModels
                 },
                 new NavigationItem()
                 {
-                    Content = "Settings",
+                    Content = "Einstellungen",
                     PageTag = "settings",
                     Icon = SymbolRegular.Settings24,
                     PageType = typeof(Views.Pages.SettingsPage)
@@ -84,8 +84,9 @@ namespace TractorMarket.ViewModels
             {
                 new MenuItem
                 {
-                    Header = "Home",
-                    Tag = "tray_home"
+                    Header = "Account",
+                    Tag = "tray_account",
+                    Icon = SymbolRegular.Person24
                 }
             };
 
