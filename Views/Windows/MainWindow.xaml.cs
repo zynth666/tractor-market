@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using TractorMarket.ViewModels;
@@ -13,17 +12,19 @@ namespace TractorMarket.Views.Windows
     /// </summary>
     public partial class MainWindow : INavigationWindow
     {
-        public ViewModels.MainWindowViewModel ViewModel
+        public MainWindowViewModel ViewModel
         {
             get;
         }
 
-        public MainWindow(ViewModels.MainWindowViewModel viewModel, ViewModels.LoginViewModel loginviewmodel, IPageService pageService, INavigationService navigationService)
+        public MainWindow(MainWindowViewModel viewModel, LoginViewModel loginViewModel, RegisterViewModel registerViewModel, IPageService pageService, INavigationService navigationService)
         {
             ViewModel = viewModel;
             DataContext = this;
 
-            loginviewmodel.ProcessLogin += DoLogin;
+            loginViewModel.ProcessLogin += ShowNavigation;
+            registerViewModel.ProcessRegister += ShowNavigation;
+            viewModel.ProcessLogout += HideNavigation;
 
             InitializeComponent();
             SetPageService(pageService);
@@ -63,11 +64,19 @@ namespace TractorMarket.Views.Windows
             Application.Current.Shutdown();
         }
 
-        private void DoLogin()
+        private void ShowNavigation()
         {
             NavigationColumnDefinition.Width = GridLength.Auto;
             RootNavigation.Visibility = Visibility.Visible;
-            Navigate(typeof(Views.Pages.DashboardPage));
+            RootBreadcrumb.Visibility = Visibility.Visible;
+            Navigate(typeof(Pages.DashboardPage));
+        }
+
+        private void HideNavigation()
+        {
+            NavigationColumnDefinition.Width = new GridLength(0);
+            RootNavigation.Visibility = Visibility.Hidden;
+            RootBreadcrumb.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -9,24 +9,26 @@ using Wpf.Ui.Mvvm.Contracts;
 
 namespace TractorMarket.ViewModels
 {
-    public partial class LoginViewModel : ObservableObject, INavigationAware
+    public partial class RegisterViewModel : ObservableObject, INavigationAware
     {
-        private UserService _userService;
         private RefreshDatabase _refreshDatabaseHelper;
         private INavigationService _navigationService;
+        private UserService _userService;
 
-        public event Action? ProcessLogin;
+        public event Action? ProcessRegister;
 
         [ObservableProperty]
         private string _usernameInput = "";
         [ObservableProperty]
         private string _passwordInput = "";
+        [ObservableProperty]
+        private int _budgetInput = 0;
 
-        public LoginViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService, UserService userService)
+        public RegisterViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService, UserService userService)
         {
             _refreshDatabaseHelper = refreshDatabaseHelper;
-            _userService = userService;
             _navigationService = navigationService;
+            _userService = userService;
         }
 
         public void OnNavigatedTo()
@@ -35,7 +37,6 @@ namespace TractorMarket.ViewModels
 
         public void OnNavigatedFrom()
         {
-
         }
 
         [RelayCommand]
@@ -45,19 +46,16 @@ namespace TractorMarket.ViewModels
         }
 
         [RelayCommand]
-        private void OnDoLogin()
+        private void OnRegister()
         {
-            if (!_userService.LoginUser(UsernameInput, PasswordInput)) {
-                return;
-            }
-
-            ProcessLogin?.Invoke();
+            _userService.RegisterUser(UsernameInput, PasswordInput, BudgetInput);
+            ProcessRegister?.Invoke();
         }
 
         [RelayCommand]
-        private void OnNavigateToRegisterPage()
+        private void OnNavigateToLoginPage()
         {
-            _navigationService.Navigate(typeof(RegisterPage));
+            _navigationService.Navigate(typeof(LoginPage));
         }
     }
 }

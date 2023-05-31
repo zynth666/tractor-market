@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using TractorMarket.Helpers;
+using TractorMarket.Services;
+using TractorMarket.Views.Pages;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
@@ -12,6 +15,7 @@ namespace TractorMarket.ViewModels
     public partial class MainWindowViewModel : ObservableObject
     {
         private bool _isInitialized = false;
+        private INavigationService _navigationService;
 
         [ObservableProperty]
         private string _applicationTitle = String.Empty;
@@ -25,12 +29,15 @@ namespace TractorMarket.ViewModels
         [ObservableProperty]
         private ObservableCollection<MenuItem> _trayMenuItems = new();
 
+        public event Action? ProcessLogout;
+
         public MainWindowViewModel(INavigationService navigationService, RefreshDatabase refreshDatabaseHelper)
         {
             if (!_isInitialized)
                 InitializeViewModel();
 
             refreshDatabaseHelper.Execute();
+            _navigationService = navigationService;
         }
 
         private void InitializeViewModel()
@@ -59,6 +66,13 @@ namespace TractorMarket.ViewModels
             {
                 new NavigationItem()
                 {
+                    Content = "Logout",
+                    PageTag = "logout",
+                    Icon = SymbolRegular.ArrowExit20,
+                    Command = LogOutCommand
+                },
+                new NavigationItem()
+                {
                     Content = "Settings",
                     PageTag = "settings",
                     Icon = SymbolRegular.Settings24,
@@ -76,6 +90,14 @@ namespace TractorMarket.ViewModels
             };
 
             _isInitialized = true;
+        }
+
+        [RelayCommand]
+        public void LogOut()
+        {
+            UserService.LoggedInUser = null;
+            ProcessLogout?.Invoke();
+            _navigationService.Navigate(typeof(LoginPage));
         }
     }
 }
