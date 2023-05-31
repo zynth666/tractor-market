@@ -13,13 +13,36 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="5">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid Margin="56,0" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition Height="10"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -44,7 +67,7 @@
             </Grid>
         </ListView>
 
-        <ui:Button Content="Warenkorb anzeigen" Grid.Row="1" Grid.Column="0" Icon="Cart24" Command="{Binding ViewModel.NavigateToCartPageCommand}" />
-        <ui:Button Content="Markt anzeigen" Grid.Row="1" Grid.Column="1" Icon="VehicleTruckBag24" Command="{Binding ViewModel.NavigateToMarketPageCommand}" />
+        <ui:Button Content="Warenkorb anzeigen" Grid.Row="2" Grid.Column="0" Icon="Cart24" Command="{Binding ViewModel.NavigateToCartPageCommand}" />
+        <ui:Button Content="Markt anzeigen" Grid.Row="2" Grid.Column="1" Icon="VehicleTruckBag24" Command="{Binding ViewModel.NavigateToMarketPageCommand}" />
     </Grid>
 </ui:UiPage>
