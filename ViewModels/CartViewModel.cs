@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.Generic;
+using System.Diagnostics;
 using TractorMarket.Entities;
 using TractorMarket.Models;
 using TractorMarket.Services;
@@ -10,24 +12,28 @@ namespace TractorMarket.ViewModels;
 public partial class CartViewModel : ObservableObject, INavigationAware
 {
     [ObservableProperty]
-    private User _user = UserService.LoggedInUser!;
+    private List<CartItem> _cart = UserService.LoggedInUser!.Cart;
 
     private TractorService _tractorService;
+    private CartService _cartService;
 
-    public CartViewModel(TractorService tractorService) 
+    public CartViewModel(TractorService tractorService, CartService cartService)
     {
         _tractorService = tractorService;
-    }
+        _cartService = cartService;
 
-    public void OnNavigatedTo()
-    {
         var tractors = _tractorService.GetTractorsForCustomers();
 
         foreach (var tractor in tractors)
         {
             CartItem item = new CartItem(tractor, 1);
-            User.Cart.Add(item);
+            Cart.Add(item);
         }
+    }
+
+    public void OnNavigatedTo()
+    {
+        Debug.WriteLine(_cartService.GetTotalPrice(Cart));
     }
 
     public void OnNavigatedFrom()

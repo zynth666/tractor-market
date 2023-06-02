@@ -65,6 +65,7 @@ namespace TractorMarket
                 // Services and Helpers
                 services.AddSingleton<TractorService>();
                 services.AddSingleton<UserService>();
+                services.AddSingleton<CartService>();
                 services.AddSingleton<RefreshDatabase>();
                 services.AddDbContext<DataContext>();
 
