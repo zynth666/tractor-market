@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using TractorMarket.Entities;
 using TractorMarket.Models;
-using Wpf.Ui.Controls;
 
 namespace TractorMarket.Services;
 
@@ -16,13 +15,13 @@ public class CartService
         _tractorService = tractorService;
     }
 
-    public void Checkout(List<CartItem> cart, User currentUser)
+    public void Checkout(ObservableCollection<CartItem> cart, User currentUser)
     {
         PaySeller(currentUser);
         RemoveSoldTractorsFromStock(cart);
     }
 
-    public long GetTotalPrice(List<CartItem> cart)
+    public static long GetTotalPrice(ObservableCollection<CartItem> cart)
     {
         long sum = 0;
         foreach (CartItem cartItem in cart)
@@ -36,7 +35,7 @@ public class CartService
         return sum;
     }
 
-    public void RemoveSoldTractorsFromStock(List<CartItem> cart)
+    public void RemoveSoldTractorsFromStock(ObservableCollection<CartItem> cart)
     {
         foreach (CartItem cartItem in cart)
         {

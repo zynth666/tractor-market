@@ -12,4 +12,9 @@ public class CartItem
         Tractor = tractor;
         Quantity = quantity;
     }
+
+    override public string ToString()
+    {
+        return $"{Tractor.Type} - {Quantity}";
+    }
 }

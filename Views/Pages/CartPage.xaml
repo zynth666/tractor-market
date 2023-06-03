@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TractorMarket.Views.Pages"
     xmlns:models="clr-namespace:TractorMarket.Models"
+    xmlns:helpers="clr-namespace:TractorMarket.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="CartPage"
@@ -15,6 +16,8 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+        <helpers:ImagePathHelper x:Key="ImagePathHelper" />
+        <helpers:CartSumConverter x:Key="CartSumConverter" />
         <Style TargetType="ListViewItem">
             <Setter Property="Template">
                 <Setter.Value>
@@ -35,16 +38,184 @@
         </Style>
     </Page.Resources>
 
-    <Grid Margin="56,0" VerticalAlignment="Top">
-        <ListView Grid.Column="0" ItemsSource="{Binding ViewModel.Cart, Mode=TwoWay}">
+    <Grid Margin="56,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.Cart}">
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:CartItem}" >
-                    <StackPanel>
-                        <TextBlock Text="{Binding Tractor.Type}" />
-                        <TextBlock Text="{Binding Quantity}" />
-                    </StackPanel>
+                    <Border CornerRadius="5" Background="{DynamicResource ControlFillColorDefaultBrush}">
+                        <Grid Height="100">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.1*" MaxWidth="5"/>
+                                <ColumnDefinition MaxWidth="250" Width="0.2*"/>
+                                <ColumnDefinition Width="0.75*"/>
+                                <ColumnDefinition MaxWidth="300" Width="0.05*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <Grid Height="125" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border CornerRadius="15">
+                                        <Image Height="125" Width="250" Stretch="UniformToFill" Source="{Binding Tractor.Type, Converter={StaticResource ImagePathHelper}}">
+                                            <Image.Clip>
+                                                <RectangleGeometry RadiusX="5" RadiusY="5" Rect="0,0,250,125"/>
+                                            </Image.Clip>
+                                        </Image>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MaxWidth="1200"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="125"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0" Grid.Column="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.1*"/>
+                                            <ColumnDefinition Width="0.7*"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition MaxWidth="200"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.08*"/>
+                                            <RowDefinition Height="0.46*"/>
+                                            <RowDefinition Height="0.46*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"></Grid>
+
+                                        <Grid Grid.Column="1" Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.00*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="0.00*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" Foreground="White">Typ</TextBlock>
+                                            </Grid>
+                                            <Grid  VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1">
+                                                <TextBlock FontSize="14" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Foreground="White" Text="{Binding Tractor.Type}"/>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid Grid.Column="2" Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.5*"/>
+                                                <RowDefinition Height="0.5*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.00*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="0.00*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                <TextBlock   FontSize="20" FontWeight="DemiBold" Foreground="White">Hersteller</TextBlock>
+                                            </Grid>
+                                            <Grid Grid.Row="1" Grid.Column="1">
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Tractor.Manufacturer}"/>
+                                            </Grid>
+                                        </Grid>
+                                        
+                                        <Grid Grid.Column="3" Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.5*"/>
+                                                <RowDefinition Height="0.5*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.0*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="0.0*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Preis</TextBlock>
+                                            </Grid>
+                                            <Grid Grid.Row="1" Grid.Column="1">
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Tractor.Price, StringFormat={}{0}€}"/>
+                                            </Grid>
+                                        </Grid>
+
+                                        <Grid Grid.Column="4" Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.5*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.0*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="0.0*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" VerticalAlignment="Center" Grid.Column="1">
+                                                <ui:Button Content="Entfernen" CommandParameter="{Binding}" Command="{Binding ViewModel.RemoveCartItemCommand, RelativeSource={RelativeSource AncestorType={x:Type local:CartPage}}}"/>
+                                            </Grid>
+                                        </Grid>
+
+                                        <Grid Grid.Column="5" Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.125*"/>
+                                                <ColumnDefinition Width="0.875*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2" FontSize="20" Grid.Column="0" Symbol="Info16"/>
+                                            <TextBlock VerticalAlignment="Center" Grid.RowSpan="2" Grid.Row="0" FontSize="20" Grid.Column="1" Text="{Binding Quantity, StringFormat={}Anzahl: {0} Stück}"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid Width="Auto" Grid.Row="1" Grid.Column="3"></Grid>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock FontSize="24" Grid.Column="0" Text="{Binding ViewModel.Cart, StringFormat={}Gesamtsumme: {0} €, Converter={StaticResource CartSumConverter}}"/>
+            <ui:Button Grid.Column="1" Content="Kauf abschließen" Icon="Cart20" HorizontalAlignment="Right" FontSize="24" />
+        </Grid>
     </Grid>
 </ui:UiPage>

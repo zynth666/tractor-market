@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using TractorMarket.Models;
 
@@ -13,5 +13,5 @@ public class User
     public bool IsAdmin { get; set; }
     
     [NotMapped]
-    public List<CartItem> Cart = new();
+    public ObservableCollection<CartItem> Cart = new();
 }

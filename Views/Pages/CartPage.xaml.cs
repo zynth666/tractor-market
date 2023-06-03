@@ -1,4 +1,5 @@
 ﻿using Wpf.Ui.Common.Interfaces;
+using Wpf.Ui.Mvvm.Contracts;
 
 namespace TractorMarket.Views.Pages;
 
