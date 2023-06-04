@@ -65,21 +65,35 @@
                     <ColumnDefinition Width="0.15*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0">
+                <Grid x:Name="OuterGridImageViewer" Grid.Column="0">
                     <ScrollViewer x:Name="ImageViewerScrollView" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" >
-                        <Grid Background="Green" x:Name="zoomGrid">
+                        <Grid  x:Name="zoomGrid">
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Grid HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0" Background="Red">
-                                <Image Stretch="UniformToFill"  x:Name="ImageViewerIMG" Grid.Row="0" Source="{Binding ViewModel.Type, Converter={StaticResource ImagePathHelper}}"></Image>
+                            <Grid x:Name="zoomGrid2" Grid.Column="0" Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <!-- Set the height of the row to "*" to occupy available space -->
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Background="Purple">
+                                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0" Stretch="Uniform" x:Name="ImageViewerIMG" Grid.Row="0" Source="{Binding ViewModel.Type, Converter={StaticResource ImagePathHelper}}"></Image>
+
+                                </Grid>
+                                
                             </Grid>
                             
                         </Grid>

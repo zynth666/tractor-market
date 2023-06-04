@@ -32,18 +32,23 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
         ImageViewerScrollView.PreviewMouseDown += ImageViewerScrollViewer_PreviewMouseDown;
         ImageViewerScrollView.PreviewMouseMove += ImageViewerScrollViewer_PreviewMouseMove;
         ImageViewerScrollView.PreviewMouseUp += ImageViewerScrollViewer_PreviewMouseUp;
-        ImageViewerIMG.LayoutUpdated += ImageViewerIMG_LayoutUpdated;
+
     }
 
     private void ImageViewerIMG_Loaded(object sender, RoutedEventArgs e)
     {
         if(ViewerImgDimensionsLoaded == false)
         {
-            InitialViewerImgHeight = zoomGrid.ActualHeight;
-            InitialViewerImgWidth = zoomGrid.ActualWidth;
-            ViewModel.InitialViewerImgHeight = zoomGrid.ActualHeight;
-            ViewModel.InitialViewerImgWidth = zoomGrid.ActualWidth;
+
+            Debug.WriteLine("LOADINGGER");
+
+            zoomGrid.Width = OuterGridImageViewer.ActualWidth;
+            zoomGrid.Height = OuterGridImageViewer.ActualHeight;
+
+  
+      
             ViewModel.inviewer = true;
+
         }
     }
 
@@ -53,16 +58,13 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
 
         if(ViewModel.inviewer == true)
         {
+          
             zoomGrid.Width = InitialViewerImgWidth* newValue;
             zoomGrid.Height = InitialViewerImgHeight* newValue;
 
         }
     }
 
-    private void ImageViewerIMG_LayoutUpdated(object sender, EventArgs e)
-    {
-        Debug.WriteLine("NEW WIDTH2:" + ImageViewerIMG.ActualWidth);
-    }
 
     private void ImageViewerScrollViewer_PreviewMouseDown(object sender, MouseButtonEventArgs e)
     {
@@ -101,14 +103,15 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
 
     private void Unloaded_ImageView(object sender, RoutedEventArgs e)
     {
-        zoomGrid.Width = ViewModel.InitialViewerImgWidth ;
-        zoomGrid.Height = ViewModel.InitialViewerImgHeight;
+
         ImageViewerSlider.Value = 1;
     }
 
     private void ImageViewerSlider_Loaded(object sender, RoutedEventArgs e)
     {
         ImageViewerSlider.Value = 1;
+
+
     }
 }
 
