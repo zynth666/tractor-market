@@ -97,6 +97,7 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                             <ColumnDefinition MaxWidth="200"/>
                                         </Grid.ColumnDefinitions>
 
@@ -146,7 +147,7 @@
                                                 <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Tractor.Manufacturer}"/>
                                             </Grid>
                                         </Grid>
-                                        
+
                                         <Grid Grid.Column="3" Grid.Row="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="0.5*"/>
@@ -170,6 +171,56 @@
                                         <Grid Grid.Column="4" Grid.Row="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="0.5*"/>
+                                                <RowDefinition Height="0.5*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.0*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="0.0*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Summe</TextBlock>
+                                            </Grid>
+                                            <Grid Grid.Row="1" Grid.Column="1">
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Sum, StringFormat={}{0}€}"/>
+                                            </Grid>
+                                        </Grid>
+
+                                        <Grid Grid.Column="5" Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.3*"/>
+                                                <RowDefinition Height="0.7*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.2*"/>
+                                                <ColumnDefinition Width="0.8*"/>
+                                                <ColumnDefinition Width="0.2*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.125*"/>
+                                                    <ColumnDefinition Width="0.875*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.028*"/>
+                                                    <RowDefinition Height="0.972*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2" FontSize="15" Grid.Column="0" Symbol="Info16"/>
+                                                <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Tractor.Stock, StringFormat={}Noch {0} Stück auf Lager}"/>
+                                            </Grid>
+
+                                            <ui:NumberBox Grid.Row="1" Grid.Column="1" IntegersOnly="True" Value="{Binding Quantity, Mode=TwoWay}" Min="1" Max="{Binding Tractor.Stock}" />
+                                        </Grid>
+
+                                        <Grid Grid.Column="6" Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.5*"/>
                                             </Grid.RowDefinitions>
 
                                             <Grid.ColumnDefinitions>
@@ -179,23 +230,8 @@
                                             </Grid.ColumnDefinitions>
 
                                             <Grid Grid.Row="0" VerticalAlignment="Center" Grid.Column="1">
-                                                <ui:Button Content="Entfernen" CommandParameter="{Binding}" Command="{Binding ViewModel.RemoveCartItemCommand, RelativeSource={RelativeSource AncestorType={x:Type local:CartPage}}}"/>
+                                                <ui:Button Content="Entfernen" Icon="Delete20" FontSize="16" CommandParameter="{Binding}" Command="{Binding ViewModel.RemoveCartItemCommand, RelativeSource={RelativeSource AncestorType={x:Type local:CartPage}}}"/>
                                             </Grid>
-                                        </Grid>
-
-                                        <Grid Grid.Column="5" Grid.Row="1">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.125*"/>
-                                                <ColumnDefinition Width="0.875*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-
-                                            <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2" FontSize="20" Grid.Column="0" Symbol="Info16"/>
-                                            <TextBlock VerticalAlignment="Center" Grid.RowSpan="2" Grid.Row="0" FontSize="20" Grid.Column="1" Text="{Binding Quantity, StringFormat={}Anzahl: {0} Stück}"/>
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -213,8 +249,8 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TextBlock FontSize="24" Grid.Column="0" Text="{Binding ViewModel.PriceSum, StringFormat={}Gesamtsumme: {0} €}"/>
-            <ui:Button Grid.Column="1" Content="Kauf abschließen" Icon="Cart20" HorizontalAlignment="Right" FontSize="24" />
+            <TextBlock FontSize="24" Grid.Column="0" Text="{Binding ViewModel.TotalPrice, StringFormat={}Gesamtsumme: {0} €}"/>
+            <ui:Button Grid.Column="1" Content="Kauf abschließen" Icon="Cart20" HorizontalAlignment="Right" FontSize="20" />
         </Grid>
     </Grid>
 </ui:UiPage>

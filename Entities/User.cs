@@ -1,5 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TractorMarket.Helpers;
 using TractorMarket.Models;
 
 namespace TractorMarket.Entities;
@@ -13,5 +13,5 @@ public class User
     public bool IsAdmin { get; set; }
     
     [NotMapped]
-    public ObservableCollection<CartItem> Cart = new();
+    public DeepObservableCollection<CartItem> Cart = new();
 }
