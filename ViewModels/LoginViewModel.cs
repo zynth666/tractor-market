@@ -15,7 +15,7 @@ namespace TractorMarket.ViewModels
         private RefreshDatabase _refreshDatabaseHelper;
         private INavigationService _navigationService;
 
-        public event Action? ProcessLogin;
+        public event Action? ShowNavigation;
 
         [ObservableProperty]
         private string _usernameInput = "";
@@ -51,7 +51,8 @@ namespace TractorMarket.ViewModels
                 return;
             }
 
-            ProcessLogin?.Invoke();
+            ShowNavigation?.Invoke();
+            _navigationService.Navigate(typeof(AccountPage));
         }
 
         [RelayCommand]
