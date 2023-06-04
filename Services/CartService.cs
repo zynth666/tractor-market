@@ -21,7 +21,7 @@ public class CartService
         RemoveSoldTractorsFromStock(cart);
     }
 
-    public static long GetTotalPrice(ObservableCollection<CartItem> cart)
+    public long GetTotalPrice(ObservableCollection<CartItem> cart)
     {
         long sum = 0;
         foreach (CartItem cartItem in cart)

@@ -10,7 +10,10 @@ namespace TractorMarket.ViewModels;
 public partial class CartViewModel : ObservableObject, INavigationAware
 {
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(PriceSum))]
     private ObservableCollection<CartItem> _cart = UserService.LoggedInUser!.Cart;
+    
+    public long PriceSum { get; private set; }
 
     private TractorService _tractorService;
     private CartService _cartService;
@@ -27,6 +30,14 @@ public partial class CartViewModel : ObservableObject, INavigationAware
             CartItem item = new CartItem(tractor, 1);
             Cart.Add(item);
         }
+
+        PriceSum = _cartService.GetTotalPrice(Cart);
+
+        Cart.CollectionChanged += (_, _) =>
+        {
+            PriceSum = _cartService.GetTotalPrice(Cart);
+            OnPropertyChanged(nameof(PriceSum));
+        };
     }
 
     public void OnNavigatedTo()

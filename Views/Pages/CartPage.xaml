@@ -17,7 +17,6 @@
 
     <Page.Resources>
         <helpers:ImagePathHelper x:Key="ImagePathHelper" />
-        <helpers:CartSumConverter x:Key="CartSumConverter" />
         <Style TargetType="ListViewItem">
             <Setter Property="Template">
                 <Setter.Value>
@@ -214,7 +213,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TextBlock FontSize="24" Grid.Column="0" Text="{Binding ViewModel.Cart, StringFormat={}Gesamtsumme: {0} €, Converter={StaticResource CartSumConverter}}"/>
+            <TextBlock FontSize="24" Grid.Column="0" Text="{Binding ViewModel.PriceSum, StringFormat={}Gesamtsumme: {0} €}"/>
             <ui:Button Grid.Column="1" Content="Kauf abschließen" Icon="Cart20" HorizontalAlignment="Right" FontSize="24" />
         </Grid>
     </Grid>
