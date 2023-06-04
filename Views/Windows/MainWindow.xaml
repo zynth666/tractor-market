@@ -8,10 +8,10 @@
     xmlns:pages="clr-namespace:TractorMarket.Views.Pages"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
+    MinWidth="1000"
     Width="1100"
     Height="650"
-    d:DataContext="{d:DesignInstance local:MainWindow,
-                                     IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance local:MainWindow,IsDesignTimeCreatable=True}"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ExtendsContentIntoTitleBar="True"
@@ -52,6 +52,9 @@
                 </ui:NotifyIcon>
             </ui:TitleBar.Tray>
         </ui:TitleBar>
+
+        
+        
 
         <Grid Grid.Column="1">
             <Border

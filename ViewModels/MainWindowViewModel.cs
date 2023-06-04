@@ -29,7 +29,7 @@ namespace TractorMarket.ViewModels
         [ObservableProperty]
         private ObservableCollection<MenuItem> _trayMenuItems = new();
 
-        public event Action? ProcessLogout;
+        public event Action? HideNavigation;
 
         public MainWindowViewModel(INavigationService navigationService, RefreshDatabase refreshDatabaseHelper)
         {
@@ -55,10 +55,10 @@ namespace TractorMarket.ViewModels
                 },
                 new NavigationItem()
                 {
-                    Content = "Data",
-                    PageTag = "data",
-                    Icon = SymbolRegular.DataHistogram24,
-                    PageType = typeof(Views.Pages.DataPage)
+                    Content = "Markt",
+                    PageTag = "market",
+                    Icon = SymbolRegular.VehicleTruckBag24,
+                    PageType = typeof(Views.Pages.MarketPage)
                 }
             };
 
@@ -97,7 +97,7 @@ namespace TractorMarket.ViewModels
         public void LogOut()
         {
             UserService.LoggedInUser = null;
-            ProcessLogout?.Invoke();
+            HideNavigation?.Invoke();
             _navigationService.Navigate(typeof(LoginPage));
         }
     }

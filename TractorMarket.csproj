@@ -40,9 +40,50 @@
     <None Remove="Assets\applicationIcon-256.png" />
     <None Remove="Assets\Images\Logos\bigboys_logo_big.png" />
     <None Remove="Assets\Images\Logos\bigboys_logo_small.png" />
+    <None Remove="Assets\Images\Tractors\11440_TTV.jpg" />
+    <None Remove="Assets\Images\Tractors\130.jpg" />
+    <None Remove="Assets\Images\Tractors\3220_Plus.jpg" />
+    <None Remove="Assets\Images\Tractors\6240_CVT.jpg" />
+    <None Remove="Assets\Images\Tractors\6300_Terrus_CVT.jpg" />
+    <None Remove="Assets\Images\Tractors\7020.jpg" />
+    <None Remove="Assets\Images\Tractors\7270.jpg" />
+    <None Remove="Assets\Images\Tractors\7R.jpg" />
+    <None Remove="Assets\Images\Tractors\8030.jpg" />
+    <None Remove="Assets\Images\Tractors\8280.jpg" />
+    <None Remove="Assets\Images\Tractors\8330.jpg" />
+    <None Remove="Assets\Images\Tractors\9340_TTV_Warrior.jpg" />
+    <None Remove="Assets\Images\Tractors\95E.jpg" />
+    <None Remove="Assets\Images\Tractors\9R_RT.jpg" />
+    <None Remove="Assets\Images\Tractors\Agroton_M_600.jpg" />
+    <None Remove="Assets\Images\Tractors\Agroton_TTV_7250.jpg" />
+    <None Remove="Assets\Images\Tractors\AgroXXL_1630.jpg" />
+    <None Remove="Assets\Images\Tractors\Axion_900.jpg" />
+    <None Remove="Assets\Images\Tractors\Axion_950.jpg" />
+    <None Remove="Assets\Images\Tractors\Axos_340_CX.jpg" />
+    <None Remove="Assets\Images\Tractors\MF_8400.jpg" />
+    <None Remove="Assets\Images\Tractors\Multi_4120.jpg" />
+    <None Remove="Assets\Images\Tractors\M_135.jpg" />
+    <None Remove="Assets\Images\Tractors\Profi_6000.jpg" />
+    <None Remove="Assets\Images\Tractors\S_394.jpg" />
+    <None Remove="Assets\Images\Tractors\T8.jpg" />
+    <None Remove="Assets\Images\Tractors\T9.jpg" />
+    <None Remove="Assets\Images\Tractors\Vario_1038.jpg" />
+    <None Remove="Assets\Images\Tractors\Vario_1050.jpg" />
+    <None Remove="Assets\Images\Tractors\Vario_1100.jpg" />
+    <None Remove="Assets\Images\Tractors\Vario_500.jpg" />
+    <None Remove="Assets\Images\Tractors\Vario_828.jpg" />
+    <None Remove="Assets\Images\Tractors\Xerion_5000.jpg" />
     <None Remove="Data\TractorAddons.json" />
     <None Remove="Data\Tractors.json" />
     <None Remove="Data\Users.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\Tractors\8030.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\Tractors\7020.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,9 +91,41 @@
     <Resource Include="Assets\applicationIcon-256.png" />
     <Resource Include="Assets\Images\Logos\bigboys_logo_big.png" />
     <Resource Include="Assets\Images\Logos\bigboys_logo_small.png" />
+    <Resource Include="Assets\Images\Tractors\11440_TTV.jpg" />
+    <Resource Include="Assets\Images\Tractors\130.jpg" />
+    <Resource Include="Assets\Images\Tractors\3220_Plus.jpg" />
+    <Resource Include="Assets\Images\Tractors\6240_CVT.jpg" />
+    <Resource Include="Assets\Images\Tractors\6300_Terrus_CVT.jpg" />
+    <Resource Include="Assets\Images\Tractors\7270.jpg" />
+    <Resource Include="Assets\Images\Tractors\7R.jpg" />
+    <Resource Include="Assets\Images\Tractors\8280.jpg" />
+    <Resource Include="Assets\Images\Tractors\8330.jpg" />
+    <Resource Include="Assets\Images\Tractors\9340_TTV_Warrior.jpg" />
+    <Resource Include="Assets\Images\Tractors\95E.jpg" />
+    <Resource Include="Assets\Images\Tractors\9R_RT.jpg" />
+    <Resource Include="Assets\Images\Tractors\Agroton_M_600.jpg" />
+    <Resource Include="Assets\Images\Tractors\Agroton_TTV_7250.jpg" />
+    <Resource Include="Assets\Images\Tractors\AgroXXL_1630.jpg" />
+    <Resource Include="Assets\Images\Tractors\Axion_900.jpg" />
+    <Resource Include="Assets\Images\Tractors\Axion_950.jpg" />
+    <Resource Include="Assets\Images\Tractors\Axos_340_CX.jpg" />
+    <Resource Include="Assets\Images\Tractors\MF_8400.jpg" />
+    <Resource Include="Assets\Images\Tractors\Multi_4120.jpg" />
+    <Resource Include="Assets\Images\Tractors\M_135.jpg" />
+    <Resource Include="Assets\Images\Tractors\Profi_6000.jpg" />
+    <Resource Include="Assets\Images\Tractors\S_394.jpg" />
+    <Resource Include="Assets\Images\Tractors\T8.jpg" />
+    <Resource Include="Assets\Images\Tractors\T9.jpg" />
+    <Resource Include="Assets\Images\Tractors\Vario_1038.jpg" />
+    <Resource Include="Assets\Images\Tractors\Vario_1050.jpg" />
+    <Resource Include="Assets\Images\Tractors\Vario_1100.jpg" />
+    <Resource Include="Assets\Images\Tractors\Vario_500.jpg" />
+    <Resource Include="Assets\Images\Tractors\Vario_828.jpg" />
+    <Resource Include="Assets\Images\Tractors\Xerion_5000.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Assets\Addons\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

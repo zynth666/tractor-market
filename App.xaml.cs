@@ -51,11 +51,13 @@ namespace TractorMarket
                 // Views and ViewModels
                 services.AddScoped<Views.Pages.AccountPage>();
                 services.AddScoped<ViewModels.AccountViewModel>();
-                services.AddScoped<Views.Pages.DataPage>();
-                services.AddScoped<ViewModels.DataViewModel>();
+                services.AddScoped<Views.Pages.MarketPage>();
+                services.AddScoped<ViewModels.MarketViewModel>();
                 services.AddScoped<Views.Pages.SettingsPage>();
                 services.AddScoped<ViewModels.SettingsViewModel>();
                 services.AddScoped<Views.Pages.LoginPage>();
+                services.AddScoped<Views.Pages.ImageViewerPage>();
+                services.AddScoped<ViewModels.ImageViewerViewModel>();
                 services.AddScoped<ViewModels.LoginViewModel>();
                 services.AddScoped<Views.Pages.RegisterPage>();
                 services.AddScoped<ViewModels.RegisterViewModel>();
@@ -64,6 +66,7 @@ namespace TractorMarket
                 services.AddSingleton<TractorService>();
                 services.AddSingleton<UserService>();
                 services.AddSingleton<RefreshDatabase>();
+                services.AddSingleton<ImageViewerService>();
                 services.AddDbContext<DataContext>();
 
                 // Configuration
