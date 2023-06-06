@@ -267,7 +267,7 @@
 
 
                                     <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2"  FontSize="15" Grid.Column="0"  Symbol="Info16"/>
-                                    <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, StringFormat={}Noch {0} Stück auf Lager}"/>
+                                    <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
 
                                 </Grid>
                                 
