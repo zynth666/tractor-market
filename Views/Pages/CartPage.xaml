@@ -250,7 +250,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock FontSize="24" Grid.Column="0" Text="{Binding ViewModel.TotalPrice, StringFormat={}Gesamtsumme: {0} €}"/>
-            <ui:Button Grid.Column="1" Content="Kauf abschließen" Icon="Cart20" HorizontalAlignment="Right" FontSize="20" />
+            <ui:Button Grid.Column="1" Content="Kauf abschließen" Command="{Binding ViewModel.CheckoutCommand}" Icon="Cart20" HorizontalAlignment="Right" FontSize="20" />
         </Grid>
     </Grid>
 </ui:UiPage>

@@ -14,7 +14,9 @@ public partial class CartViewModel : ObservableObject, INavigationAware
     [NotifyPropertyChangedFor(nameof(TotalPrice))]
     private DeepObservableCollection<CartItem> _cart = UserService.LoggedInUser!.Cart;
 
-    public long TotalPrice { get; private set; }
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(CheckoutCommand))]
+    private long _totalPrice;
 
     private TractorService _tractorService;
     private CartService _cartService;
@@ -32,13 +34,21 @@ public partial class CartViewModel : ObservableObject, INavigationAware
             Cart.Add(item);
         }
 
-        TotalPrice = _cartService.GetTotalPrice(Cart);
+        long totalPrice = _cartService.GetTotalPrice(Cart);
+        TotalPrice = totalPrice;
 
         Cart.CollectionChanged += (_, _) =>
         {
-            TotalPrice = _cartService.GetTotalPrice(Cart);
+            long totalPrice = _cartService.GetTotalPrice(Cart);
+            TotalPrice = totalPrice;
             OnPropertyChanged(nameof(TotalPrice));
         };
+    }
+
+    private bool HasEnoughBudgetToCheckout()
+    {
+        long totalPrice = _cartService.GetTotalPrice(Cart);
+        return totalPrice <= UserService.LoggedInUser!.Budget && totalPrice != 0;
     }
 
     public void OnNavigatedTo()
@@ -53,5 +63,11 @@ public partial class CartViewModel : ObservableObject, INavigationAware
     public void RemoveCartItem(CartItem item)
     {
         Cart.Remove(item);
+    }
+
+    [RelayCommand(CanExecute = nameof(HasEnoughBudgetToCheckout))]
+    public void Checkout()
+    {
+        _cartService.Checkout(Cart, UserService.LoggedInUser!);
     }
 }

@@ -19,6 +19,7 @@ public class CartService
     {
         PaySeller(currentUser);
         RemoveSoldTractorsFromStock(cart);
+        cart.Clear();
     }
 
     public long GetTotalPrice(ObservableCollection<CartItem> cart)
@@ -49,6 +50,6 @@ public class CartService
         long moneyFromSale = GetTotalPrice(currentUser.Cart);
 
         currentUser.Budget -= moneyFromSale;
-        _userService.GetAdmin().Budget =+ moneyFromSale;
+        _userService.GetAdmin().Budget += moneyFromSale;
     }
 }
