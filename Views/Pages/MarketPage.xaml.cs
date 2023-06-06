@@ -1,4 +1,5 @@
-﻿using Wpf.Ui.Common.Interfaces;
+﻿using System.Diagnostics;
+using Wpf.Ui.Common.Interfaces;
 
 namespace TractorMarket.Views.Pages;
 

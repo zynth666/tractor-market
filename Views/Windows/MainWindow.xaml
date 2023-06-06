@@ -11,8 +11,7 @@
     MinWidth="1000"
     Width="1100"
     Height="650"
-    d:DataContext="{d:DesignInstance local:MainWindow,
-                                     IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance local:MainWindow,IsDesignTimeCreatable=True}"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ExtendsContentIntoTitleBar="True"
@@ -53,6 +52,9 @@
                 </ui:NotifyIcon>
             </ui:TitleBar.Tray>
         </ui:TitleBar>
+
+        
+        
 
         <Grid Grid.Column="1">
             <Border

@@ -56,6 +56,8 @@ namespace TractorMarket
                 services.AddScoped<Views.Pages.SettingsPage>();
                 services.AddScoped<ViewModels.SettingsViewModel>();
                 services.AddScoped<Views.Pages.LoginPage>();
+                services.AddScoped<Views.Pages.ImageViewerPage>();
+                services.AddScoped<ViewModels.ImageViewerViewModel>();
                 services.AddScoped<ViewModels.LoginViewModel>();
                 services.AddScoped<Views.Pages.RegisterPage>();
                 services.AddScoped<ViewModels.RegisterViewModel>();
@@ -67,6 +69,7 @@ namespace TractorMarket
                 services.AddSingleton<UserService>();
                 services.AddSingleton<CartService>();
                 services.AddSingleton<RefreshDatabase>();
+                services.AddSingleton<ImageViewerService>();
                 services.AddDbContext<DataContext>();
 
                 // Configuration

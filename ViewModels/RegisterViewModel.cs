@@ -15,7 +15,7 @@ namespace TractorMarket.ViewModels
         private INavigationService _navigationService;
         private UserService _userService;
 
-        public event Action? ProcessRegister;
+        public event Action? ShowNavigation;
 
         [ObservableProperty]
         private string _usernameInput = "";
@@ -49,7 +49,8 @@ namespace TractorMarket.ViewModels
         private void OnRegister()
         {
             _userService.RegisterUser(UsernameInput, PasswordInput, BudgetInput);
-            ProcessRegister?.Invoke();
+            ShowNavigation?.Invoke();
+            _navigationService.Navigate(typeof(AccountPage));
         }
 
         [RelayCommand]

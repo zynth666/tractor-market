@@ -29,7 +29,7 @@ namespace TractorMarket.ViewModels
         [ObservableProperty]
         private ObservableCollection<MenuItem> _trayMenuItems = new();
 
-        public event Action? ProcessLogout;
+        public event Action? HideNavigation;
 
         public MainWindowViewModel(INavigationService navigationService, RefreshDatabase refreshDatabaseHelper)
         {
@@ -104,7 +104,7 @@ namespace TractorMarket.ViewModels
         public void LogOut()
         {
             UserService.LoggedInUser = null;
-            ProcessLogout?.Invoke();
+            HideNavigation?.Invoke();
             _navigationService.Navigate(typeof(LoginPage));
         }
     }

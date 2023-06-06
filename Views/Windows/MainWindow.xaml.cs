@@ -12,19 +12,23 @@ namespace TractorMarket.Views.Windows
     /// </summary>
     public partial class MainWindow : INavigationWindow
     {
+        private double breadcrumbheight = 0;
+
         public MainWindowViewModel ViewModel
         {
             get;
         }
 
-        public MainWindow(MainWindowViewModel viewModel, LoginViewModel loginViewModel, RegisterViewModel registerViewModel, IPageService pageService, INavigationService navigationService)
+        public MainWindow(MainWindowViewModel viewModel, LoginViewModel loginViewModel, RegisterViewModel registerViewModel, ImageViewerViewModel imageviewerViewModel, IPageService pageService, INavigationService navigationService)
         {
             ViewModel = viewModel;
             DataContext = this;
 
-            loginViewModel.ProcessLogin += ShowNavigation;
-            registerViewModel.ProcessRegister += ShowNavigation;
-            viewModel.ProcessLogout += HideNavigation;
+            loginViewModel.ShowNavigation += ShowNavigation;
+            registerViewModel.ShowNavigation += ShowNavigation;
+            viewModel.HideNavigation += HideNavigation;
+            imageviewerViewModel.ShowNavigation += ShowNavigation;
+            imageviewerViewModel.HideNavigation += HideNavigation;
 
             InitializeComponent();
             SetPageService(pageService);
@@ -69,7 +73,7 @@ namespace TractorMarket.Views.Windows
             NavigationColumnDefinition.Width = GridLength.Auto;
             RootNavigation.Visibility = Visibility.Visible;
             RootBreadcrumb.Visibility = Visibility.Visible;
-            Navigate(typeof(Pages.AccountPage));
+            RootBreadcrumb.Height = Double.NaN;
         }
 
         private void HideNavigation()
@@ -77,6 +81,8 @@ namespace TractorMarket.Views.Windows
             NavigationColumnDefinition.Width = new GridLength(0);
             RootNavigation.Visibility = Visibility.Hidden;
             RootBreadcrumb.Visibility = Visibility.Hidden;
+            breadcrumbheight = RootBreadcrumb.Height;
+            RootBreadcrumb.Height = 0;
         }
     }
 }
