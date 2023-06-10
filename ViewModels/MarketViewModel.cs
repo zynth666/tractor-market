@@ -63,7 +63,7 @@ namespace TractorMarket.ViewModels
         [RelayCommand]
         public void AddToCart(Tractor tractor)
         {
-            CartItem cartItem = new(tractor, SelectedQuantity);
+            CartItem cartItem = new(tractor, tractor.SelectedQuantity);
             _cartService.AddToCart(UserService.LoggedInUser!.Cart, cartItem);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TractorMarket.Entities;
 
@@ -13,6 +14,9 @@ public class Tractor
     public int Price { get; set; }
     public int Vintage { get; set; }
     public int Stock { get; set; }
+
+    [NotMapped]
+    public int SelectedQuantity { get; set; }
 
     public string GetDisplayName()
     {
