@@ -26,14 +26,6 @@ public partial class CartViewModel : ObservableObject, INavigationAware
         _tractorService = tractorService;
         _cartService = cartService;
 
-        var tractors = _tractorService.GetTractorsForCustomers();
-
-        foreach (var tractor in tractors)
-        {
-            CartItem item = new CartItem(tractor, 2);
-            Cart.Add(item);
-        }
-
         long totalPrice = _cartService.GetTotalPrice(Cart);
         TotalPrice = totalPrice;
 
