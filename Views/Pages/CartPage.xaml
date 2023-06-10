@@ -1,17 +1,14 @@
-﻿<ui:UiPage
-    x:Name="Market_Page"
-    x:Class="TractorMarket.Views.Pages.MarketPage"
+﻿<ui:UiPage x:Class="TractorMarket.Views.Pages.CartPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TractorMarket.Views.Pages"
-    xmlns:entities="clr-namespace:TractorMarket.Entities"
-    xmlns:helpers="clr-namespace:TractorMarket.Helpers"
     xmlns:models="clr-namespace:TractorMarket.Models"
+    xmlns:helpers="clr-namespace:TractorMarket.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="MarketPage"
-    d:DataContext="{d:DesignInstance local:MarketPage, IsDesignTimeCreatable=False}"
+    Title="CartPage"
+    d:DataContext="{d:DesignInstance local:CartPage, IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -28,7 +25,6 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="5">
-                            <!-- Content Presenter -->
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -46,32 +42,34 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.TractorsForCustomers}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.Cart}">
             <ListView.ItemTemplate>
- 		        <DataTemplate DataType="{x:Type entities:Tractor}" >
+                <DataTemplate DataType="{x:Type models:CartItem}" >
                     <Border CornerRadius="5" Background="{DynamicResource ControlFillColorDefaultBrush}">
-                        <Grid Height="200">
+                        <Grid Height="100">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.1*" MaxWidth="5"/>
-                                <ColumnDefinition MaxWidth="200" Width="0.10*"/>
-                                <ColumnDefinition Width="0.7*"/>
-                                <ColumnDefinition MaxWidth="300" Width="0.2*"/>
+                                <ColumnDefinition MaxWidth="250" Width="0.2*"/>
+                                <ColumnDefinition Width="0.75*"/>
+                                <ColumnDefinition MaxWidth="300" Width="0.05*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
+
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="200"/>
+                                <RowDefinition Height="100"/>
                             </Grid.RowDefinitions>
 
-                            <Grid Grid.Column="1" Grid.Row="0" >
-                                <Grid  Height="125" Width="125" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Grid.InputBindings>
-                                        <MouseBinding Gesture="LeftClick" CommandParameter="{Binding}" Command="{Binding ViewModel.OpenImageViewerCommand, Source={x:Reference Name=Market_Page}}" />
-                                    </Grid.InputBindings>
-
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <Grid Height="125" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Border CornerRadius="15">
-                                        <Image Height="125" Width="125" Stretch="UniformToFill" Source="{Binding Type, Converter={StaticResource ImagePathHelper}}">
+                                        <Image Height="125" Width="250" Stretch="UniformToFill" Source="{Binding Tractor.Type, Converter={StaticResource ImagePathHelper}}">
                                             <Image.Clip>
-                                                <RectangleGeometry RadiusX="5" RadiusY="5" Rect="0,0,125,125"/>
+                                                <RectangleGeometry RadiusX="5" RadiusY="5" Rect="0,0,250,125"/>
                                             </Image.Clip>
                                         </Image>
                                     </Border>
@@ -92,10 +90,12 @@
                                         <RowDefinition Height="125"/>
                                     </Grid.RowDefinitions>
 
-                                    <Grid  Grid.Row="0" Grid.Column="0">
+                                    <Grid Grid.Row="0" Grid.Column="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="0.1*"/>
                                             <ColumnDefinition Width="0.7*"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                             <ColumnDefinition MaxWidth="200"/>
@@ -125,7 +125,7 @@
                                                 <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" Foreground="White">Typ</TextBlock>
                                             </Grid>
                                             <Grid  VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Foreground="White" Text="{Binding Type}"/>
+                                                <TextBlock FontSize="14" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Foreground="White" Text="{Binding Tractor.Type}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Column="2" Grid.Row="1">
@@ -144,9 +144,10 @@
                                                 <TextBlock   FontSize="20" FontWeight="DemiBold" Foreground="White">Hersteller</TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Manufacturer}"/>
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Tractor.Manufacturer}"/>
                                             </Grid>
                                         </Grid>
+
                                         <Grid Grid.Column="3" Grid.Row="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="0.5*"/>
@@ -163,49 +164,11 @@
                                                 <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Preis</TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Price, StringFormat={}{0}€}"/>
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Tractor.Price, StringFormat={}{0}€}"/>
                                             </Grid>
                                         </Grid>
 
-                                        <Grid Grid.Row="2" Grid.Column="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.0*"/>
-                                                <ColumnDefinition Width="1*"/>
-                                                <ColumnDefinition Width="0.0*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Row="0" Grid.Column="1">
-                                                <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" Foreground="White">Leistung</TextBlock>
-                                            </Grid>
-                                            <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock VerticalAlignment="Top" FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Horsepower, StringFormat={}{0} PS}"/>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid Grid.Row="2" Grid.Column="2">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="0.5*"/>
-                                                <RowDefinition Height="0.5*"/>
-                                            </Grid.RowDefinitions>
-
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.0*"/>
-                                                <ColumnDefinition Width="1*"/>
-                                                <ColumnDefinition Width="0.0*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1">
-                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Max. Geschwindigkeit</TextBlock>
-                                            </Grid>
-                                            <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Velocity, StringFormat={}{0} KM/h}"/>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid Grid.Row="2" Grid.Column="3">
+                                        <Grid Grid.Column="4" Grid.Row="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="0.5*"/>
                                                 <RowDefinition Height="0.5*"/>
@@ -218,61 +181,76 @@
                                             </Grid.ColumnDefinitions>
 
                                             <Grid Grid.Row="0" Grid.Column="1">
-                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Baujahr</TextBlock>
+                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Summe</TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Vintage}"/>
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Sum, StringFormat={}{0}€}"/>
                                             </Grid>
                                         </Grid>
 
-                                        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="4" >
-                                            <ui:Hyperlink Content="Verfügbares Zubehör"/>
+                                        <Grid Grid.Column="5" Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.3*"/>
+                                                <RowDefinition Height="0.7*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.2*"/>
+                                                <ColumnDefinition Width="0.8*"/>
+                                                <ColumnDefinition Width="0.2*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.125*"/>
+                                                    <ColumnDefinition Width="0.875*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.028*"/>
+                                                    <RowDefinition Height="0.972*"/>
+                                                </Grid.RowDefinitions>
+
+                                                <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2" FontSize="15" Grid.Column="0" Symbol="Info16"/>
+                                                <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Tractor.Stock, StringFormat={}Noch {0} Stück auf Lager}"/>
+                                            </Grid>
+
+                                            <ui:NumberBox Grid.Row="1" Grid.Column="1" IntegersOnly="True" Value="{Binding Quantity, Mode=TwoWay}" Min="1" Max="{Binding Tractor.Stock}" />
+                                        </Grid>
+
+                                        <Grid Grid.Column="6" Grid.Row="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.5*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.0*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="0.0*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Row="0" VerticalAlignment="Center" Grid.Column="1">
+                                                <ui:Button Content="Entfernen" Icon="Delete20" FontSize="16" CommandParameter="{Binding}" Command="{Binding ViewModel.RemoveCartItemCommand, RelativeSource={RelativeSource AncestorType={x:Type local:CartPage}}}"/>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
-
-                            <Grid Grid.Column="3" Grid.Row="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.2*"/>
-                                    <RowDefinition Height="0.1*"/>
-                                    <RowDefinition Height="0.2*"/>
-                                    <RowDefinition Height="0.3*"/>
-                                    <RowDefinition Height="0.2*"/>
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.2*"/>
-                                    <ColumnDefinition Width="0.8*"/>
-                                    <ColumnDefinition Width="0.2*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Grid Grid.Row="1" Grid.Column="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.125*"/>
-                                        <ColumnDefinition Width="0.875*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="0.028*"/>
-                                        <RowDefinition Height="0.972*"/>
-                                    </Grid.RowDefinitions>
-
-
-                                    <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2"  FontSize="15" Grid.Column="0"  Symbol="Info16"/>
-                                    <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
-                                </Grid>
-
-                                <ui:NumberBox x:Name="selectedQuantityBox" Value="{Binding SelectedQuantity, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" IntegersOnly="True" Min="1" Max="{Binding Stock}" />
-
-                                <ui:Button CommandParameter="{Binding}" Command="{Binding ViewModel.AddToCartCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}" VerticalAlignment="Stretch" Margin="0, 7.5, 0, 7.5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Icon="Cart24" IconFilled="False" FontSize="30" />
-                            </Grid>
-
-                            <Grid Width="Auto"  Grid.Row="1" Grid.Column="3" ></Grid>
+                            <Grid Width="Auto" Grid.Row="1" Grid.Column="3"></Grid>
                         </Grid>
                     </Border>
- 		        </DataTemplate>
- 	        </ListView.ItemTemplate>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
+
+        <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock FontSize="24" Grid.Column="0" Text="{Binding ViewModel.TotalPrice, StringFormat={}Gesamtsumme: {0} €}"/>
+            <ui:Button Grid.Column="1" Content="Kauf abschließen" Command="{Binding ViewModel.CheckoutCommand}" Icon="Cart20" HorizontalAlignment="Right" FontSize="20" />
+        </Grid>
     </Grid>
 </ui:UiPage>
