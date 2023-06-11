@@ -11,12 +11,21 @@ public class Tractor
     public string Type { get; set; } = string.Empty;
     public int Horsepower { get; set; }
     public int Velocity { get; set; }
-    public int Price { get; set; }
+    public double Price { get; set; }
     public int Vintage { get; set; }
     public int Stock { get; set; }
 
     [NotMapped]
-    public int SelectedQuantity { get; set; }
+    public int SelectedQuantity { get; set; } = 1;
+
+    [NotMapped]
+    public double AdminPrice
+    {
+        get
+        {
+            return Price * 0.65;
+        }
+    }
 
     public string GetDisplayName()
     {

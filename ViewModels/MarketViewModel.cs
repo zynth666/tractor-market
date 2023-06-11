@@ -12,43 +12,35 @@ namespace TractorMarket.ViewModels
 {
     public partial class MarketViewModel : ObservableObject, INavigationAware
     {
-        private bool _isInitialized = false;
-        private TractorService _tractorService;
-        private CartService _cartService;
+        private readonly TractorService _tractorService;
 
-        private INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
 
         [ObservableProperty]
-        private int _selectedQuantity;
+        private List<Tractor> _tractors = new();
 
         [ObservableProperty]
-        private List<Tractor> _tractorsForCustomers = new List<Tractor>();
+        private bool _isAdmin = UserService.LoggedInUser!.IsAdmin;
 
         [ObservableProperty]
-        private List<Tractor> _tractorsForAdmin = new List<Tractor>();
+        private bool _isNotAdmin = !UserService.LoggedInUser!.IsAdmin;
 
-        public MarketViewModel(TractorService tractorService, INavigationService navigationService, CartService cartService)
+        public MarketViewModel(TractorService tractorService, INavigationService navigationService)
         {
             _tractorService = tractorService;
             _navigationService = navigationService;
-            _cartService = cartService;
         }
 
         public void OnNavigatedTo()
         {
-            if (!_isInitialized)
-                InitializeViewModel();
+            IsAdmin = UserService.LoggedInUser!.IsAdmin;
+            IsNotAdmin = !UserService.LoggedInUser!.IsAdmin;
+
+            UpdateTractorList();
         }
 
         public void OnNavigatedFrom()
         {
-        }
-
-        private void InitializeViewModel()
-        {
-            TractorsForCustomers = _tractorService.GetTractorsForCustomers();
-            TractorsForAdmin = _tractorService.GetTractorsForAdmin();
-            _isInitialized = true;
         }
 
         [RelayCommand]
@@ -61,10 +53,22 @@ namespace TractorMarket.ViewModels
         }
 
         [RelayCommand]
-        public void AddToCart(Tractor tractor)
+        public static void AddToCart(Tractor tractor)
         {
             CartItem cartItem = new(tractor, tractor.SelectedQuantity);
-            _cartService.AddToCart(UserService.LoggedInUser!.Cart, cartItem);
+            CartService.AddToCart(UserService.LoggedInUser!.Cart, cartItem);
+        }
+
+        private void UpdateTractorList()
+        {
+            if (IsAdmin)
+            {
+                Tractors = _tractorService.GetTractorsForAdmin();
+            }
+            else
+            {
+                Tractors = _tractorService.GetTractorsForCustomers();
+            }
         }
     }
 }

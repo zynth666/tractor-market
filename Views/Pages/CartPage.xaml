@@ -17,6 +17,7 @@
 
     <Page.Resources>
         <helpers:ImagePathHelper x:Key="ImagePathHelper" />
+        <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
         <Style TargetType="ListViewItem">
             <Setter Property="Template">
                 <Setter.Value>
@@ -164,7 +165,22 @@
                                                 <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Preis</TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Tractor.Price, StringFormat={}{0}€}"/>
+                                                <TextBlock 
+                                                    x:Name="CustomerPrice"
+                                                    FontSize="14"
+                                                    FontWeight="DemiBold"
+                                                    Foreground="White"
+                                                    Text="{Binding Tractor.Price, StringFormat={}{0}€}"
+                                                    Visibility="{Binding ViewModel.IsNotAdmin, RelativeSource={RelativeSource AncestorType={x:Type local:CartPage}}, Converter={StaticResource VisibilityOfBool}}"
+                                                />
+                                                <TextBlock 
+                                                    x:Name="AdminPrice"
+                                                    FontSize="14"
+                                                    FontWeight="DemiBold"
+                                                    Foreground="White"
+                                                    Text="{Binding Tractor.AdminPrice, StringFormat={}{0}€}"
+                                                    Visibility="{Binding ViewModel.IsAdmin, RelativeSource={RelativeSource AncestorType={x:Type local:CartPage}}, Converter={StaticResource VisibilityOfBool}}"
+                                                />
                                             </Grid>
                                         </Grid>
 
@@ -188,35 +204,88 @@
                                             </Grid>
                                         </Grid>
 
-                                        <Grid Grid.Column="5" Grid.Row="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="0.3*"/>
-                                                <RowDefinition Height="0.7*"/>
-                                            </Grid.RowDefinitions>
+                                        <ContentControl Grid.Column="5" Grid.Row="1">
+                                            <ContentControl.Style>
+                                                <Style TargetType="{x:Type ContentControl}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ViewModel.IsAdmin, RelativeSource={RelativeSource AncestorType={x:Type local:CartPage}}}" Value="False">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate>
+                                                                        <Grid>
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="0.3*"/>
+                                                                                <RowDefinition Height="0.7*"/>
+                                                                            </Grid.RowDefinitions>
 
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.2*"/>
-                                                <ColumnDefinition Width="0.8*"/>
-                                                <ColumnDefinition Width="0.2*"/>
-                                            </Grid.ColumnDefinitions>
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="0.2*"/>
+                                                                                <ColumnDefinition Width="0.8*"/>
+                                                                                <ColumnDefinition Width="0.2*"/>
+                                                                            </Grid.ColumnDefinitions>
 
-                                            <Grid Grid.Row="0" Grid.Column="1">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="0.125*"/>
-                                                    <ColumnDefinition Width="0.875*"/>
-                                                </Grid.ColumnDefinitions>
+                                                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="0.125*"/>
+                                                                                    <ColumnDefinition Width="0.875*"/>
+                                                                                </Grid.ColumnDefinitions>
 
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="0.028*"/>
-                                                    <RowDefinition Height="0.972*"/>
-                                                </Grid.RowDefinitions>
+                                                                                <Grid.RowDefinitions>
+                                                                                    <RowDefinition Height="0.028*"/>
+                                                                                    <RowDefinition Height="0.972*"/>
+                                                                                </Grid.RowDefinitions>
 
-                                                <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2" FontSize="15" Grid.Column="0" Symbol="Info16"/>
-                                                <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Tractor.Stock, StringFormat={}Noch {0} Stück auf Lager}"/>
-                                            </Grid>
+                                                                                <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2" FontSize="15" Grid.Column="0" Symbol="Info16"/>
+                                                                                <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Tractor.Stock, StringFormat={}Noch {0} Stück auf Lager}"/>
+                                                                            </Grid>
 
-                                            <ui:NumberBox Grid.Row="1" Grid.Column="1" IntegersOnly="True" Value="{Binding Quantity, Mode=TwoWay}" Min="1" Max="{Binding Tractor.Stock}" />
-                                        </Grid>
+                                                                            <ui:NumberBox Grid.Row="1" Grid.Column="1" IntegersOnly="True" Value="{Binding Quantity, Mode=TwoWay}" Min="1" Max="{Binding Tractor.Stock}" />
+                                                                        </Grid>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ViewModel.IsAdmin, RelativeSource={RelativeSource AncestorType={x:Type local:CartPage}}}" Value="True">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate>
+                                                                        <Grid>
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="0.3*"/>
+                                                                                <RowDefinition Height="0.7*"/>
+                                                                            </Grid.RowDefinitions>
+
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="0.2*"/>
+                                                                                <ColumnDefinition Width="0.8*"/>
+                                                                                <ColumnDefinition Width="0.2*"/>
+                                                                            </Grid.ColumnDefinitions>
+
+                                                                            <Grid Grid.Row="0" Grid.Column="1">
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="0.125*"/>
+                                                                                    <ColumnDefinition Width="0.875*"/>
+                                                                                </Grid.ColumnDefinitions>
+
+                                                                                <Grid.RowDefinitions>
+                                                                                    <RowDefinition Height="0.028*"/>
+                                                                                    <RowDefinition Height="0.972*"/>
+                                                                                </Grid.RowDefinitions>
+
+                                                                                <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2" FontSize="15" Grid.Column="0" Symbol="Info16"/>
+                                                                                <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Tractor.Stock, StringFormat={}Du hast {0} Stück auf Lager}"/>
+                                                                            </Grid>
+
+                                                                            <ui:NumberBox Grid.Row="1" Grid.Column="1" IntegersOnly="True" Value="{Binding Quantity, Mode=TwoWay}" Min="1" />
+                                                                        </Grid>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
 
                                         <Grid Grid.Column="6" Grid.Row="1">
                                             <Grid.RowDefinitions>
@@ -249,7 +318,12 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TextBlock FontSize="24" Grid.Column="0" Text="{Binding ViewModel.TotalPrice, StringFormat={}Gesamtsumme: {0} €}"/>
+            <TextBlock
+                FontSize="24"
+                Grid.Column="0"
+                Text="{Binding ViewModel.TotalPrice, StringFormat={}Gesamtsumme: {0} €}"
+            />
+            
             <ui:Button Grid.Column="1" Content="Kauf abschließen" Command="{Binding ViewModel.CheckoutCommand}" Icon="Cart20" HorizontalAlignment="Right" FontSize="20" />
         </Grid>
     </Grid>
