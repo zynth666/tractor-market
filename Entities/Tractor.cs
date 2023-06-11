@@ -16,7 +16,18 @@ public class Tractor
     public int Stock { get; set; }
 
     [NotMapped]
-    public int SelectedQuantity { get; set; }
+    public int SelectedQuantity { get; set; } = 1;
+
+    [NotMapped]
+    public int MaxStock 
+    { 
+        get {
+            return Stock > 0 ? Stock : 9999;
+        } 
+        set {
+            MaxStock = value;
+        } 
+    }
 
     public string GetDisplayName()
     {

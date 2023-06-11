@@ -46,7 +46,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.TractorsForCustomers}">
+        <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.Tractors}">
             <ListView.ItemTemplate>
  		        <DataTemplate DataType="{x:Type entities:Tractor}" >
                     <Border CornerRadius="5" Background="{DynamicResource ControlFillColorDefaultBrush}">
@@ -260,10 +260,10 @@
 
 
                                     <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2"  FontSize="15" Grid.Column="0"  Symbol="Info16"/>
-                                    <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
+                                    <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding MaxStock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
                                 </Grid>
 
-                                <ui:NumberBox x:Name="selectedQuantityBox" Value="{Binding SelectedQuantity, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" IntegersOnly="True" Min="1" Max="{Binding Stock}" />
+                                <ui:NumberBox x:Name="selectedQuantityBox" Value="{Binding SelectedQuantity, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" IntegersOnly="True" Min="1" Max="{Binding MaxStock}" />
 
                                 <ui:Button CommandParameter="{Binding}" Command="{Binding ViewModel.AddToCartCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}" VerticalAlignment="Stretch" Margin="0, 7.5, 0, 7.5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Icon="Cart24" IconFilled="False" FontSize="30" />
                             </Grid>

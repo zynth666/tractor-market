@@ -41,7 +41,6 @@
     <None Remove="Assets\Images\Logos\bigboys_logo_big.png" />
     <None Remove="Assets\Images\Logos\bigboys_logo_small.png" />
     <None Remove="Assets\Images\Tractors\11440_TTV.jpg" />
-    <None Remove="Assets\Images\Tractors\130.jpg" />
     <None Remove="Assets\Images\Tractors\3220_Plus.jpg" />
     <None Remove="Assets\Images\Tractors\6240_CVT.jpg" />
     <None Remove="Assets\Images\Tractors\6300_Terrus_CVT.jpg" />
@@ -60,11 +59,12 @@
     <None Remove="Assets\Images\Tractors\Axion_900.jpg" />
     <None Remove="Assets\Images\Tractors\Axion_950.jpg" />
     <None Remove="Assets\Images\Tractors\Axos_340_CX.jpg" />
-    <None Remove="Assets\Images\Tractors\MF_8400.jpg" />
+    <None Remove="Assets\Images\Tractors\Lintrac_130.jpg" />
+    <None Remove="Assets\Images\Tractors\M135.jpg" />
+    <None Remove="Assets\Images\Tractors\MF8400.jpg" />
     <None Remove="Assets\Images\Tractors\Multi_4120.jpg" />
-    <None Remove="Assets\Images\Tractors\M_135.jpg" />
     <None Remove="Assets\Images\Tractors\Profi_6000.jpg" />
-    <None Remove="Assets\Images\Tractors\S_394.jpg" />
+    <None Remove="Assets\Images\Tractors\S394.jpg" />
     <None Remove="Assets\Images\Tractors\T8.jpg" />
     <None Remove="Assets\Images\Tractors\T9.jpg" />
     <None Remove="Assets\Images\Tractors\Vario_1038.jpg" />
@@ -92,7 +92,7 @@
     <Resource Include="Assets\Images\Logos\bigboys_logo_big.png" />
     <Resource Include="Assets\Images\Logos\bigboys_logo_small.png" />
     <Resource Include="Assets\Images\Tractors\11440_TTV.jpg" />
-    <Resource Include="Assets\Images\Tractors\130.jpg" />
+    <Resource Include="Assets\Images\Tractors\Lintrac_130.jpg" />
     <Resource Include="Assets\Images\Tractors\3220_Plus.jpg" />
     <Resource Include="Assets\Images\Tractors\6240_CVT.jpg" />
     <Resource Include="Assets\Images\Tractors\6300_Terrus_CVT.jpg" />
@@ -109,11 +109,11 @@
     <Resource Include="Assets\Images\Tractors\Axion_900.jpg" />
     <Resource Include="Assets\Images\Tractors\Axion_950.jpg" />
     <Resource Include="Assets\Images\Tractors\Axos_340_CX.jpg" />
-    <Resource Include="Assets\Images\Tractors\MF_8400.jpg" />
+    <Resource Include="Assets\Images\Tractors\MF8400.jpg" />
     <Resource Include="Assets\Images\Tractors\Multi_4120.jpg" />
-    <Resource Include="Assets\Images\Tractors\M_135.jpg" />
+    <Resource Include="Assets\Images\Tractors\M135.jpg" />
     <Resource Include="Assets\Images\Tractors\Profi_6000.jpg" />
-    <Resource Include="Assets\Images\Tractors\S_394.jpg" />
+    <Resource Include="Assets\Images\Tractors\S394.jpg" />
     <Resource Include="Assets\Images\Tractors\T8.jpg" />
     <Resource Include="Assets\Images\Tractors\T9.jpg" />
     <Resource Include="Assets\Images\Tractors\Vario_1038.jpg" />

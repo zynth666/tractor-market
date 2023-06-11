@@ -12,7 +12,6 @@ namespace TractorMarket.ViewModels
 {
     public partial class MarketViewModel : ObservableObject, INavigationAware
     {
-        private bool _isInitialized = false;
         private TractorService _tractorService;
         private CartService _cartService;
 
@@ -22,10 +21,10 @@ namespace TractorMarket.ViewModels
         private int _selectedQuantity;
 
         [ObservableProperty]
-        private List<Tractor> _tractorsForCustomers = new List<Tractor>();
+        private int _maxStock;
 
         [ObservableProperty]
-        private List<Tractor> _tractorsForAdmin = new List<Tractor>();
+        public List<Tractor> _tractors = new List<Tractor>();
 
         public MarketViewModel(TractorService tractorService, INavigationService navigationService, CartService cartService)
         {
@@ -36,19 +35,11 @@ namespace TractorMarket.ViewModels
 
         public void OnNavigatedTo()
         {
-            if (!_isInitialized)
-                InitializeViewModel();
+            UpdateTractorList();
         }
 
         public void OnNavigatedFrom()
         {
-        }
-
-        private void InitializeViewModel()
-        {
-            TractorsForCustomers = _tractorService.GetTractorsForCustomers();
-            TractorsForAdmin = _tractorService.GetTractorsForAdmin();
-            _isInitialized = true;
         }
 
         [RelayCommand]
@@ -65,6 +56,18 @@ namespace TractorMarket.ViewModels
         {
             CartItem cartItem = new(tractor, tractor.SelectedQuantity);
             _cartService.AddToCart(UserService.LoggedInUser!.Cart, cartItem);
+        }
+
+        private void UpdateTractorList()
+        {
+            if (UserService.LoggedInUser!.IsAdmin)
+            {
+                Tractors = _tractorService.GetTractorsForAdmin();
+            }
+            else
+            {
+                Tractors = _tractorService.GetTractorsForCustomers();
+            }
         }
     }
 }
