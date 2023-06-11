@@ -12,7 +12,7 @@ public partial class User : ObservableObject
     public string Password { get; set; } = string.Empty;
     
     [ObservableProperty]
-    public long _budget;
+    public double _budget;
     public bool IsAdmin { get; set; }
     
     [NotMapped]

@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using TractorMarket.Helpers;
 using TractorMarket.Models;
 using TractorMarket.Services;
@@ -16,35 +15,50 @@ public partial class CartViewModel : ObservableObject, INavigationAware
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(CheckoutCommand))]
-    private long _totalPrice;
+    private double _totalPrice;
 
-    private TractorService _tractorService;
-    private CartService _cartService;
+    private readonly TractorService _tractorService;
+    private readonly CartService _cartService;
+
+    [ObservableProperty]
+    private bool _isAdmin = UserService.LoggedInUser!.IsAdmin;
+
+    [ObservableProperty]
+    private bool _isNotAdmin = !UserService.LoggedInUser!.IsAdmin;
 
     public CartViewModel(TractorService tractorService, CartService cartService)
     {
         _tractorService = tractorService;
         _cartService = cartService;
 
-        long totalPrice = _cartService.GetTotalPrice(Cart);
-        TotalPrice = totalPrice;
+        TotalPrice = GetTotalByAccount();
 
         Cart.CollectionChanged += (_, _) =>
         {
-            long totalPrice = _cartService.GetTotalPrice(Cart);
-            TotalPrice = totalPrice;
+            TotalPrice = GetTotalByAccount();
             OnPropertyChanged(nameof(TotalPrice));
         };
     }
 
+    private double GetTotalByAccount()
+    {
+        if (IsAdmin)
+        {
+            return CartService.GetTotalAdminPrice(Cart);
+        }
+        
+        return CartService.GetTotalPrice(Cart);
+    }
+
     private bool HasEnoughBudgetToCheckout()
     {
-        long totalPrice = _cartService.GetTotalPrice(Cart);
+        double totalPrice = GetTotalByAccount();
         return totalPrice <= UserService.LoggedInUser!.Budget && totalPrice != 0;
     }
 
     public void OnNavigatedTo()
     {
+        Cart = UserService.LoggedInUser!.Cart;
     }
 
     public void OnNavigatedFrom()
@@ -60,6 +74,6 @@ public partial class CartViewModel : ObservableObject, INavigationAware
     [RelayCommand(CanExecute = nameof(HasEnoughBudgetToCheckout))]
     public void Checkout()
     {
-        _cartService.Checkout(Cart, UserService.LoggedInUser!);
+        _cartService.Checkout(UserService.LoggedInUser!);
     }
 }

@@ -22,6 +22,7 @@ public partial class AccountViewModel : ObservableObject, INavigationAware
 
     public void OnNavigatedTo()
     {
+        User = UserService.LoggedInUser!;
     }
 
     public void OnNavigatedFrom()

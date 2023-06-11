@@ -21,6 +21,9 @@
     <Content Include="Data\Users.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="sqlite.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -95,6 +98,7 @@
     <None Remove="Data\TractorAddons.json" />
     <None Remove="Data\Tractors.json" />
     <None Remove="Data\Users.json" />
+    <None Remove="sqlite.db" />
   </ItemGroup>
 
   <ItemGroup>

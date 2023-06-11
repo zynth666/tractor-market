@@ -18,7 +18,7 @@ namespace TractorMarket.ViewModels
         private INavigationService _navigationService;
 
         [ObservableProperty]
-        private string _applicationTitle = String.Empty;
+        private string _applicationTitle = string.Empty;
 
         [ObservableProperty]
         private ObservableCollection<INavigationControl> _navigationItems = new();
@@ -51,14 +51,14 @@ namespace TractorMarket.ViewModels
                     Content = "Account",
                     PageTag = "account",
                     Icon = SymbolRegular.Person24,
-                    PageType = typeof(Views.Pages.AccountPage)
+                    PageType = typeof(AccountPage)
                 },
                 new NavigationItem()
                 {
                     Content = "Markt",
                     PageTag = "market",
                     Icon = SymbolRegular.VehicleTruckBag24,
-                    PageType = typeof(Views.Pages.MarketPage)
+                    PageType = typeof(MarketPage),
                 },
                 new NavigationItem()
                 {
@@ -72,7 +72,7 @@ namespace TractorMarket.ViewModels
                     Content = "Warenkorb",
                     PageTag = "cart",
                     Icon = SymbolRegular.Cart24,
-                    PageType = typeof(Views.Pages.CartPage)
+                    PageType = typeof(CartPage),
                 }
             };
 
@@ -90,7 +90,7 @@ namespace TractorMarket.ViewModels
                     Content = "Einstellungen",
                     PageTag = "settings",
                     Icon = SymbolRegular.Settings24,
-                    PageType = typeof(Views.Pages.SettingsPage)
+                    PageType = typeof(SettingsPage)
                 }
             };
 

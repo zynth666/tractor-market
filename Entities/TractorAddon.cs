@@ -12,6 +12,6 @@ public class TractorAddon
     [NotMapped]
     public List<string> AssociatedTractors { get; set; } = new List<string>();
     public string Name { get; set; } = string.Empty;
-    public int Price { get; set; }
+    public double Price { get; set; }
     public int Stock { get; set; }
 }
