@@ -67,7 +67,7 @@
                             <Grid Grid.Column="1" Grid.Row="0">
                                 <Grid Height="125" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Border CornerRadius="15">
-                                        <Image Height="125" Width="250" Stretch="UniformToFill" Source="{Binding Tractor.Type, Converter={StaticResource ImagePathHelper}}">
+                                        <Image Height="125" Width="250" Stretch="UniformToFill" Source="{Binding Tractor.Type, Converter={StaticResource ImagePathHelper}, ConverterParameter=tractor}">
                                             <Image.Clip>
                                                 <RectangleGeometry RadiusX="5" RadiusY="5" Rect="0,0,250,125"/>
                                             </Image.Clip>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,13 @@ namespace TractorMarket.Helpers
         {
             if(value is string imageName)
             {
-                string convertedImageName = imageName.Replace(" ", "_");
-                string imagePath = $"pack://application:,,,/Assets/Images/Tractors/{convertedImageName}.jpg";
-                return imagePath;
+                {
+                    string convertedImageName = imageName.Replace(" ", "_");
+                    string imagePath = $"pack://application:,,,/Assets/Images/Products/{convertedImageName}.jpg";
+                    Debug.WriteLine(" IMAGE PATH : " + imagePath);
+                    return imagePath;
+                }
+              
             }
 
             return null;

@@ -50,9 +50,7 @@
 
             <Grid Grid.Row="0">
                 <TextBlock FontSize="40">
-                    <Run Text="{Binding ViewModel.Type}"/>
-                    <Run Text=" - "/>
-                    <Run Text="{Binding ViewModel.Manufacturer}"/>
+                    <Run Text="{Binding ViewModel.Name}"/>
                 </TextBlock>
             </Grid>
 
@@ -78,7 +76,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Grid x:Name="zoomGrid2" Grid.Column="0" Grid.Row="0">
+                            <Grid Background="Yellow" x:Name="zoomGrid2" Grid.Column="0" Grid.Row="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <!-- Set the height of the row to "*" to occupy available space -->
@@ -89,8 +87,8 @@
                                     <ColumnDefinition Width="0*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Background="Purple">
-                                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0" Stretch="Uniform" x:Name="ImageViewerIMG" Grid.Row="0" Source="{Binding ViewModel.Type, Converter={StaticResource ImagePathHelper}}"></Image>
+                                <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Background="Yellow">
+                                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0" Stretch="Uniform" x:Name="ImageViewerIMG" Grid.Row="0" Source="{Binding ViewModel.Name, Converter={StaticResource ImagePathHelper}}"></Image>
 
                                 </Grid>
 

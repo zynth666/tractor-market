@@ -54,7 +54,8 @@ namespace TractorMarket.ViewModels
         [RelayCommand]
         private void OpenImageViewer(Tractor tractor_in)
         {
-            ImageViewerService.Type = tractor_in.Type;
+            ImageViewerService.Name = tractor_in.Type;
+            ImageViewerService.Type = "tractor";
             ImageViewerService.Manufacturer = tractor_in.Manufacturer;
 
             _navigationService.Navigate(typeof(ImageViewerPage));

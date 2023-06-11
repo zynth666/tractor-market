@@ -20,6 +20,9 @@ namespace TractorMarket.ViewModels
         public double InitialViewerImgWidth;
 
         [ObservableProperty]
+        private string _name = ImageViewerService.Name;
+
+        [ObservableProperty]
         private string _type = ImageViewerService.Type;
 
         [ObservableProperty]
@@ -36,6 +39,7 @@ namespace TractorMarket.ViewModels
 
         public void OnNavigatedTo()
         {
+            Name = ImageViewerService.Name;
             Type = ImageViewerService.Type;
             Manufacturer = ImageViewerService.Manufacturer;
             HideNavigation?.Invoke();

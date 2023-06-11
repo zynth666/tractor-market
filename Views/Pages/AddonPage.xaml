@@ -1,45 +1,26 @@
 ﻿<ui:UiPage
-    x:Name="Market_Page"
-    x:Class="TractorMarket.Views.Pages.MarketPage"
+    x:Name="Addon_Page"
+    x:Class="TractorMarket.Views.Pages.AddonPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TractorMarket.Views.Pages"
-    xmlns:entities="clr-namespace:TractorMarket.Entities"
-    xmlns:helpers="clr-namespace:TractorMarket.Helpers"
-    xmlns:models="clr-namespace:TractorMarket.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="MarketPage"
-    d:DataContext="{d:DesignInstance local:MarketPage, IsDesignTimeCreatable=False}"
+    xmlns:helpers="clr-namespace:TractorMarket.Helpers"
+    xmlns:entities="clr-namespace:TractorMarket.Entities"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Title="LoginPage"
+    d:DataContext="{d:DesignInstance local:AddonPage, IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
+
     <Page.Resources>
         <helpers:ImagePathHelper x:Key="ImagePathHelper" />
-        <!--helpers:CreateCartItemConverter x:Key="CreateCartItemHelper" /-->
-        <Style TargetType="ListViewItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListViewItem">
-                        <Border x:Name="border"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="5">
-                            <!-- Content Presenter -->
-                            <ContentPresenter />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Page.Resources>
 
     <Grid Margin="56,0">
@@ -47,9 +28,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.TractorsForCustomers}">
+        <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.AllAddons}">
             <ListView.ItemTemplate>
- 		        <DataTemplate DataType="{x:Type entities:Tractor}" >
+                <DataTemplate DataType="{x:Type entities:TractorAddon}" >
                     <Border CornerRadius="5" Background="{DynamicResource ControlFillColorDefaultBrush}">
                         <Grid Height="200">
                             <Grid.ColumnDefinitions>
@@ -66,11 +47,11 @@
                             <Grid Grid.Column="1" Grid.Row="0" >
                                 <Grid  Height="125" Width="125" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Grid.InputBindings>
-                                        <MouseBinding CommandParameter="{Binding}" Gesture="LeftClick" Command="{Binding ViewModel.OpenImageViewerCommand, Source={x:Reference Name=Market_Page}}" />
+                                        <MouseBinding Gesture="LeftClick" CommandParameter="{Binding}" Command="{Binding ViewModel.OpenImageViewerCommand, Source={x:Reference Name=Addon_Page}}" />
                                     </Grid.InputBindings>
 
                                     <Border CornerRadius="15">
-                                        <Image Height="125" Width="125" Stretch="UniformToFill" Source="{Binding Type, Converter={StaticResource ImagePathHelper}}">
+                                        <Image Height="125" Width="125" Stretch="UniformToFill" Source="{Binding Name, Converter={StaticResource ImagePathHelper}}">
                                             <Image.Clip>
                                                 <RectangleGeometry RadiusX="5" RadiusY="5" Rect="0,0,125,125"/>
                                             </Image.Clip>
@@ -126,7 +107,7 @@
                                                 <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" Foreground="White">Typ</TextBlock>
                                             </Grid>
                                             <Grid  VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Foreground="White" Text="{Binding Type}"/>
+                                                <TextBlock FontSize="14" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Foreground="White" Text="{Binding Name}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Column="2" Grid.Row="1">
@@ -145,7 +126,7 @@
                                                 <TextBlock   FontSize="20" FontWeight="DemiBold" Foreground="White">Hersteller</TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Manufacturer}"/>
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Name}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Column="3" Grid.Row="1">
@@ -184,7 +165,7 @@
                                                 <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" Foreground="White">Leistung</TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock VerticalAlignment="Top" FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Horsepower, StringFormat={}{0} PS}"/>
+                                                <TextBlock VerticalAlignment="Top" FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Price, StringFormat={}{0} PS}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Row="2" Grid.Column="2">
@@ -203,7 +184,7 @@
                                                 <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Max. Geschwindigkeit</TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Velocity, StringFormat={}{0} KM/h}"/>
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Price, StringFormat={}{0} KM/h}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Row="2" Grid.Column="3">
@@ -222,7 +203,7 @@
                                                 <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Baujahr</TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Vintage}"/>
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Id}"/>
                                             </Grid>
                                         </Grid>
 
@@ -264,16 +245,16 @@
                                     <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
                                 </Grid>
 
-                                <ui:NumberBox x:Name="selectedQuantityBox" Value="{Binding ViewModel.SelectedQuantity, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}" Grid.Row="2" Grid.Column="1" IntegersOnly="True" Min="1" Max="{Binding Stock}" />
+                                <ui:NumberBox x:Name="selectedQuantityBox" Value="{Binding ViewModel.SelectedQuantity, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type local:AddonPage}}}" Grid.Row="2" Grid.Column="1" IntegersOnly="True" Min="1" Max="{Binding Stock}" />
 
-                                <ui:Button CommandParameter="{Binding}" Command="{Binding ViewModel.AddToCartCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}" VerticalAlignment="Stretch" Margin="0, 7.5, 0, 7.5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Icon="Cart24" IconFilled="False" FontSize="30" />
+                                <ui:Button  VerticalAlignment="Stretch" Margin="0, 7.5, 0, 7.5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Icon="Cart24" IconFilled="False" FontSize="30" />
                             </Grid>
 
                             <Grid Width="Auto"  Grid.Row="1" Grid.Column="3" ></Grid>
                         </Grid>
                     </Border>
- 		        </DataTemplate>
- 	        </ListView.ItemTemplate>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </ui:UiPage>

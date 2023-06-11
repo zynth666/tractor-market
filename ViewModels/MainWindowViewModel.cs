@@ -62,6 +62,13 @@ namespace TractorMarket.ViewModels
                 },
                 new NavigationItem()
                 {
+                    Content = "Addon",
+                    PageTag = "addon",
+                    Icon = SymbolRegular.VehicleTruckBag24,
+                    PageType = typeof(Views.Pages.AddonPage)
+                },
+                new NavigationItem()
+                {
                     Content = "Warenkorb",
                     PageTag = "cart",
                     Icon = SymbolRegular.Cart24,
