@@ -24,7 +24,6 @@ public class TractorService
     public List<Tractor> GetTractorsForAdmin()
     {
         return _context.Tractors
-            .Where(tractor => tractor.Stock == 0)
             .ToList();
     }
 

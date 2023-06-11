@@ -12,8 +12,6 @@ namespace TractorMarket.Views.Windows
     /// </summary>
     public partial class MainWindow : INavigationWindow
     {
-        private double breadcrumbheight = 0;
-
         public MainWindowViewModel ViewModel
         {
             get;
@@ -81,7 +79,6 @@ namespace TractorMarket.Views.Windows
             NavigationColumnDefinition.Width = new GridLength(0);
             RootNavigation.Visibility = Visibility.Hidden;
             RootBreadcrumb.Visibility = Visibility.Hidden;
-            breadcrumbheight = RootBreadcrumb.Height;
             RootBreadcrumb.Height = 0;
         }
     }

@@ -12,29 +12,30 @@ namespace TractorMarket.ViewModels
 {
     public partial class MarketViewModel : ObservableObject, INavigationAware
     {
-        private TractorService _tractorService;
-        private CartService _cartService;
+        private readonly TractorService _tractorService;
 
-        private INavigationService _navigationService;
-
-        [ObservableProperty]
-        private int _selectedQuantity;
+        private readonly INavigationService _navigationService;
 
         [ObservableProperty]
-        private int _maxStock;
+        private List<Tractor> _tractors = new();
 
         [ObservableProperty]
-        public List<Tractor> _tractors = new List<Tractor>();
+        private bool _isAdmin = UserService.LoggedInUser!.IsAdmin;
 
-        public MarketViewModel(TractorService tractorService, INavigationService navigationService, CartService cartService)
+        [ObservableProperty]
+        private bool _isNotAdmin = !UserService.LoggedInUser!.IsAdmin;
+
+        public MarketViewModel(TractorService tractorService, INavigationService navigationService)
         {
             _tractorService = tractorService;
             _navigationService = navigationService;
-            _cartService = cartService;
         }
 
         public void OnNavigatedTo()
         {
+            IsAdmin = UserService.LoggedInUser!.IsAdmin;
+            IsNotAdmin = !UserService.LoggedInUser!.IsAdmin;
+
             UpdateTractorList();
         }
 
@@ -52,15 +53,15 @@ namespace TractorMarket.ViewModels
         }
 
         [RelayCommand]
-        public void AddToCart(Tractor tractor)
+        public static void AddToCart(Tractor tractor)
         {
             CartItem cartItem = new(tractor, tractor.SelectedQuantity);
-            _cartService.AddToCart(UserService.LoggedInUser!.Cart, cartItem);
+            CartService.AddToCart(UserService.LoggedInUser!.Cart, cartItem);
         }
 
         private void UpdateTractorList()
         {
-            if (UserService.LoggedInUser!.IsAdmin)
+            if (IsAdmin)
             {
                 Tractors = _tractorService.GetTractorsForAdmin();
             }
