@@ -12,11 +12,9 @@ public partial class MarketPage : INavigableView<ViewModels.MarketViewModel>
     {
         get;
     }
-
     public MarketPage(ViewModels.MarketViewModel viewModel)
     {
         ViewModel = viewModel;
-
         InitializeComponent();
     }
 }

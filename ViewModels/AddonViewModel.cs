@@ -24,6 +24,7 @@ namespace TractorMarket.ViewModels
         [ObservableProperty]
         private int _selectedQuantity;
 
+
         public AddonViewModel(AddonService addonService, INavigationService navigationService, CartService cartService)
         {
             _navigationService = navigationService;
@@ -36,12 +37,15 @@ namespace TractorMarket.ViewModels
         private void OpenImageViewer(TractorAddon tractoraddon_in)
         {
             ImageViewerService.Name = tractoraddon_in.Name;
+            ImageViewerService.Cat = "addon";
             _navigationService.Navigate(typeof(ImageViewerPage));
         }
 
 
         public void OnNavigatedTo()
         {
+
+          
         }
 
         public void OnNavigatedFrom()

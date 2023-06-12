@@ -25,9 +25,7 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
     public ImageViewerPage(ViewModels.ImageViewerViewModel viewModel)
     {
         ViewModel = viewModel;
-
         InitializeComponent();
-
         zoomGrid.Loaded += ImageViewerIMG_Loaded;
         ImageViewerScrollView.PreviewMouseDown += ImageViewerScrollViewer_PreviewMouseDown;
         ImageViewerScrollView.PreviewMouseMove += ImageViewerScrollViewer_PreviewMouseMove;
@@ -39,10 +37,8 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
     {
         if (ViewerImgDimensionsLoaded == false)
         {
-
             zoomGrid.Height = OuterGridImageViewer.ActualHeight;
             zoomGrid.Width = OuterGridImageViewer.ActualWidth;
-
             InitialViewerImgHeight = zoomGrid.ActualHeight;
             InitialViewerImgWidth = zoomGrid.ActualWidth;
             ViewModel.InitialViewerImgHeight = zoomGrid.ActualHeight;
@@ -65,7 +61,6 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
 
     private void ImageViewerIMG_LayoutUpdated(object sender, EventArgs e)
     {
-        Debug.WriteLine("NEW WIDTH2:" + ImageViewerIMG.ActualWidth);
     }
 
     private void ImageViewerScrollViewer_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -85,11 +80,9 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
             Point currentMousePosition = e.GetPosition(ImageViewerScrollView);
             double offsetX = currentMousePosition.X - lastMousePosition.X;
             double offsetY = currentMousePosition.Y - lastMousePosition.Y;
-
             ScrollViewer scrollViewer = (ScrollViewer)sender;
             scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset - offsetX);
             scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - offsetY);
-
             lastMousePosition = currentMousePosition;
         }
     }

@@ -16,10 +16,10 @@ namespace TractorMarket.Helpers
         {
             if(value is string imageName)
             {
+                if(imageName != "" && imageName != null)
                 {
                     string convertedImageName = imageName.Replace(" ", "_");
                     string imagePath = $"pack://application:,,,/Assets/Images/Products/{convertedImageName}.jpg";
-                    Debug.WriteLine(" IMAGE PATH : " + imagePath);
                     return imagePath;
                 }
               

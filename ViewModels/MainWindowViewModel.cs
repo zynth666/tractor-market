@@ -64,7 +64,7 @@ namespace TractorMarket.ViewModels
                 {
                     Content = "Addon",
                     PageTag = "addon",
-                    Icon = SymbolRegular.VehicleTruckBag24,
+                    Icon = SymbolRegular.VehicleTruckCube24,
                     PageType = typeof(Views.Pages.AddonPage)
                 },
                 new NavigationItem()

@@ -21,13 +21,11 @@ namespace TractorMarket.Views.Windows
         {
             ViewModel = viewModel;
             DataContext = this;
-
             loginViewModel.ShowNavigation += ShowNavigation;
             registerViewModel.ShowNavigation += ShowNavigation;
             viewModel.HideNavigation += HideNavigation;
             imageviewerViewModel.ShowNavigation += ShowNavigation;
             imageviewerViewModel.HideNavigation += HideNavigation;
-
             InitializeComponent();
             SetPageService(pageService);
             navigationService.SetNavigationControl(RootNavigation);
@@ -61,8 +59,6 @@ namespace TractorMarket.Views.Windows
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-
-            // Make sure that closing this window will begin the process of closing the application.
             Application.Current.Shutdown();
         }
 

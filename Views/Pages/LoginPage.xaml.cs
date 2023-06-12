@@ -7,17 +7,14 @@ namespace TractorMarket.Views.Pages
     /// </summary>
     public partial class LoginPage : INavigableView<ViewModels.LoginViewModel>
     {
-
         public ViewModels.LoginViewModel ViewModel
         {
             get;
         }
-
         public LoginPage(ViewModels.LoginViewModel viewModel)
         {
             ViewModel = viewModel;
             InitializeComponent();
         }
-
     }
 }

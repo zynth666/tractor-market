@@ -30,7 +30,6 @@ namespace TractorMarket.ViewModels
         {
             CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
             AppVersion = $"TractorMarket - {GetAssemblyVersion()}";
-
             _isInitialized = true;
         }
 
@@ -47,19 +46,15 @@ namespace TractorMarket.ViewModels
                 case "theme_light":
                     if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Light)
                         break;
-
                     Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Light);
                     CurrentTheme = Wpf.Ui.Appearance.ThemeType.Light;
-
                     break;
 
                 default:
                     if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Dark)
                         break;
-
                     Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Dark);
                     CurrentTheme = Wpf.Ui.Appearance.ThemeType.Dark;
-
                     break;
             }
         }

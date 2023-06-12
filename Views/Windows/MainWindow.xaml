@@ -24,7 +24,6 @@
             <ColumnDefinition x:Name="NavigationColumnDefinition" Width="0" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
         <ui:NavigationCompact
             Visibility="Hidden"
             x:Name="RootNavigation"
@@ -32,7 +31,6 @@
             Footer="{Binding ViewModel.NavigationFooter, Mode=TwoWay}"
             Frame="{Binding ElementName=RootFrame, Mode=OneWay}"
             Items="{Binding ViewModel.NavigationItems, Mode=TwoWay}" />
-
         <ui:TitleBar
             Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
             Grid.Row="0"
@@ -52,10 +50,6 @@
                 </ui:NotifyIcon>
             </ui:TitleBar.Tray>
         </ui:TitleBar>
-
-        
-        
-
         <Grid Grid.Column="1">
             <Border
                 Margin="0,46,0,0"
