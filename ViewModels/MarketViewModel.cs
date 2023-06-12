@@ -35,7 +35,6 @@ namespace TractorMarket.ViewModels
         {
             IsAdmin = UserService.LoggedInUser!.IsAdmin;
             IsNotAdmin = !UserService.LoggedInUser!.IsAdmin;
-
             UpdateTractorList();
         }
 
@@ -46,7 +45,8 @@ namespace TractorMarket.ViewModels
         [RelayCommand]
         private void OpenImageViewer(Tractor tractor_in)
         {
-            ImageViewerService.Type = tractor_in.Type;
+            ImageViewerService.Name = tractor_in.Type;
+            ImageViewerService.Cat = "market";
             ImageViewerService.Manufacturer = tractor_in.Manufacturer;
 
             _navigationService.Navigate(typeof(ImageViewerPage));

@@ -17,7 +17,6 @@
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-
     <Page.Resources>
         <helpers:ImagePathHelper x:Key="ImagePathHelper" />
         <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
@@ -41,12 +40,10 @@
             </Setter>
         </Style>
     </Page.Resources>
-
     <Grid Margin="56,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
         <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.Tractors}">
             <ListView.ItemTemplate>
  		        <DataTemplate DataType="{x:Type entities:Tractor}" >
@@ -62,11 +59,10 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="200"/>
                             </Grid.RowDefinitions>
-
                             <Grid Grid.Column="1" Grid.Row="0" >
                                 <Grid  Height="125" Width="125" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Grid.InputBindings>
-                                        <MouseBinding Gesture="LeftClick" CommandParameter="{Binding}" Command="{Binding ViewModel.OpenImageViewerCommand, Source={x:Reference Name=Market_Page}}" />
+                                        <MouseBinding CommandParameter="{Binding}" Gesture="LeftClick" Command="{Binding ViewModel.OpenImageViewerCommand, Source={x:Reference Name=Market_Page}}" />
                                     </Grid.InputBindings>
 
                                     <Border CornerRadius="15">
@@ -78,13 +74,11 @@
                                     </Border>
                                 </Grid>
                             </Grid>
-
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition MaxWidth="1200"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-
                                 <Grid Grid.Column="0" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -92,8 +86,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="125"/>
                                     </Grid.RowDefinitions>
-
-                                    <Grid  Grid.Row="0" Grid.Column="0">
+                                    <Grid Grid.Row="0" Grid.Column="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="0.1*"/>
                                             <ColumnDefinition Width="0.7*"/>
@@ -101,27 +94,22 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition MaxWidth="200"/>
                                         </Grid.ColumnDefinitions>
-
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="0.08*"/>
                                             <RowDefinition Height="0.46*"/>
                                             <RowDefinition Height="0.46*"/>
                                         </Grid.RowDefinitions>
-
                                         <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"></Grid>
-
                                         <Grid Grid.Column="1" Grid.Row="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
-
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="0.00*"/>
                                                 <ColumnDefinition Width="1*"/>
                                                 <ColumnDefinition Width="0.00*"/>
                                             </Grid.ColumnDefinitions>
-
                                             <Grid Grid.Row="0" Grid.Column="1">
                                                 <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" Foreground="White">Typ</TextBlock>
                                             </Grid>
@@ -134,13 +122,11 @@
                                                 <RowDefinition Height="0.5*"/>
                                                 <RowDefinition Height="0.5*"/>
                                             </Grid.RowDefinitions>
-
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="0.00*"/>
                                                 <ColumnDefinition Width="1*"/>
                                                 <ColumnDefinition Width="0.00*"/>
                                             </Grid.ColumnDefinitions>
-
                                             <Grid Grid.Row="0" Grid.Column="1">
                                                 <TextBlock   FontSize="20" FontWeight="DemiBold" Foreground="White">Hersteller</TextBlock>
                                             </Grid>
@@ -153,13 +139,11 @@
                                                 <RowDefinition Height="0.5*"/>
                                                 <RowDefinition Height="0.5*"/>
                                             </Grid.RowDefinitions>
-
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="0.0*"/>
                                                 <ColumnDefinition Width="1*"/>
                                                 <ColumnDefinition Width="0.0*"/>
                                             </Grid.ColumnDefinitions>
-
                                             <Grid Grid.Row="0" Grid.Column="1">
                                                 <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Preis</TextBlock>
                                             </Grid>
@@ -182,19 +166,16 @@
                                                 />
                                             </Grid>
                                         </Grid>
-
                                         <Grid Grid.Row="2" Grid.Column="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
-
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="0.0*"/>
                                                 <ColumnDefinition Width="1*"/>
                                                 <ColumnDefinition Width="0.0*"/>
                                             </Grid.ColumnDefinitions>
-
                                             <Grid Grid.Row="0" Grid.Column="1">
                                                 <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" Foreground="White">Leistung</TextBlock>
                                             </Grid>
@@ -207,13 +188,11 @@
                                                 <RowDefinition Height="0.5*"/>
                                                 <RowDefinition Height="0.5*"/>
                                             </Grid.RowDefinitions>
-
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="0.0*"/>
                                                 <ColumnDefinition Width="1*"/>
                                                 <ColumnDefinition Width="0.0*"/>
                                             </Grid.ColumnDefinitions>
-
                                             <Grid VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1">
                                                 <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Max. Geschwindigkeit</TextBlock>
                                             </Grid>
@@ -226,13 +205,11 @@
                                                 <RowDefinition Height="0.5*"/>
                                                 <RowDefinition Height="0.5*"/>
                                             </Grid.RowDefinitions>
-
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="0.0*"/>
                                                 <ColumnDefinition Width="1*"/>
                                                 <ColumnDefinition Width="0.0*"/>
                                             </Grid.ColumnDefinitions>
-
                                             <Grid Grid.Row="0" Grid.Column="1">
                                                 <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Baujahr</TextBlock>
                                             </Grid>
@@ -240,14 +217,12 @@
                                                 <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Vintage}"/>
                                             </Grid>
                                         </Grid>
-
                                         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="4" >
                                             <ui:Hyperlink Content="Verfügbares Zubehör"/>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
-
                             <ContentControl 
                                 Grid.Column="3"
                                 Grid.Row="0"
@@ -267,28 +242,23 @@
                                                                     <RowDefinition Height="0.3*"/>
                                                                     <RowDefinition Height="0.2*"/>
                                                                 </Grid.RowDefinitions>
-
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="0.2*"/>
                                                                     <ColumnDefinition Width="0.8*"/>
                                                                     <ColumnDefinition Width="0.2*"/>
                                                                 </Grid.ColumnDefinitions>
-
                                                                 <Grid Grid.Row="1" Grid.Column="1">
                                                                     <Grid.ColumnDefinitions>
                                                                         <ColumnDefinition Width="0.125*"/>
                                                                         <ColumnDefinition Width="0.875*"/>
                                                                     </Grid.ColumnDefinitions>
-
                                                                     <Grid.RowDefinitions>
                                                                         <RowDefinition Height="0.028*"/>
                                                                         <RowDefinition Height="0.972*"/>
                                                                     </Grid.RowDefinitions>
-
                                                                     <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2"  FontSize="15" Grid.Column="0"  Symbol="Info16"/>
                                                                     <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
                                                                 </Grid>
-
                                                                 <ui:NumberBox Value="{Binding SelectedQuantity, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" IntegersOnly="True" Min="1" Max="{Binding Stock}" />
                                                                 <ui:Button CommandParameter="{Binding}" Command="{Binding ViewModel.AddToCartCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}" VerticalAlignment="Stretch" Margin="0, 7.5, 0, 7.5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Icon="Cart24" IconFilled="False" FontSize="30" />
                                                             </Grid>
@@ -308,28 +278,23 @@
                                                                     <RowDefinition Height="0.3*"/>
                                                                     <RowDefinition Height="0.2*"/>
                                                                 </Grid.RowDefinitions>
-
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="0.2*"/>
                                                                     <ColumnDefinition Width="0.8*"/>
                                                                     <ColumnDefinition Width="0.2*"/>
                                                                 </Grid.ColumnDefinitions>
-
                                                                 <Grid Grid.Row="1" Grid.Column="1">
                                                                     <Grid.ColumnDefinitions>
                                                                         <ColumnDefinition Width="0.125*"/>
                                                                         <ColumnDefinition Width="0.875*"/>
                                                                     </Grid.ColumnDefinitions>
-
                                                                     <Grid.RowDefinitions>
                                                                         <RowDefinition Height="0.028*"/>
                                                                         <RowDefinition Height="0.972*"/>
                                                                     </Grid.RowDefinitions>
-
                                                                     <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2"  FontSize="15" Grid.Column="0"  Symbol="Info16"/>
                                                                     <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat={}Du hast {0} Stück auf Lager}"/>
                                                                 </Grid>
-
                                                                 <ui:NumberBox Value="{Binding SelectedQuantity, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" IntegersOnly="True" Min="1" />
                                                                 <ui:Button CommandParameter="{Binding}" Command="{Binding ViewModel.AddToCartCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}" VerticalAlignment="Stretch" Margin="0, 7.5, 0, 7.5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Icon="Cart24" IconFilled="False" FontSize="30" />
                                                             </Grid>

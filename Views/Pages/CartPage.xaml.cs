@@ -12,7 +12,6 @@ public partial class CartPage : INavigableView<ViewModels.CartViewModel>
     {
         get;
     }
-
     public CartPage(ViewModels.CartViewModel viewModel)
     {
         ViewModel = viewModel;

@@ -14,32 +14,24 @@
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-
     <Page.Resources>
         <helpers:ImagePathHelper x:Key="ImagePathHelper" />
         <helpers:ZoomSliderValHelper x:Key="ZoomSliderValHelper" />
     </Page.Resources>
-
-
     <Grid Margin="56,0" >
-
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.8*"/>
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition Width="0.8*"/>
             <ColumnDefinition Width="0.1*"/>
         </Grid.ColumnDefinitions>
-
         <Grid Grid.Row="0" Grid.Column="0" >
             <ui:Button Width="50" Height="50" Command="{Binding ViewModel.LeaveImageViewerCommand}" Icon="ArrowLeft24"/>
         </Grid>
-
         <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
@@ -47,69 +39,51 @@
                 <RowDefinition Height="0.8*"/>
                 <RowDefinition Height="0.05*"/>
             </Grid.RowDefinitions>
-
             <Grid Grid.Row="0">
                 <TextBlock FontSize="40">
-                    <Run Text="{Binding ViewModel.Type}"/>
-                    <Run Text=" - "/>
-                    <Run Text="{Binding ViewModel.Manufacturer}"/>
+                    <Run Text="{Binding ViewModel.Name}"/>
                 </TextBlock>
             </Grid>
-
-
             <Grid Grid.Row="2" >
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.8*"/>
                     <ColumnDefinition Width="0.05*"/>
                     <ColumnDefinition Width="0.15*"/>
                 </Grid.ColumnDefinitions>
-
                 <Grid x:Name="OuterGridImageViewer" Grid.Column="0">
                     <ScrollViewer x:Name="ImageViewerScrollView" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" >
                         <Grid x:Name="zoomGrid">
-
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-
-                            <Grid x:Name="zoomGrid2" Grid.Column="0" Grid.Row="0">
+                            <Grid Background="Yellow" x:Name="zoomGrid2" Grid.Column="0" Grid.Row="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <!-- Set the height of the row to "*" to occupy available space -->
                                 </Grid.RowDefinitions>
-
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="0*"/>
                                 </Grid.ColumnDefinitions>
-
-                                <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Background="Purple">
-                                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0" Stretch="Uniform" x:Name="ImageViewerIMG" Grid.Row="0" Source="{Binding ViewModel.Type, Converter={StaticResource ImagePathHelper}}"></Image>
-
+                                <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Background="Yellow">
+                                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0" Stretch="Uniform" x:Name="ImageViewerIMG" Grid.Row="0" Source="{Binding ViewModel.Name, Converter={StaticResource ImagePathHelper}}"></Image>
                                 </Grid>
-
                             </Grid>
-
                         </Grid>
                     </ScrollViewer>
                 </Grid>
-
                 <Grid Grid.Column="2">
                     <Border CornerRadius="10" MaxWidth="50" Background="#0FFFFFFF" >
                         <Grid HorizontalAlignment="Center">
-
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.05*"/>
                                 <RowDefinition Height="0.9*"/>
                                 <RowDefinition Height="0.05*"/>
                             </Grid.RowDefinitions>
-
                             <Slider 
                                 Loaded="ImageViewerSlider_Loaded"
                                 x:Name="ImageViewerSlider"
@@ -120,14 +94,11 @@
                                 Value="{Binding ViewModel.ZoomSliderVal, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ImageViewerPage}, Mode=TwoWay}"
                                 ValueChanged="ImageViewerSlider_ValueChanged"
                             />
-                            
                             <TextBlock Visibility="Collapsed" Grid.Row="2" Text="{Binding ViewModel.ZoomSliderVal, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ImageViewerPage}, Mode=OneWay}" />
                         </Grid>
                     </Border>
                 </Grid>
-
             </Grid>
         </Grid>
-
     </Grid>
 </ui:UiPage>

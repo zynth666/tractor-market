@@ -28,19 +28,16 @@ public class UserService
         try
         {
             User user = _context.Users.Where(user => user.Name == username).First();
-            Debug.WriteLine(user.ToString());
 
             if (user.Password == password) {
                 LoggedInUser = user;
                 return true;
             } else {
-                Debug.WriteLine("Password wrong");
                 return false;
             }
         }
         catch
         {
-            Debug.WriteLine("User not found");
             return false;
         }
     }

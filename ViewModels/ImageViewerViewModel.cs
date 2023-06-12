@@ -20,6 +20,9 @@ namespace TractorMarket.ViewModels
         public double InitialViewerImgWidth;
 
         [ObservableProperty]
+        private string _name = ImageViewerService.Name;
+
+        [ObservableProperty]
         private string _type = ImageViewerService.Type;
 
         [ObservableProperty]
@@ -36,6 +39,7 @@ namespace TractorMarket.ViewModels
 
         public void OnNavigatedTo()
         {
+            Name = ImageViewerService.Name;
             Type = ImageViewerService.Type;
             Manufacturer = ImageViewerService.Manufacturer;
             HideNavigation?.Invoke();
@@ -49,8 +53,16 @@ namespace TractorMarket.ViewModels
         [RelayCommand]
         private void LeaveImageViewer()
         {
-            Debug.WriteLine(Type);
-            _navigationService.Navigate(typeof(MarketPage));
+            if (ImageViewerService.Cat == "addon") {
+                _navigationService.Navigate(typeof(AddonPage));
+            }
+            else if(ImageViewerService.Cat == "market") {
+                _navigationService.Navigate(typeof(MarketPage));
+            }
+            else if(ImageViewerService.Cat == "cart")
+            {
+                _navigationService.Navigate(typeof(CartPage));
+            }
             inviewer = false;
             ShowNavigation?.Invoke();
         }
