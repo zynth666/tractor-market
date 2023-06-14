@@ -14,7 +14,7 @@ public partial class CartViewModel : ObservableObject, INavigationAware
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalPrice))]
-    private DeepObservableCollection<CartItem> _cart = UserService.LoggedInUser!.Cart;
+    private DeepObservableCollection<CartItem<ItemisableBaseEntity>> _cart = UserService.LoggedInUser!.Cart;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(CheckoutCommand))]
@@ -72,16 +72,14 @@ public partial class CartViewModel : ObservableObject, INavigationAware
     }
 
     [RelayCommand]
-    private void OpenImageViewer(Tractor tractor_in)
+    private void OpenImageViewer(ItemisableBaseEntity item)
     {
-        ImageViewerService.Name = tractor_in.Type;
-        ImageViewerService.Manufacturer = tractor_in.Manufacturer;
-        ImageViewerService.Cat = "cart";
+        ImageViewerService.Name = item.Name;
         _navigationService.Navigate(typeof(ImageViewerPage));
     }
 
     [RelayCommand]
-    public void RemoveCartItem(CartItem item)
+    public void RemoveCartItem(CartItem<ItemisableBaseEntity> item)
     {
         Cart.Remove(item);
     }
