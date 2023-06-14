@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
+﻿using TractorMarket.Data;
 using TractorMarket.Entities;
 using TractorMarket.Helpers;
 using TractorMarket.Models;
@@ -11,34 +9,36 @@ public class CartService
 {
     private readonly UserService _userService;
     private readonly TractorService _tractorService;
+    private readonly DataContext _dataContext;
 
-    public CartService(UserService userService, TractorService tractorService)
+    public CartService(UserService userService, TractorService tractorService, DataContext dataContext)
     {
         _userService = userService;
         _tractorService = tractorService;
+        _dataContext = dataContext;
     }
 
     public void Checkout(User currentUser)
     {
         if (currentUser.IsAdmin)
         {
-            AddNewlyBoughtTractorsToStock(currentUser.Cart);
+            AddNewlyBoughtItemsToStock(currentUser.Cart);
             RemoveBudgetFromAdmin(currentUser);
             currentUser.Cart.Clear();
             return;
         }
 
         PaySeller(currentUser);
-        RemoveSoldTractorsFromStock(currentUser.Cart);
+        RemoveSoldItemsFromStock(currentUser.Cart);
         currentUser.Cart.Clear();
     }
 
-    public static double GetTotalPrice(DeepObservableCollection<CartItem> cart)
+    public static double GetTotalPrice(DeepObservableCollection<CartItem<ItemisableBaseEntity>> cart)
     {
         double sum = 0;
-        foreach (CartItem cartItem in cart)
+        foreach (CartItem<ItemisableBaseEntity> cartItem in cart)
         {
-            double tractorPrice = cartItem.Tractor.Price;
+            double tractorPrice = cartItem.Item.Price;
             double cartItemPrice = tractorPrice * cartItem.Quantity;
 
             sum += cartItemPrice;
@@ -47,12 +47,12 @@ public class CartService
         return sum;
     }
 
-    public static double GetTotalAdminPrice(DeepObservableCollection<CartItem> cart)
+    public static double GetTotalAdminPrice(DeepObservableCollection<CartItem<ItemisableBaseEntity>> cart)
     {
         double sum = 0;
-        foreach (CartItem cartItem in cart)
+        foreach (CartItem<ItemisableBaseEntity> cartItem in cart)
         {
-            double tractorPrice = cartItem.Tractor.AdminPrice;
+            double tractorPrice = cartItem.Item.AdminPrice;
             double cartItemPrice = tractorPrice * cartItem.Quantity;
 
             sum += cartItemPrice;
@@ -69,21 +69,37 @@ public class CartService
         _userService.UpdateUser(currentUser);
     }
 
-    private void AddNewlyBoughtTractorsToStock(DeepObservableCollection<CartItem> cart)
+    private void AddNewlyBoughtItemsToStock(DeepObservableCollection<CartItem<ItemisableBaseEntity>> cart)
     {
-        foreach (CartItem cartItem in cart)
+        foreach (CartItem<ItemisableBaseEntity> cartItem in cart)
         {
-            cartItem.Tractor.Stock += cartItem.Quantity;
-            _tractorService.UpdateTractor(cartItem.Tractor);
+            cartItem.Item.Stock += cartItem.Quantity;
+
+            if (cartItem.Item.GetType() == typeof(Tractor))
+            {
+                _dataContext.Set<Tractor>().Update(cartItem.Item as Tractor);
+            }
+            else
+            {
+                _dataContext.Set<TractorAddon>().Update(cartItem.Item as TractorAddon);
+            }
         }
     }
 
-    private void RemoveSoldTractorsFromStock(DeepObservableCollection<CartItem> cart)
+    private void RemoveSoldItemsFromStock(DeepObservableCollection<CartItem<ItemisableBaseEntity>> cart)
     {
-        foreach (CartItem cartItem in cart)
+        foreach (CartItem<ItemisableBaseEntity> cartItem in cart)
         {
-            cartItem.Tractor.Stock -= cartItem.Quantity;
-            _tractorService.UpdateTractor(cartItem.Tractor);
+            cartItem.Item.Stock -= cartItem.Quantity;
+
+            if (cartItem.Item.GetType() == typeof(Tractor))
+            {
+                _dataContext.Set<Tractor>().Update(cartItem.Item as Tractor);
+            }
+            else
+            {
+                _dataContext.Set<TractorAddon>().Update(cartItem.Item as TractorAddon);
+            }
         }
     }
 
@@ -99,20 +115,20 @@ public class CartService
         _userService.UpdateUser(adminUser);
     }
 
-    public static void AddToCart(DeepObservableCollection<CartItem> cart, CartItem cartItem)
+    public static void AddToCart(DeepObservableCollection<CartItem<ItemisableBaseEntity>> cart, CartItem<ItemisableBaseEntity> cartItem)
     {
-        foreach (CartItem item in cart)
+        foreach (CartItem<ItemisableBaseEntity> item in cart)
         {
-            if (item.Tractor.Id != cartItem.Tractor.Id)
+            if (item.Item.Name != cartItem.Item.Name)
             {
                 continue;
             }
 
             int newItemQuantity = item.Quantity + cartItem.Quantity;
 
-            if (newItemQuantity > item.Tractor.Stock)
+            if (newItemQuantity > item.Item.Stock)
             {
-                item.Quantity = item.Tractor.Stock;
+                item.Quantity = item.Item.Stock;
             }
             else
             {

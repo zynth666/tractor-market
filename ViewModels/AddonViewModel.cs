@@ -37,7 +37,6 @@ namespace TractorMarket.ViewModels
         private void OpenImageViewer(TractorAddon tractoraddon_in)
         {
             ImageViewerService.Name = tractoraddon_in.Name;
-            ImageViewerService.Cat = "addon";
             _navigationService.Navigate(typeof(ImageViewerPage));
         }
 
@@ -51,6 +50,13 @@ namespace TractorMarket.ViewModels
         public void OnNavigatedFrom()
         {
 
+        }
+
+        [RelayCommand]
+        public static void AddToCart(TractorAddon tractorAddon)
+        {
+            CartItem<ItemisableBaseEntity> cartItem = new(tractorAddon, tractorAddon.SelectedQuantity);
+            CartService.AddToCart(UserService.LoggedInUser!.Cart, cartItem);
         }
     }
 }
