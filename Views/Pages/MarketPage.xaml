@@ -1,6 +1,4 @@
 ﻿<ui:UiPage
-    x:Name="Market_Page"
-    x:Class="TractorMarket.Views.Pages.MarketPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,21 +7,26 @@
     xmlns:helpers="clr-namespace:TractorMarket.Helpers"
     xmlns:models="clr-namespace:TractorMarket.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    x:Name="Market_Page"
+    x:Class="TractorMarket.Views.Pages.MarketPage"
     Title="MarketPage"
-    d:DataContext="{d:DesignInstance local:MarketPage, IsDesignTimeCreatable=False}"
+    d:DataContext="{d:DesignInstance {x:Type local:MarketPage}, IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
+    <ui:UiPage.Resources>
         <helpers:ImagePathHelper x:Key="ImagePathHelper" />
         <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
-        <Style TargetType="ListViewItem">
+        <Style TargetType="{x:Type ListViewItem}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ListViewItem">
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
                         <Border x:Name="border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -32,21 +35,112 @@
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True"/>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-    </Page.Resources>
+
+    </ui:UiPage.Resources>
     <Grid Margin="56,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.Tractors}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Expander Grid.Column="0" Grid.ColumnSpan="8" Header="Filter">
+                <Grid Height="250" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.025*"/>
+                        <RowDefinition Height="0.8*"/>
+                        <RowDefinition Height="0.175*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.3*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Preis" Grid.Row="0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0">
+                            <Run Text="Min: "/>
+                            <Run Text="{Binding ViewModel.MinEurSlider, Mode=TwoWay}"/>
+                            <Run Text="€"/>
+                        </TextBlock>
+                        <Slider Minimum="95000" Maximum="388000" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MinEurSlider, Mode=TwoWay}" IsSnapToTickEnabled="True" TickFrequency="10000" TickPlacement="Both" Grid.Row="2" Grid.Column="0"></Slider>
+                        <TextBlock Grid.Row="3" Grid.Column="0">
+                            <Run Text="Max: "/>
+                            <Run Text="{Binding ViewModel.MaxEurSlider, Mode=TwoWay}"/>
+                            <Run Text="€"/>
+                        </TextBlock>
+                        <Slider Minimum="95000" Maximum="388000" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MaxEurSlider, Mode=TwoWay}" IsSnapToTickEnabled="True" TickFrequency="10000" TickPlacement="Both" Grid.Row="4" Grid.Column="0"></Slider>
+                        <TextBlock Text="Geschwindigkeit" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1">
+                            <Run Text="Min: "/>
+                            <Run Text="{Binding ViewModel.MinKmhSlider, Mode=TwoWay}"/>
+                            <Run Text="Km/h"/>
+                        </TextBlock>
+                        <Slider Minimum="40" Maximum="65" IsSnapToTickEnabled="True" TickFrequency="5" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MinKmhSlider, Mode=TwoWay}" Grid.Row="2" Grid.Column="1"></Slider>
+                        <TextBlock Grid.Row="3" Grid.Column="1">
+                            <Run Text="Max: "/>
+                            <Run Text="{Binding ViewModel.MaxKmhSlider, Mode=TwoWay}"/>
+                            <Run Text="Km/h"/>
+                        </TextBlock>
+                        <Slider Minimum="40" Maximum="65" IsSnapToTickEnabled="True" TickFrequency="5" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MaxKmhSlider, Mode=TwoWay}" Grid.Row="4" Grid.Column="1"></Slider>
+                        <TextBlock Text="Pferdestärke" Grid.Row="0" Grid.Column="2"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2">
+                            <Run Text="Min: "/>
+                            <Run Text="{Binding ViewModel.MinPsSlider, Mode=TwoWay}"/>
+                            <Run Text="PS"/>
+                        </TextBlock>
+                        <Slider Minimum="100" Maximum="700" IsSnapToTickEnabled="True" TickFrequency="50" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MinPsSlider, Mode=TwoWay}" Grid.Row="2" Grid.Column="2"></Slider>
+                        <TextBlock Grid.Row="3" Grid.Column="2">
+                            <Run Text="Max: "/>
+                            <Run Text="{Binding ViewModel.MaxPsSlider, Mode=TwoWay}"/>
+                            <Run Text="PS"/>
+                        </TextBlock>
+                        <Slider Minimum="100" Maximum="700" IsSnapToTickEnabled="True" TickFrequency="50" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MaxPsSlider, Mode=TwoWay}" Grid.Row="4" Grid.Column="2"></Slider>
+
+                        <TextBlock Text="Baujahr" Grid.Row="0" Grid.Column="3"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3">
+                            <Run Text="Min Baujahr: "/>
+                            <Run Text="{Binding ViewModel.MinJahrSlider, Mode=TwoWay}"/>
+                        </TextBlock>
+                        <Slider Minimum="1999" Maximum="2021" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MinJahrSlider, Mode=TwoWay}" Grid.Row="2" Grid.Column="3"></Slider>
+
+                        <TextBlock Grid.Row="3" Grid.Column="3">
+                            <Run Text="Max: "/>
+                            <Run Text="{Binding ViewModel.MaxJahrSlider, Mode=TwoWay}"/>
+                            <Run Text="Jahr"/>
+                        </TextBlock>
+                        <Slider Minimum="100" Maximum="700" IsSnapToTickEnabled="True" TickFrequency="50" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MaxJahrSlider, Mode=TwoWay}" Grid.Row="4" Grid.Column="3"></Slider>
+                    </Grid>
+                    <Grid  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <ui:Button Command="{Binding ViewModel.ResetFilterCommand}" Appearance="Danger" Grid.Column="0" Content="RESET"/>
+                        <ui:Button Command="{Binding ViewModel.ApplyFilterCommand}" Appearance="Success" Grid.Column="1" Content="SUCHEN"/>
+                    </Grid>
+                </Grid>
+            </Expander>
+        </Grid>
+        <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding ViewModel.Tractors}">
             <ListView.ItemTemplate>
- 		        <DataTemplate DataType="{x:Type entities:Tractor}" >
+                <DataTemplate DataType="{x:Type entities:Tractor}" >
                     <Border CornerRadius="5" Background="{DynamicResource ControlFillColorDefaultBrush}">
                         <Grid Height="200">
                             <Grid.ColumnDefinitions>
@@ -99,7 +193,7 @@
                                             <RowDefinition Height="0.46*"/>
                                             <RowDefinition Height="0.46*"/>
                                         </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"></Grid>
+                                        <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"/>
                                         <Grid Grid.Column="1" Grid.Row="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition/>
@@ -111,10 +205,10 @@
                                                 <ColumnDefinition Width="0.00*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid Grid.Row="0" Grid.Column="1">
-                                                <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" Foreground="White">Typ</TextBlock>
+                                                <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" ><Run Text="Typ"/></TextBlock>
                                             </Grid>
                                             <Grid  VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Foreground="White" Text="{Binding Type}"/>
+                                                <TextBlock FontSize="14" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Text="{Binding Type}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Column="2" Grid.Row="1">
@@ -128,10 +222,10 @@
                                                 <ColumnDefinition Width="0.00*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid Grid.Row="0" Grid.Column="1">
-                                                <TextBlock   FontSize="20" FontWeight="DemiBold" Foreground="White">Hersteller</TextBlock>
+                                                <TextBlock   FontSize="20" FontWeight="DemiBold"><Run Text="Hersteller"/></TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Manufacturer}"/>
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Text="{Binding Manufacturer}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Column="3" Grid.Row="1">
@@ -145,24 +239,22 @@
                                                 <ColumnDefinition Width="0.0*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid Grid.Row="0" Grid.Column="1">
-                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Preis</TextBlock>
+                                                <TextBlock FontSize="20" FontWeight="DemiBold"><Run Text="Preis"/></TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
                                                 <TextBlock 
                                                     x:Name="CustomerPrice"
                                                     FontSize="14"
                                                     FontWeight="DemiBold"
-                                                    Foreground="White"
-                                                    Text="{Binding Price, StringFormat={}{0}€}"
-                                                    Visibility="{Binding ViewModel.IsNotAdmin, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}, Converter={StaticResource VisibilityOfBool}}"
+                                                    Text="{Binding Price, StringFormat=\{0\}€}"
+                                                    Visibility="{Binding ViewModel.IsNotAdmin, Converter={StaticResource VisibilityOfBool}, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}"
                                                 />
                                                 <TextBlock 
                                                     x:Name="AdminPrice"
                                                     FontSize="14"
                                                     FontWeight="DemiBold"
-                                                    Foreground="White"
-                                                    Text="{Binding AdminPrice, StringFormat={}{0}€}"
-                                                    Visibility="{Binding ViewModel.IsAdmin, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}, Converter={StaticResource VisibilityOfBool}}"
+                                                    Text="{Binding AdminPrice, StringFormat=\{0\}€}"
+                                                    Visibility="{Binding ViewModel.IsAdmin, Converter={StaticResource VisibilityOfBool}, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}"
                                                 />
                                             </Grid>
                                         </Grid>
@@ -177,10 +269,10 @@
                                                 <ColumnDefinition Width="0.0*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid Grid.Row="0" Grid.Column="1">
-                                                <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold" Foreground="White">Leistung</TextBlock>
+                                                <TextBlock VerticalAlignment="Bottom" FontSize="20" FontWeight="DemiBold"><Run Text="Leistung"/></TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock VerticalAlignment="Top" FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Horsepower, StringFormat={}{0} PS}"/>
+                                                <TextBlock VerticalAlignment="Top" FontSize="14" FontWeight="DemiBold" Text="{Binding Horsepower, StringFormat=\{0\} PS}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Row="2" Grid.Column="2">
@@ -194,10 +286,10 @@
                                                 <ColumnDefinition Width="0.0*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1">
-                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Max. Geschwindigkeit</TextBlock>
+                                                <TextBlock FontSize="20" FontWeight="DemiBold" ><Run Text="Max. Geschwindigkeit"/></TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Velocity, StringFormat={}{0} KM/h}"/>
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Text="{Binding Velocity, StringFormat=\{0\} KM/h}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Row="2" Grid.Column="3">
@@ -211,10 +303,10 @@
                                                 <ColumnDefinition Width="0.0*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid Grid.Row="0" Grid.Column="1">
-                                                <TextBlock FontSize="20" FontWeight="DemiBold" Foreground="White">Baujahr</TextBlock>
+                                                <TextBlock FontSize="20" FontWeight="DemiBold"><Run Text="Baujahr"/></TextBlock>
                                             </Grid>
                                             <Grid Grid.Row="1" Grid.Column="1">
-                                                <TextBlock FontSize="14" FontWeight="DemiBold" Foreground="White" Text="{Binding Vintage}"/>
+                                                <TextBlock FontSize="14" FontWeight="DemiBold" Text="{Binding Vintage}"/>
                                             </Grid>
                                         </Grid>
                                         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="4" >
@@ -257,7 +349,7 @@
                                                                         <RowDefinition Height="0.972*"/>
                                                                     </Grid.RowDefinitions>
                                                                     <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2"  FontSize="15" Grid.Column="0"  Symbol="Info16"/>
-                                                                    <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
+                                                                    <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat=Noch \{0\} Stück auf Lager}"/>
                                                                 </Grid>
                                                                 <ui:NumberBox Value="{Binding SelectedQuantity, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" IntegersOnly="True" Min="1" Max="{Binding Stock}" />
                                                                 <ui:Button CommandParameter="{Binding}" Command="{Binding ViewModel.AddToCartCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}" VerticalAlignment="Stretch" Margin="0, 7.5, 0, 7.5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Icon="Cart24" IconFilled="False" FontSize="30" />
@@ -293,7 +385,7 @@
                                                                         <RowDefinition Height="0.972*"/>
                                                                     </Grid.RowDefinitions>
                                                                     <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2"  FontSize="15" Grid.Column="0"  Symbol="Info16"/>
-                                                                    <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat={}Du hast {0} Stück auf Lager}"/>
+                                                                    <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Stock, Mode=TwoWay, StringFormat=Du hast \{0\} Stück auf Lager}"/>
                                                                 </Grid>
                                                                 <ui:NumberBox Value="{Binding SelectedQuantity, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" IntegersOnly="True" Min="1" />
                                                                 <ui:Button CommandParameter="{Binding}" Command="{Binding ViewModel.AddToCartCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MarketPage}}}" VerticalAlignment="Stretch" Margin="0, 7.5, 0, 7.5" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Icon="Cart24" IconFilled="False" FontSize="30" />
@@ -306,11 +398,11 @@
                                     </Style>
                                 </ContentControl.Style>
                             </ContentControl>
-                            <Grid Width="Auto" Grid.Row="1" Grid.Column="3" ></Grid>
+                            <Grid Width="Auto" Grid.Row="1" Grid.Column="3" />
                         </Grid>
                     </Border>
- 		        </DataTemplate>
- 	        </ListView.ItemTemplate>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </ui:UiPage>
