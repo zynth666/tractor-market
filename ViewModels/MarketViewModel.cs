@@ -77,7 +77,7 @@ namespace TractorMarket.ViewModels
         [RelayCommand]
         public static void AddToCart(Tractor tractor)
         {
-            CartItem cartItem = new(tractor, tractor.SelectedQuantity);
+            CartItem<ItemisableBaseEntity> cartItem = new(tractor, tractor.SelectedQuantity);
             CartService.AddToCart(UserService.LoggedInUser!.Cart, cartItem);
         }
 

@@ -4,9 +4,9 @@ using TractorMarket.Services;
 
 namespace TractorMarket.Models;
 
-public partial class CartItem : ObservableObject
+public partial class CartItem<T> : ObservableObject where T : ItemisableBaseEntity
 {
-    public Tractor Tractor { get; set; }
+    public T Item { get; set; }
 
     [ObservableProperty]
     private int _quantity;
@@ -15,43 +15,43 @@ public partial class CartItem : ObservableObject
     [NotifyPropertyChangedFor(nameof(Quantity))]
     private double _sum;
 
-    public CartItem(Tractor tractor, int quantity)
+    public CartItem(T item, int quantity)
     {
-        Tractor = tractor;
+        Item = item;
         Quantity = quantity;
 
-        double tractorPrice = 0;
+        double price = 0;
 
         if (UserService.LoggedInUser!.IsAdmin)
         {
-            tractorPrice = tractor.AdminPrice;
+            price = item.AdminPrice;
         }
         else
         {
-            tractorPrice = tractor.Price;
+            price = item.Price;
         }
 
-        Sum = tractorPrice * quantity;
+        Sum = price * quantity;
     }
 
     partial void OnQuantityChanged(int value)
     {
-        double tractorPrice = 0;
+        double price = 0;
 
         if (UserService.LoggedInUser!.IsAdmin)
         {
-            tractorPrice = Tractor.AdminPrice;
+            price = Item.AdminPrice;
         }
         else
         {
-            tractorPrice = Tractor.Price;
+            price = Item.Price;
         }
 
-        Sum = tractorPrice * Quantity;
+        Sum = price * Quantity;
     }
 
     override public string ToString()
     {
-        return $"{Tractor.Type} - {Quantity}";
+        return $"{Item.Name} - {Quantity}";
     }
 }

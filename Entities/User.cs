@@ -16,5 +16,5 @@ public partial class User : ObservableObject
     public bool IsAdmin { get; set; }
     
     [NotMapped]
-    public DeepObservableCollection<CartItem> Cart = new();
+    public DeepObservableCollection<CartItem<ItemisableBaseEntity>> Cart = new();
 }
