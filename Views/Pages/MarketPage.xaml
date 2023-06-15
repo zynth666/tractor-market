@@ -23,7 +23,6 @@
     <ui:UiPage.Resources>
         <helpers:ImagePathHelper x:Key="ImagePathHelper" />
         <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
-
         <Style TargetType="{x:Type ListViewItem}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -48,24 +47,18 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <Grid Grid.Column="0" Grid.Row="0">
             <Expander Grid.Column="0" Grid.ColumnSpan="8" Header="Filter">
                 <Grid Height="250" >
-
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.025*"/>
                         <RowDefinition Height="0.8*"/>
                         <RowDefinition Height="0.175*"/>
                     </Grid.RowDefinitions>
-                    
-                    
-
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.2*"/>
@@ -74,30 +67,25 @@
                             <RowDefinition Height="0.1*"/>
                             <RowDefinition Height="0.3*"/>
                         </Grid.RowDefinitions>
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-
-
-                        <TextBlock Text="PREIS" Grid.Row="0"/>
+                        <TextBlock Text="Preis" Grid.Row="0"/>
                         <TextBlock Grid.Row="1" Grid.Column="0">
                             <Run Text="Min: "/>
                             <Run Text="{Binding ViewModel.MinEurSlider, Mode=TwoWay}"/>
                             <Run Text="€"/>
                         </TextBlock>
                         <Slider Minimum="95000" Maximum="388000" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MinEurSlider, Mode=TwoWay}" IsSnapToTickEnabled="True" TickFrequency="10000" TickPlacement="Both" Grid.Row="2" Grid.Column="0"></Slider>
-
                         <TextBlock Grid.Row="3" Grid.Column="0">
                             <Run Text="Max: "/>
                             <Run Text="{Binding ViewModel.MaxEurSlider, Mode=TwoWay}"/>
-                            <Run Text="€"/> 
+                            <Run Text="€"/>
                         </TextBlock>
                         <Slider Minimum="95000" Maximum="388000" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MaxEurSlider, Mode=TwoWay}" IsSnapToTickEnabled="True" TickFrequency="10000" TickPlacement="Both" Grid.Row="4" Grid.Column="0"></Slider>
-
                         <TextBlock Text="Geschwindigkeit" Grid.Row="0" Grid.Column="1"/>
                         <TextBlock Grid.Row="1" Grid.Column="1">
                             <Run Text="Min: "/>
@@ -105,14 +93,12 @@
                             <Run Text="Km/h"/>
                         </TextBlock>
                         <Slider Minimum="40" Maximum="65" IsSnapToTickEnabled="True" TickFrequency="5" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MinKmhSlider, Mode=TwoWay}" Grid.Row="2" Grid.Column="1"></Slider>
-
                         <TextBlock Grid.Row="3" Grid.Column="1">
                             <Run Text="Max: "/>
                             <Run Text="{Binding ViewModel.MaxKmhSlider, Mode=TwoWay}"/>
                             <Run Text="Km/h"/>
                         </TextBlock>
                         <Slider Minimum="40" Maximum="65" IsSnapToTickEnabled="True" TickFrequency="5" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MaxKmhSlider, Mode=TwoWay}" Grid.Row="4" Grid.Column="1"></Slider>
-
                         <TextBlock Text="Pferdestärke" Grid.Row="0" Grid.Column="2"/>
                         <TextBlock Grid.Row="1" Grid.Column="2">
                             <Run Text="Min: "/>
@@ -120,7 +106,6 @@
                             <Run Text="PS"/>
                         </TextBlock>
                         <Slider Minimum="100" Maximum="700" IsSnapToTickEnabled="True" TickFrequency="50" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MinPsSlider, Mode=TwoWay}" Grid.Row="2" Grid.Column="2"></Slider>
-
                         <TextBlock Grid.Row="3" Grid.Column="2">
                             <Run Text="Max: "/>
                             <Run Text="{Binding ViewModel.MaxPsSlider, Mode=TwoWay}"/>
@@ -135,25 +120,24 @@
                         </TextBlock>
                         <Slider Minimum="1999" Maximum="2021" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MinJahrSlider, Mode=TwoWay}" Grid.Row="2" Grid.Column="3"></Slider>
 
-                   
+                        <TextBlock Grid.Row="3" Grid.Column="3">
+                            <Run Text="Max: "/>
+                            <Run Text="{Binding ViewModel.MaxJahrSlider, Mode=TwoWay}"/>
+                            <Run Text="Jahr"/>
+                        </TextBlock>
+                        <Slider Minimum="100" Maximum="700" IsSnapToTickEnabled="True" TickFrequency="50" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MaxJahrSlider, Mode=TwoWay}" Grid.Row="4" Grid.Column="3"></Slider>
                     </Grid>
-
                     <Grid  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
-
                         <ui:Button Command="{Binding ViewModel.ResetFilterCommand}" Appearance="Danger" Grid.Column="0" Content="RESET"/>
-
                         <ui:Button Command="{Binding ViewModel.ApplyFilterCommand}" Appearance="Success" Grid.Column="1" Content="SUCHEN"/>
                     </Grid>
-
-
                 </Grid>
             </Expander>
         </Grid>
-
         <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding ViewModel.Tractors}">
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type entities:Tractor}" >

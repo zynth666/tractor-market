@@ -14,9 +14,7 @@ namespace TractorMarket.ViewModels
     public partial class MarketViewModel : ObservableObject, INavigationAware
     {
         private readonly TractorService _tractorService;
-
         private readonly INavigationService _navigationService;
-
 
         [ObservableProperty]
         private int _minEurSlider = 95000;
@@ -63,7 +61,6 @@ namespace TractorMarket.ViewModels
             IsNotAdmin = !UserService.LoggedInUser!.IsAdmin;
             UpdateTractorList();
         }
-
         public void OnNavigatedFrom()
         {
         }
@@ -74,7 +71,6 @@ namespace TractorMarket.ViewModels
             ImageViewerService.Name = tractor_in.Type;
             ImageViewerService.Cat = "market";
             ImageViewerService.Manufacturer = tractor_in.Manufacturer;
-
             _navigationService.Navigate(typeof(ImageViewerPage));
         }
 
@@ -103,7 +99,6 @@ namespace TractorMarket.ViewModels
             {
                 MinJahrSlider = MaxJahrSlider;
             }
-
             Tractors = _tractorService.GetFilteredTractorsForCustomers(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
         }
 
@@ -118,11 +113,8 @@ namespace TractorMarket.ViewModels
             MaxPsSlider = 700;
             MinJahrSlider = 1999;
             MaxJahrSlider = 2021;
-
             Tractors = _tractorService.GetFilteredTractorsForCustomers(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
         }
-
-
 
         private void UpdateTractorList()
         {
