@@ -2,6 +2,7 @@
 using TractorMarket.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace TractorMarket.Services;
 
@@ -23,9 +24,12 @@ public class AddonService
 
     public List<TractorAddon> GetFilteredAddons(List<string> ManufacturerFilter) 
     {
-        return _context.TractorAddons
-            .Where(TractorAddon => TractorAddon.Stock > 0)
+        var filteredAddons = _context.TractorAddons
+            .AsEnumerable()
+            .Where(addons => addons.AssociatedTractors.Intersect(ManufacturerFilter).Count() == ManufacturerFilter.Count)
             .ToList();
+            
+        return filteredAddons;
     }
 
 }
