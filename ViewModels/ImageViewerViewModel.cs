@@ -53,13 +53,13 @@ namespace TractorMarket.ViewModels
         [RelayCommand]
         private void LeaveImageViewer()
         {
-            if (ImageViewerService.Cat == "addon") {
+            if (ImageViewerService.Category == "addon") {
                 _navigationService.Navigate(typeof(AddonPage));
             }
-            else if(ImageViewerService.Cat == "market") {
+            else if(ImageViewerService.Category == "market") {
                 _navigationService.Navigate(typeof(MarketPage));
             }
-            else if(ImageViewerService.Cat == "cart")
+            else if(ImageViewerService.Category == "cart")
             {
                 _navigationService.Navigate(typeof(CartPage));
             }

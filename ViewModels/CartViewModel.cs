@@ -75,6 +75,7 @@ public partial class CartViewModel : ObservableObject, INavigationAware
     private void OpenImageViewer(ItemisableBaseEntity item)
     {
         ImageViewerService.Name = item.Name;
+        ImageViewerService.Category = "cart";
         _navigationService.Navigate(typeof(ImageViewerPage));
     }
 

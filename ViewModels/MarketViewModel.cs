@@ -69,7 +69,7 @@ namespace TractorMarket.ViewModels
         private void OpenImageViewer(Tractor tractor_in)
         {
             ImageViewerService.Name = tractor_in.Type;
-            ImageViewerService.Cat = "market";
+            ImageViewerService.Category = "market";
             ImageViewerService.Manufacturer = tractor_in.Manufacturer;
             _navigationService.Navigate(typeof(ImageViewerPage));
         }
