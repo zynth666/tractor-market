@@ -41,182 +41,238 @@
 		</Style>
     </Page.Resources>
     <Grid Margin="56,0">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" Grid.Column="0" ItemsSource="{Binding ViewModel.AllAddons}">
-			<ListView.ItemTemplate>
-				<DataTemplate DataType="{x:Type entities:TractorAddon}" >
-					<Border CornerRadius="5" Background="{DynamicResource ControlFillColorDefaultBrush}">
-						<Grid Height="100">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="0.1*" MaxWidth="15"/>
-								<ColumnDefinition MaxWidth="150" Width="0.1*"/>
-								<ColumnDefinition Width="0.75*"/>
-							</Grid.ColumnDefinitions>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="100"/>
-							</Grid.RowDefinitions>
-							<Grid Grid.Column="0"></Grid>
-							<Grid Grid.Column="1" Grid.Row="0">
-								<Grid Height="80" HorizontalAlignment="Center" VerticalAlignment="Center">
-									<Grid.InputBindings>
-										<MouseBinding CommandParameter="{Binding}" Gesture="LeftClick" Command="{Binding ViewModel.OpenImageViewerCommand, Source={x:Reference Name=Addon_Page}}" />
-									</Grid.InputBindings>
-									<Border Background="White" CornerRadius="15">
-										<Image Height="80" Width="150" HorizontalAlignment="Center"   VerticalAlignment="Center" Stretch="Uniform" Source="{Binding Name, Converter={StaticResource ImagePathHelper}}">
-											<Image.Clip>
-												<RectangleGeometry RadiusX="5" RadiusY="5" Rect="0,0,150,80"/>
-											</Image.Clip>
-										</Image>
-									</Border>
-								</Grid>
-							</Grid>
-							<Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="100"/>
-								</Grid.RowDefinitions>
-								<Grid Grid.Column="0">
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*"/>
-									</Grid.ColumnDefinitions>
-									<Grid.RowDefinitions>
-										<RowDefinition Height="*"/>
-									</Grid.RowDefinitions>
-									<Grid Grid.Row="0" Grid.Column="0">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition MaxWidth="20" Width="0.05*"/>
-											<ColumnDefinition MaxWidth="1000" Width="0.45*"/>
-											<ColumnDefinition MaxWidth="500" Width="0.5*"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="0.2*"/>
-											<RowDefinition Height="0.7*"/>
-											<RowDefinition Height="0.1*"/>
-										</Grid.RowDefinitions>
-										<Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0"></Grid>
-										<Grid  HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="1" >
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition MaxWidth="200" MinWidth="130"/>
-												<ColumnDefinition/>
-											</Grid.ColumnDefinitions>
-											<Grid Grid.Column="0" Grid.Row="1">
-												<Grid.RowDefinitions>
-													<RowDefinition/>
-													<RowDefinition/>
-												</Grid.RowDefinitions>
-												<Grid.ColumnDefinitions>
-													<ColumnDefinition Width="0.00*"/>
-													<ColumnDefinition Width="1*"/>
-													<ColumnDefinition Width="0.00*"/>
-												</Grid.ColumnDefinitions>
-												<Grid Grid.Row="0" Grid.Column="1">
-													<TextBlock VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold">Name</TextBlock>
-												</Grid>
-												<Grid  VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1">
-													<TextBlock FontSize="14" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Text="{Binding Name}"/>
-												</Grid>
-											</Grid>
-											<Grid Grid.Column="1" Grid.Row="1">
-												<Grid.RowDefinitions>
-													<RowDefinition/>
-													<RowDefinition/>
-												</Grid.RowDefinitions>
-												<Grid.ColumnDefinitions>
-													<ColumnDefinition Width="0.00*"/>
-													<ColumnDefinition Width="1*"/>
-													<ColumnDefinition Width="0.00*"/>
-												</Grid.ColumnDefinitions>
-												<Grid Grid.Row="0" Grid.Column="1">
-													<TextBlock   FontSize="20" FontWeight="DemiBold">Kompatible Marken</TextBlock>
-												</Grid>
-												<Grid Grid.Row="1" Grid.Column="1">
-													<TextBlock FontSize="14" FontWeight="DemiBold" Text="{Binding AssociatedTractors, Converter={StaticResource StringListConverter}}"/>
-												</Grid>
-											</Grid>
-										</Grid>
-										<Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" >
-											<Grid.RowDefinitions>
-												<RowDefinition Height="0.2*"/>
-												<RowDefinition Height="0.7*"/>
-												<RowDefinition Height="0.1*"/>
-											</Grid.RowDefinitions>
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition />
-												<ColumnDefinition Width="10"/>
-												<ColumnDefinition />
-												<ColumnDefinition MaxWidth="150"/>
-											</Grid.ColumnDefinitions>
-												<Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">
-													<Grid.RowDefinitions>
-														<RowDefinition/>
-														<RowDefinition/>
-													</Grid.RowDefinitions>
-													<Grid.ColumnDefinitions>
-														<ColumnDefinition/>
-													</Grid.ColumnDefinitions>
-													<Grid Grid.Row="0" Grid.Column="0">
-														<TextBlock FontSize="20" FontWeight="DemiBold">Preis</TextBlock>
-													</Grid>
-													<Grid Grid.Row="1" Grid.Column="0">
-														<TextBlock FontSize="14" FontWeight="DemiBold" Text="{Binding Price, StringFormat={}{0}€}"/>
-													</Grid>
-												</Grid>
-												<Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="2">
-													<Grid.RowDefinitions>
-														<RowDefinition Height="0.1*"/>
-														<RowDefinition Height="0.1*"/>
-														<RowDefinition Height="0.7*"/>
-														<RowDefinition Height="0.1*"/>
-													</Grid.RowDefinitions>
-													<Grid.ColumnDefinitions>
-														<ColumnDefinition Width="0.2*"/>
-														<ColumnDefinition Width="0.8*"/>
-														<ColumnDefinition Width="0.2*"/>
-													</Grid.ColumnDefinitions>
-													<Grid Grid.Row="2" Grid.Column="1">
-														<Grid.RowDefinitions>
-															<RowDefinition Height="0.2*"/>
-															<RowDefinition Height="0.8*"/>
-														</Grid.RowDefinitions>
-														<Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="LEft" >
-															<Grid.ColumnDefinitions>
-																<ColumnDefinition Width="0.125*"/>
-																<ColumnDefinition Width="0.875*"/>
-															</Grid.ColumnDefinitions>
-															<Grid.RowDefinitions>
-																<RowDefinition Height="0.028*"/>
-																<RowDefinition Height="0.972*"/>
-															</Grid.RowDefinitions>
-															<ui:SymbolIcon  Grid.Row="1" Grid.Column="0" FontSize="15" Symbol="Info16"/>
-															<TextBlock Grid.Row="1" Grid.Column="1" FontSize="12"  Text="{Binding Stock, StringFormat={}Noch {0} Stück auf Lager}"/>
-														</Grid>
-														<ui:NumberBox Grid.Row="1" Grid.Column="0" IntegersOnly="True" Value="0" Min="1" Max="{Binding Stock}"/>
-													</Grid>
-												</Grid>
-											<Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3">
-												<Grid.RowDefinitions>
-													<RowDefinition Height="0.5*"/>
-												</Grid.RowDefinitions>
-												<Grid.ColumnDefinitions>
-													<ColumnDefinition Width="0.1*"/>
-													<ColumnDefinition Width="0.2*"/>
-													<ColumnDefinition Width="0.3*"/>
-													<ColumnDefinition Width="0.4*"/>
-												</Grid.ColumnDefinitions>
-												<Grid Grid.Row="0" VerticalAlignment="Center" Grid.Column="2">
-                                                    <ui:Button Content="Kaufen" Icon="Cart20" FontSize="16" CommandParameter="{Binding}" Command="{Binding ViewModel.AddToCartCommand, RelativeSource={RelativeSource AncestorType={x:Type local:AddonPage}}}"/>
-												</Grid>
-											</Grid>
-										</Grid>
-									</Grid>
-								</Grid>
-							</Grid>
-							<Grid Width="Auto" Grid.Row="1" Grid.Column="3"></Grid>
-						</Grid>
-					</Border>
-				</DataTemplate>
-			</ListView.ItemTemplate>
-        </ListView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Expander Grid.Column="0" Grid.ColumnSpan="8" Header="Filter">
+                <Grid Height="50">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.025*"/>
+                        <RowDefinition Height="0.8*"/>
+                        <RowDefinition Height="0.175*"/>
+                    </Grid.RowDefinitions>
+
+
+                      
+                    
+                    <Grid Grid.Row="1">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Column="0" IsChecked="{Binding ViewModel.ClaasIsChecked}" Content="Claas"/>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding ViewModel.DeutzIsChecked}" Content="Deutz"/>
+                        <CheckBox Grid.Column="2" IsChecked="{Binding ViewModel.FendtIsChecked}" Content="Fendt"/>
+                        <CheckBox Grid.Column="3" IsChecked="{Binding ViewModel.JCBIsChecked}" Content="JCB"/>
+                        <CheckBox Grid.Column="4" IsChecked="{Binding ViewModel.JohnDeereIsChecked}" Content="John Deere"/>
+                        <CheckBox Grid.Column="5" IsChecked="{Binding ViewModel.KubotaIsChecked}" Content="Kubota"/>
+                        <CheckBox Grid.Column="6" IsChecked="{Binding ViewModel.LindnerIsChecked}" Content="Lindner"/>
+                        <CheckBox Grid.Column="7" IsChecked="{Binding ViewModel.MasseyFergusonIsChecked}" Content="Massey Ferguson"/>
+                        <CheckBox Grid.Column="8" IsChecked="{Binding ViewModel.NewHollandIsChecked}" Content="New Holland"/>
+                        <CheckBox Grid.Column="9" IsChecked="{Binding ViewModel.SteyrIsChecked}" Content="Steyr"/>
+                        <CheckBox Grid.Column="10" IsChecked="{Binding ViewModel.ValtraIsChecked}" Content="Valtra"/>
+                    </Grid>
+                    
+                    
+                </Grid>
+             </Expander>
+        </Grid>
+
+        <Grid  Grid.Column="0" Grid.Row="1">
+            <ListView Background="Yellow" x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" ItemsSource="{Binding ViewModel.AllAddons}">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type entities:TractorAddon}" >
+                        <Border CornerRadius="5" Background="{DynamicResource ControlFillColorDefaultBrush}">
+                            <Grid Height="100">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*" MaxWidth="15"/>
+                                    <ColumnDefinition MaxWidth="150" Width="0.1*"/>
+                                    <ColumnDefinition Width="0.75*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="100"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1" Grid.Row="0">
+                                    <Grid Height="80" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Grid.InputBindings>
+                                            <MouseBinding CommandParameter="{Binding}" Gesture="LeftClick" Command="{Binding ViewModel.OpenImageViewerCommand, Source={x:Reference Name=Addon_Page}}" />
+                                        </Grid.InputBindings>
+                                        <Border Background="White" CornerRadius="15">
+                                            <Image Height="80" Width="150" HorizontalAlignment="Center"   VerticalAlignment="Center" Stretch="Uniform" Source="{Binding Name, Converter={StaticResource ImagePathHelper}}">
+                                                <Image.Clip>
+                                                    <RectangleGeometry RadiusX="5" RadiusY="5" Rect="0,0,150,80"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="100"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Grid.Column="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition MaxWidth="20" Width="0.05*"/>
+                                                <ColumnDefinition MaxWidth="1000" Width="0.45*"/>
+                                                <ColumnDefinition MaxWidth="500" Width="0.5*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.2*"/>
+                                                <RowDefinition Height="0.7*"/>
+                                                <RowDefinition Height="0.1*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0"></Grid>
+                                            <Grid  HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="1" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition MaxWidth="200" MinWidth="130"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0" Grid.Row="1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.00*"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                        <ColumnDefinition Width="0.00*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Row="0" Grid.Column="1">
+                                                        <TextBlock VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold">Name</TextBlock>
+                                                    </Grid>
+                                                    <Grid  VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1">
+                                                        <TextBlock FontSize="14" VerticalAlignment="Top" Margin="0, 0, 0, 0" Padding="0,0,0,0" FontWeight="DemiBold" Text="{Binding Name}"/>
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid Grid.Column="1" Grid.Row="1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.00*"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                        <ColumnDefinition Width="0.00*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Row="0" Grid.Column="1">
+                                                        <TextBlock   FontSize="20" FontWeight="DemiBold">Kompatible Marken</TextBlock>
+                                                    </Grid>
+                                                    <Grid Grid.Row="1" Grid.Column="1">
+                                                        <TextBlock FontSize="14" FontWeight="DemiBold" Text="{Binding AssociatedTractors, Converter={StaticResource StringListConverter}}"/>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" >
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.2*"/>
+                                                    <RowDefinition Height="0.7*"/>
+                                                    <RowDefinition Height="0.1*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="10"/>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition MaxWidth="150"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Row="0" Grid.Column="0">
+                                                        <TextBlock FontSize="20" FontWeight="DemiBold">Preis</TextBlock>
+                                                    </Grid>
+                                                    <Grid Grid.Row="1" Grid.Column="0">
+                                                        <TextBlock FontSize="14" FontWeight="DemiBold" Text="{Binding Price, StringFormat={}{0}€}"/>
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="2">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="0.1*"/>
+                                                        <RowDefinition Height="0.1*"/>
+                                                        <RowDefinition Height="0.7*"/>
+                                                        <RowDefinition Height="0.1*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.2*"/>
+                                                        <ColumnDefinition Width="0.8*"/>
+                                                        <ColumnDefinition Width="0.2*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Row="2" Grid.Column="1">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="0.2*"/>
+                                                            <RowDefinition Height="0.8*"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="LEft" >
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="0.125*"/>
+                                                                <ColumnDefinition Width="0.875*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="0.028*"/>
+                                                                <RowDefinition Height="0.972*"/>
+                                                            </Grid.RowDefinitions>
+                                                            <ui:SymbolIcon  Grid.Row="1" Grid.Column="0" FontSize="15" Symbol="Info16"/>
+                                                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12"  Text="{Binding Stock, StringFormat={}Noch {0} Stück auf Lager}"/>
+                                                        </Grid>
+                                                        <ui:NumberBox Grid.Row="1" Grid.Column="0" IntegersOnly="True" Value="0" Min="1" Max="{Binding Stock}"/>
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="0.5*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.1*"/>
+                                                        <ColumnDefinition Width="0.2*"/>
+                                                        <ColumnDefinition Width="0.3*"/>
+                                                        <ColumnDefinition Width="0.4*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Row="0" VerticalAlignment="Center" Grid.Column="2">
+                                                        <ui:Button Content="Kaufen" Icon="Cart20" FontSize="16" CommandParameter="{Binding}" Command="{Binding ViewModel.AddToCartCommand, RelativeSource={RelativeSource AncestorType={x:Type local:AddonPage}}}"/>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Width="Auto" Grid.Row="1" Grid.Column="3"></Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
+        
+        
     </Grid>
 </ui:UiPage>

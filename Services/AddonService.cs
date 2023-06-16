@@ -21,5 +21,11 @@ public class AddonService
             .ToList();
     }
 
+    public List<TractorAddon> GetFilteredAddons(List<string> ManufacturerFilter) 
+    {
+        return _context.TractorAddons
+            .Where(TractorAddon => TractorAddon.Stock > 0)
+            .ToList();
+    }
 
 }
