@@ -8,6 +8,8 @@ namespace TractorMarket.Services;
 
 public class AddonService
 {
+    public static string RelatedMarketProduct = string.Empty;
+
     private readonly DataContext _context;
 
     public AddonService(DataContext context)

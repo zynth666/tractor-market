@@ -117,8 +117,6 @@ namespace TractorMarket.ViewModels
 
         public void UpdateAllAddons(string addon_in, bool selected_in)
         {
-            Debug.WriteLine("UPDATE ALL ADDONS");
-
             if (selected_in == true)
             {
                 AddonFilters.Add(addon_in);
@@ -127,9 +125,7 @@ namespace TractorMarket.ViewModels
             {
                 AddonFilters.Remove(addon_in);
             }
-
             AllAddons = _addonService.GetFilteredAddons(AddonFilters);
-            Debug.WriteLine(AllAddons);
         }
 
         public AddonViewModel(AddonService addonService, INavigationService navigationService, CartService cartService)
@@ -144,19 +140,185 @@ namespace TractorMarket.ViewModels
         private void OpenImageViewer(TractorAddon tractoraddon_in)
         {
             ImageViewerService.Name = tractoraddon_in.Name;
+            ImageViewerService.Category = "addon";
             _navigationService.Navigate(typeof(ImageViewerPage));
         }
 
 
         public void OnNavigatedTo()
         {
+            AddonFilters.Clear();
 
-          
+
+            if(AddonService.RelatedMarketProduct == "Claas")
+            {
+                DeutzIsChecked = false;
+                FendtIsChecked = false;
+                JCBIsChecked = false;
+                JohnDeereIsChecked = false;
+                KubotaIsChecked = false;
+                LindnerIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                NewHollandIsChecked = false;
+                SteyrIsChecked = false;
+                ValtraIsChecked = false;
+
+                ClaasIsChecked = true;
+            }else if(AddonService.RelatedMarketProduct == "Deutz")
+            {
+                ClaasIsChecked = false;
+                FendtIsChecked = false;
+                JCBIsChecked = false;
+                JohnDeereIsChecked = false;
+                KubotaIsChecked = false;
+                LindnerIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                NewHollandIsChecked = false;
+                SteyrIsChecked = false;
+                ValtraIsChecked = false;
+
+                DeutzIsChecked = true;  
+            }
+            else if (AddonService.RelatedMarketProduct == "Fendt")
+            {
+                ClaasIsChecked = false;
+                DeutzIsChecked = false;
+                JCBIsChecked = false;
+                JohnDeereIsChecked = false;
+                KubotaIsChecked = false;
+                LindnerIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                NewHollandIsChecked = false;
+                SteyrIsChecked = false;
+                ValtraIsChecked = false;
+
+                FendtIsChecked = true;
+            }
+            else if (AddonService.RelatedMarketProduct == "JCB")
+            {
+                ClaasIsChecked = false;
+                DeutzIsChecked = false;
+                FendtIsChecked = false;
+                JohnDeereIsChecked = false;
+                KubotaIsChecked = false;
+                LindnerIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                NewHollandIsChecked = false;
+                SteyrIsChecked = false;
+                ValtraIsChecked = false;
+
+                JCBIsChecked = true;
+            }
+            else if (AddonService.RelatedMarketProduct == "John Deere")
+            {
+                ClaasIsChecked = false;
+                DeutzIsChecked = false;
+                FendtIsChecked = false;
+                JCBIsChecked = false;
+                KubotaIsChecked = false;
+                LindnerIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                NewHollandIsChecked = false;
+                SteyrIsChecked = false;
+                ValtraIsChecked = false;
+
+                JohnDeereIsChecked = true;
+            }
+            else if (AddonService.RelatedMarketProduct == "Kubota")
+            {
+                ClaasIsChecked = false;
+                DeutzIsChecked = false;
+                FendtIsChecked = false;
+                JCBIsChecked = false;
+                JohnDeereIsChecked = false;
+                LindnerIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                NewHollandIsChecked = false;
+                SteyrIsChecked = false;
+                ValtraIsChecked = false;
+
+                KubotaIsChecked = true; 
+            }
+            else if (AddonService.RelatedMarketProduct == "Lindner")
+            {
+                ClaasIsChecked = false;
+                DeutzIsChecked = false;
+                FendtIsChecked = false;
+                JCBIsChecked = false;
+                JohnDeereIsChecked = false;
+                KubotaIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                NewHollandIsChecked = false;
+                SteyrIsChecked = false;
+                ValtraIsChecked = false;
+
+                LindnerIsChecked = true;
+            }
+            else if (AddonService.RelatedMarketProduct == "Massey Ferguson")
+            {
+                ClaasIsChecked = false;
+                DeutzIsChecked = false;
+                FendtIsChecked = false;
+                JCBIsChecked = false;
+                JohnDeereIsChecked = false;
+                KubotaIsChecked = false;
+                LindnerIsChecked = false;
+                NewHollandIsChecked = false;
+                SteyrIsChecked = false;
+                ValtraIsChecked = false;
+
+                MasseyFergusonIsChecked = true;
+            }
+            else if (AddonService.RelatedMarketProduct == "New Holland")
+            {
+                ClaasIsChecked = false;
+                DeutzIsChecked = false;
+                FendtIsChecked = false;
+                JCBIsChecked = false;
+                JohnDeereIsChecked = false;
+                KubotaIsChecked = false;
+                LindnerIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                SteyrIsChecked = false;
+                ValtraIsChecked = false;
+
+                NewHollandIsChecked = true;
+            }
+            else if (AddonService.RelatedMarketProduct == "Steyr")
+            {
+                ClaasIsChecked = false;
+                DeutzIsChecked = false;
+                FendtIsChecked = false;
+                JCBIsChecked = false;
+                JohnDeereIsChecked = false;
+                KubotaIsChecked = false;
+                LindnerIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                NewHollandIsChecked = false;
+                ValtraIsChecked = false;
+
+                SteyrIsChecked = true;
+            }
+            else if (AddonService.RelatedMarketProduct == "Valtra")
+            {
+                ClaasIsChecked = false;
+                DeutzIsChecked = false;
+                FendtIsChecked = false;
+                JCBIsChecked = false;
+                JohnDeereIsChecked = false;
+                KubotaIsChecked = false;
+                LindnerIsChecked = false;
+                MasseyFergusonIsChecked = false;
+                NewHollandIsChecked = false;
+                SteyrIsChecked = false;
+
+                ValtraIsChecked = true;
+            }
         }
 
         public void OnNavigatedFrom()
         {
-
+            AddonService.RelatedMarketProduct = "";
         }
 
         [RelayCommand]

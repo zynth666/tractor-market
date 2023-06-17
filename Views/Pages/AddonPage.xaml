@@ -95,8 +95,8 @@
              </Expander>
         </Grid>
 
-        <Grid  Grid.Column="0" Grid.Row="1">
-            <ListView Background="Yellow" x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" ItemsSource="{Binding ViewModel.AllAddons}">
+        
+            <ListView Grid.Column="0" Grid.Row="1" x:Name="MarketListView" ItemContainerStyle="{StaticResource {x:Type ListViewItem}}" ItemsSource="{Binding ViewModel.AllAddons}">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type entities:TractorAddon}" >
                         <Border CornerRadius="5" Background="{DynamicResource ControlFillColorDefaultBrush}">
@@ -139,7 +139,7 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition MaxWidth="20" Width="0.05*"/>
                                                 <ColumnDefinition MaxWidth="1000" Width="0.45*"/>
-                                                <ColumnDefinition MaxWidth="500" Width="0.5*"/>
+                                                <ColumnDefinition Width="0.3*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="0.2*"/>
@@ -147,7 +147,7 @@
                                                 <RowDefinition Height="0.1*"/>
                                             </Grid.RowDefinitions>
                                             <Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0"></Grid>
-                                            <Grid  HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="1" >
+                                            <Grid HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="1" >
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition MaxWidth="200" MinWidth="130"/>
                                                     <ColumnDefinition/>
@@ -187,7 +187,7 @@
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
-                                            <Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" >
+                                            <Grid   Grid.Column="2" Grid.Row="0"  Grid.RowSpan="3" >
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="0.2*"/>
                                                     <RowDefinition Height="0.7*"/>
@@ -197,7 +197,7 @@
                                                     <ColumnDefinition />
                                                     <ColumnDefinition Width="10"/>
                                                     <ColumnDefinition />
-                                                    <ColumnDefinition MaxWidth="150"/>
+                                                    <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
                                                 <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">
                                                     <Grid.RowDefinitions>
@@ -270,7 +270,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Grid>
+        
         
         
         
