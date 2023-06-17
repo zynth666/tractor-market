@@ -252,13 +252,31 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock
                 FontSize="24"
                 Grid.Column="0"
                 Text="{Binding ViewModel.TotalPrice, StringFormat={}Gesamtsumme: {0} €}"
             />
-            <ui:Button Grid.Column="1" Content="Kauf abschließen" Command="{Binding ViewModel.CheckoutCommand}" Icon="Cart20" HorizontalAlignment="Right" FontSize="20" />
+            <TextBlock
+                Grid.Column="1"
+                FontSize="24"
+                Text="Ihr Budget ist zu niedrig."
+                Foreground="Red"
+            >
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ViewModel.HasNotEnoughBudget, RelativeSource={RelativeSource AncestorType={x:Type local:CartPage}}}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <ui:Button Grid.Column="2" Content="Kauf abschließen" Command="{Binding ViewModel.CheckoutCommand}" Icon="Cart20" HorizontalAlignment="Right" FontSize="20" />
         </Grid>
     </Grid>
 </ui:UiPage>

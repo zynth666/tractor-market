@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics;
 using TractorMarket.Entities;
 using TractorMarket.Helpers;
 using TractorMarket.Models;
@@ -18,6 +19,7 @@ public partial class CartViewModel : ObservableObject, INavigationAware
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(CheckoutCommand))]
+    [NotifyPropertyChangedFor(nameof(HasNotEnoughBudget))]
     private double _totalPrice;
 
     private readonly INavigationService _navigationService;
@@ -30,6 +32,9 @@ public partial class CartViewModel : ObservableObject, INavigationAware
 
     [ObservableProperty]
     private bool _isNotAdmin = !UserService.LoggedInUser!.IsAdmin;
+
+    [ObservableProperty]
+    private bool _hasNotEnoughBudget;
 
     public CartViewModel(TractorService tractorService, INavigationService navigationService, CartService cartService)
     {
@@ -59,7 +64,9 @@ public partial class CartViewModel : ObservableObject, INavigationAware
     private bool HasEnoughBudgetToCheckout()
     {
         double totalPrice = GetTotalByAccount();
-        return totalPrice <= UserService.LoggedInUser!.Budget && totalPrice != 0;
+        bool hasNotEnoughBudget = totalPrice >= UserService.LoggedInUser!.Budget && totalPrice != 0;
+        HasNotEnoughBudget = hasNotEnoughBudget;
+        return !hasNotEnoughBudget;
     }
 
     public void OnNavigatedTo()
