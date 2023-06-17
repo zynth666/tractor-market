@@ -31,9 +31,6 @@ namespace TractorMarket.ViewModels
         private List<TractorAddon> _allAddons = new List<TractorAddon>();
 
         [ObservableProperty]
-        private bool _selectedQuantity;
-
-        [ObservableProperty]
         private bool _claasIsChecked;
 
         [ObservableProperty]
@@ -132,8 +129,10 @@ namespace TractorMarket.ViewModels
                 AddonFilters.Remove(addon_in);
             }
 
-            if(IsAdmin)
+            Debug.WriteLine("AMENA ZIGGI 3");
+            if (IsAdmin)
             {
+
                 AllAddons = _addonService.GetFilteredAdminAddons(AddonFilters);
             }
             else
@@ -147,6 +146,8 @@ namespace TractorMarket.ViewModels
             _navigationService = navigationService;
             _cartService = cartService;
             _addonService = addonService;
+
+            Debug.WriteLine("AMENA ZIGGI 1");
 
             if(IsAdmin)
             {
@@ -170,7 +171,10 @@ namespace TractorMarket.ViewModels
         {
             AddonFilters.Clear();
 
-            if(AddonService.RelatedMarketProduct != "" )
+            IsAdmin = UserService.LoggedInUser!.IsAdmin;
+            IsNotAdmin = !UserService.LoggedInUser!.IsAdmin;
+
+            if (AddonService.RelatedMarketProduct != "" )
             {
                 DeutzIsChecked = false;
                 FendtIsChecked = false;
@@ -184,6 +188,7 @@ namespace TractorMarket.ViewModels
                 ValtraIsChecked = false;
                 ClaasIsChecked = false;
             }
+
 
             if (AddonService.RelatedMarketProduct == "Claas")
             {
@@ -228,6 +233,28 @@ namespace TractorMarket.ViewModels
             {
                 ValtraIsChecked = true;
             }
+
+
+        
+
+            if (ClaasIsChecked == true || DeutzIsChecked == true || FendtIsChecked == true || JCBIsChecked == true || JohnDeereIsChecked == true || KubotaIsChecked == true || LindnerIsChecked == true || MasseyFergusonIsChecked == true || NewHollandIsChecked == true || SteyrIsChecked == true || ValtraIsChecked == true)
+            {
+
+            }
+            else
+            {
+                Debug.WriteLine("AMENA ZIGGI 2");
+
+                if (IsAdmin)
+                {
+                    AllAddons = _addonService.GetAllAdminAddons();
+                }
+                else
+                {
+                    AllAddons = _addonService.GetAllAddons();
+                }
+            }
+                
         }
 
         public void OnNavigatedFrom()

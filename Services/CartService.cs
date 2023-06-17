@@ -1,4 +1,5 @@
-﻿using TractorMarket.Data;
+﻿using System.Diagnostics;
+using TractorMarket.Data;
 using TractorMarket.Entities;
 using TractorMarket.Helpers;
 using TractorMarket.Models;
@@ -109,8 +110,12 @@ public class CartService
     /// <param name="cart">User shopping cart.</param>
     private void RemoveSoldItemsFromStock(DeepObservableCollection<CartItem<ItemisableBaseEntity>> cart)
     {
+        
+
         foreach (CartItem<ItemisableBaseEntity> cartItem in cart)
         {
+            Debug.WriteLine(" REMOVE SOLD ITEMD FROM STOCK!!! : "+cartItem.Item.Name);
+
             cartItem.Item.Stock -= cartItem.Quantity;
             UpdateCartItemByItemType(cartItem);
         }
@@ -123,14 +128,21 @@ public class CartService
     /// <param name="cartItem">The CartItem to update.</param>
     private void UpdateCartItemByItemType(CartItem<ItemisableBaseEntity> cartItem)
     {
+
         if (cartItem.Item.GetType() == typeof(Tractor))
         {
             _dataContext.Set<Tractor>().Update(cartItem.Item as Tractor);
+            Debug.WriteLine("UPDATE CART1: " + cartItem.Item.Name + "  " + cartItem.Item.Stock);
+
         }
         else
         {
             _dataContext.Set<TractorAddon>().Update(cartItem.Item as TractorAddon);
+            Debug.WriteLine("UPDATE CART2: " + cartItem.Item.Name + "  " + cartItem.Item.Stock);
+
         }
+
+        _dataContext.SaveChanges();
     }
 
     /// <summary>

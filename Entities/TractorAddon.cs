@@ -15,6 +15,7 @@ public class TractorAddon : ItemisableBaseEntity
     public override double Price { get; set; }
     public override int Stock { get; set; }
 
+
     [NotMapped]
     public override double AdminPrice
     {

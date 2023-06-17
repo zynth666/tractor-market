@@ -30,6 +30,7 @@ public class Tractor : ItemisableBaseEntity
         }
     }
 
+
     [NotMapped]
     public override double AdminPrice
     {
