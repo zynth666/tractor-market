@@ -37,7 +37,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </ui:UiPage.Resources>
     <Grid Margin="56,0">
         <Grid.ColumnDefinitions>
@@ -108,14 +107,12 @@
                             <Run Text="PS"/>
                         </TextBlock>
                         <Slider Minimum="100" Maximum="700" IsSnapToTickEnabled="True" TickFrequency="50" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MaxPsSlider, Mode=TwoWay}" Grid.Row="4" Grid.Column="2"></Slider>
-
                         <TextBlock Text="Baujahr" Grid.Row="0" Grid.Column="3"/>
                         <TextBlock Grid.Row="1" Grid.Column="3">
                             <Run Text="Min Baujahr: "/>
                             <Run Text="{Binding ViewModel.MinJahrSlider, Mode=TwoWay}"/>
                         </TextBlock>
                         <Slider Minimum="1999" Maximum="2021" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="Both" Margin="0, 0, 20, 0" Value="{Binding ViewModel.MinJahrSlider, Mode=TwoWay}" Grid.Row="2" Grid.Column="3"></Slider>
-
                         <TextBlock Grid.Row="3" Grid.Column="3">
                             <Run Text="Max: "/>
                             <Run Text="{Binding ViewModel.MaxJahrSlider, Mode=TwoWay}"/>
@@ -154,7 +151,6 @@
                                     <Grid.InputBindings>
                                         <MouseBinding CommandParameter="{Binding}" Gesture="LeftClick" Command="{Binding ViewModel.OpenImageViewerCommand, Source={x:Reference Name=Market_Page}}" />
                                     </Grid.InputBindings>
-
                                     <Border CornerRadius="15">
                                         <Image Height="125" Width="125" Stretch="UniformToFill" Source="{Binding Type, Converter={StaticResource ImagePathHelper}}">
                                             <Image.Clip>

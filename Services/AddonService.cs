@@ -30,12 +30,19 @@ public class AddonService
             .ToList();
     }
 
+    public List<TractorAddon> GetAllAdminAddons()
+    {
+        return _context.TractorAddons
+            .ToList();
+    }
+
     /// <summary>
     /// Gets a filtered list of TractorAddons that are in Stock.
     /// Checks if a list of Manufacturers is contained inside of the Addons Associated Tractors.
     /// </summary>
     /// <param name="ManufacturerFilter">A list of Manufacturer names, i.e. "Claas".</param>
     /// <returns>A list of TractorAddons.</returns>
+    /// 
     public List<TractorAddon> GetFilteredAddons(List<string> ManufacturerFilter) 
     {
         var filteredAddons = _context.TractorAddons
@@ -44,6 +51,16 @@ public class AddonService
             .Where(addons => addons.Stock > 0)
             .ToList();
             
+        return filteredAddons;
+    }
+
+    public List<TractorAddon> GetFilteredAdminAddons(List<string> ManufacturerFilter)
+    {
+        var filteredAddons = _context.TractorAddons
+            .AsEnumerable()
+            .Where(addons => addons.AssociatedTractors.Intersect(ManufacturerFilter).Count() == ManufacturerFilter.Count)
+            .ToList();
+
         return filteredAddons;
     }
 

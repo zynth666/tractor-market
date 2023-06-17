@@ -18,8 +18,14 @@ namespace TractorMarket.ViewModels
         private INavigationService _navigationService;
         private AddonService _addonService;
         private CartService _cartService;
-
         public List<string> AddonFilters = new();
+
+
+        [ObservableProperty]
+        private bool _isAdmin = UserService.LoggedInUser!.IsAdmin;
+
+        [ObservableProperty]
+        private bool _isNotAdmin = !UserService.LoggedInUser!.IsAdmin;
 
         [ObservableProperty]
         private List<TractorAddon> _allAddons = new List<TractorAddon>();
@@ -125,7 +131,15 @@ namespace TractorMarket.ViewModels
             {
                 AddonFilters.Remove(addon_in);
             }
-            AllAddons = _addonService.GetFilteredAddons(AddonFilters);
+
+            if(IsAdmin)
+            {
+                AllAddons = _addonService.GetFilteredAdminAddons(AddonFilters);
+            }
+            else
+            {
+                AllAddons = _addonService.GetFilteredAddons(AddonFilters);
+            }
         }
 
         public AddonViewModel(AddonService addonService, INavigationService navigationService, CartService cartService)
@@ -133,7 +147,15 @@ namespace TractorMarket.ViewModels
             _navigationService = navigationService;
             _cartService = cartService;
             _addonService = addonService;
-            AllAddons = _addonService.GetAllAddons();
+
+            if(IsAdmin)
+            {
+                AllAddons = _addonService.GetAllAdminAddons();
+            }
+            else
+            {
+                AllAddons = _addonService.GetAllAddons();
+            }
         }
 
         [RelayCommand]
@@ -144,13 +166,11 @@ namespace TractorMarket.ViewModels
             _navigationService.Navigate(typeof(ImageViewerPage));
         }
 
-
         public void OnNavigatedTo()
         {
             AddonFilters.Clear();
 
-
-            if(AddonService.RelatedMarketProduct == "Claas")
+            if(AddonService.RelatedMarketProduct != "" )
             {
                 DeutzIsChecked = false;
                 FendtIsChecked = false;
@@ -162,156 +182,50 @@ namespace TractorMarket.ViewModels
                 NewHollandIsChecked = false;
                 SteyrIsChecked = false;
                 ValtraIsChecked = false;
+                ClaasIsChecked = false;
+            }
 
+            if (AddonService.RelatedMarketProduct == "Claas")
+            {
                 ClaasIsChecked = true;
             }else if(AddonService.RelatedMarketProduct == "Deutz")
             {
-                ClaasIsChecked = false;
-                FendtIsChecked = false;
-                JCBIsChecked = false;
-                JohnDeereIsChecked = false;
-                KubotaIsChecked = false;
-                LindnerIsChecked = false;
-                MasseyFergusonIsChecked = false;
-                NewHollandIsChecked = false;
-                SteyrIsChecked = false;
-                ValtraIsChecked = false;
-
                 DeutzIsChecked = true;  
             }
             else if (AddonService.RelatedMarketProduct == "Fendt")
             {
-                ClaasIsChecked = false;
-                DeutzIsChecked = false;
-                JCBIsChecked = false;
-                JohnDeereIsChecked = false;
-                KubotaIsChecked = false;
-                LindnerIsChecked = false;
-                MasseyFergusonIsChecked = false;
-                NewHollandIsChecked = false;
-                SteyrIsChecked = false;
-                ValtraIsChecked = false;
-
                 FendtIsChecked = true;
             }
             else if (AddonService.RelatedMarketProduct == "JCB")
             {
-                ClaasIsChecked = false;
-                DeutzIsChecked = false;
-                FendtIsChecked = false;
-                JohnDeereIsChecked = false;
-                KubotaIsChecked = false;
-                LindnerIsChecked = false;
-                MasseyFergusonIsChecked = false;
-                NewHollandIsChecked = false;
-                SteyrIsChecked = false;
-                ValtraIsChecked = false;
-
                 JCBIsChecked = true;
             }
             else if (AddonService.RelatedMarketProduct == "John Deere")
             {
-                ClaasIsChecked = false;
-                DeutzIsChecked = false;
-                FendtIsChecked = false;
-                JCBIsChecked = false;
-                KubotaIsChecked = false;
-                LindnerIsChecked = false;
-                MasseyFergusonIsChecked = false;
-                NewHollandIsChecked = false;
-                SteyrIsChecked = false;
-                ValtraIsChecked = false;
-
                 JohnDeereIsChecked = true;
             }
             else if (AddonService.RelatedMarketProduct == "Kubota")
             {
-                ClaasIsChecked = false;
-                DeutzIsChecked = false;
-                FendtIsChecked = false;
-                JCBIsChecked = false;
-                JohnDeereIsChecked = false;
-                LindnerIsChecked = false;
-                MasseyFergusonIsChecked = false;
-                NewHollandIsChecked = false;
-                SteyrIsChecked = false;
-                ValtraIsChecked = false;
-
                 KubotaIsChecked = true; 
             }
             else if (AddonService.RelatedMarketProduct == "Lindner")
             {
-                ClaasIsChecked = false;
-                DeutzIsChecked = false;
-                FendtIsChecked = false;
-                JCBIsChecked = false;
-                JohnDeereIsChecked = false;
-                KubotaIsChecked = false;
-                MasseyFergusonIsChecked = false;
-                NewHollandIsChecked = false;
-                SteyrIsChecked = false;
-                ValtraIsChecked = false;
-
                 LindnerIsChecked = true;
             }
             else if (AddonService.RelatedMarketProduct == "Massey Ferguson")
             {
-                ClaasIsChecked = false;
-                DeutzIsChecked = false;
-                FendtIsChecked = false;
-                JCBIsChecked = false;
-                JohnDeereIsChecked = false;
-                KubotaIsChecked = false;
-                LindnerIsChecked = false;
-                NewHollandIsChecked = false;
-                SteyrIsChecked = false;
-                ValtraIsChecked = false;
-
                 MasseyFergusonIsChecked = true;
             }
             else if (AddonService.RelatedMarketProduct == "New Holland")
             {
-                ClaasIsChecked = false;
-                DeutzIsChecked = false;
-                FendtIsChecked = false;
-                JCBIsChecked = false;
-                JohnDeereIsChecked = false;
-                KubotaIsChecked = false;
-                LindnerIsChecked = false;
-                MasseyFergusonIsChecked = false;
-                SteyrIsChecked = false;
-                ValtraIsChecked = false;
-
                 NewHollandIsChecked = true;
             }
             else if (AddonService.RelatedMarketProduct == "Steyr")
             {
-                ClaasIsChecked = false;
-                DeutzIsChecked = false;
-                FendtIsChecked = false;
-                JCBIsChecked = false;
-                JohnDeereIsChecked = false;
-                KubotaIsChecked = false;
-                LindnerIsChecked = false;
-                MasseyFergusonIsChecked = false;
-                NewHollandIsChecked = false;
-                ValtraIsChecked = false;
-
                 SteyrIsChecked = true;
             }
             else if (AddonService.RelatedMarketProduct == "Valtra")
             {
-                ClaasIsChecked = false;
-                DeutzIsChecked = false;
-                FendtIsChecked = false;
-                JCBIsChecked = false;
-                JohnDeereIsChecked = false;
-                KubotaIsChecked = false;
-                LindnerIsChecked = false;
-                MasseyFergusonIsChecked = false;
-                NewHollandIsChecked = false;
-                SteyrIsChecked = false;
-
                 ValtraIsChecked = true;
             }
         }

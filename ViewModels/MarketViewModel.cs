@@ -78,7 +78,6 @@ namespace TractorMarket.ViewModels
         private void ShowRelatedAddons(Tractor tractor_in)
         {
             AddonService.RelatedMarketProduct = tractor_in.Manufacturer;
-
             _navigationService.Navigate(typeof(AddonPage));
         }
 
@@ -111,12 +110,10 @@ namespace TractorMarket.ViewModels
             if (IsAdmin)
             {
                 Tractors = _tractorService.GetFilteredTractorsForAdmin(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
-
             }
             else
             {
                 Tractors = _tractorService.GetFilteredTractorsForCustomers(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
-
             }
         }
 
@@ -134,12 +131,10 @@ namespace TractorMarket.ViewModels
             if (IsAdmin)
             {
                 Tractors = _tractorService.GetFilteredTractorsForAdmin(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
-
             }
             else
             {
                 Tractors = _tractorService.GetFilteredTractorsForCustomers(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
-
             }
         }
 

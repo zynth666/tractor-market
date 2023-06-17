@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 
 
+
+
 namespace TractorMarket.Helpers
 {
+
+    /// <summary>
+    /// Does convert image name to image path
+    /// </summary>
     class ImagePathHelper : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -22,9 +28,7 @@ namespace TractorMarket.Helpers
                     string imagePath = $"pack://application:,,,/Assets/Images/Products/{convertedImageName}.jpg";
                     return imagePath;
                 }
-              
             }
-
             return null;
         }
 

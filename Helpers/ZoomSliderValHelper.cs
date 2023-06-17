@@ -10,6 +10,10 @@ using System.Windows.Data;
 
 namespace TractorMarket.Helpers
 {
+    /// <summary>
+    /// Does convert the image zoom value
+    /// </summary>
+
     class ZoomSliderValHelper : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
