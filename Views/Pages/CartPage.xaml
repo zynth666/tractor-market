@@ -216,7 +216,7 @@
                                                                                 <ui:SymbolIcon Grid.Row="0" Grid.RowSpan="2" FontSize="15" Grid.Column="0" Symbol="Info16"/>
                                                                                 <TextBlock Grid.Row="1" FontSize="12" Grid.Column="1" Text="{Binding Item.Stock, StringFormat={}Du hast {0} Stück auf Lager}"/>
                                                                             </Grid>
-                                                                            <ui:NumberBox Grid.Row="1" Grid.Column="1" IntegersOnly="True" Value="{Binding Quantity, Mode=TwoWay}" Min="1" Max="{Binding Item.Stock}"/>
+                                                                            <ui:NumberBox Grid.Row="1" Grid.Column="1" IntegersOnly="True" Value="{Binding Quantity, Mode=TwoWay}" Min="1"/>
                                                                         </Grid>
                                                                     </ControlTemplate>
                                                                 </Setter.Value>
