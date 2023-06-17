@@ -25,9 +25,6 @@ namespace TractorMarket.ViewModels
         private List<TractorAddon> _allAddons = new List<TractorAddon>();
 
         [ObservableProperty]
-        private bool _selectedQuantity;
-
-        [ObservableProperty]
         private bool _claasIsChecked;
 
         [ObservableProperty]
@@ -148,7 +145,6 @@ namespace TractorMarket.ViewModels
         public void OnNavigatedTo()
         {
             AddonFilters.Clear();
-
 
             if(AddonService.RelatedMarketProduct == "Claas")
             {
@@ -314,6 +310,8 @@ namespace TractorMarket.ViewModels
 
                 ValtraIsChecked = true;
             }
+
+            AllAddons = _addonService.GetFilteredAddons(AddonFilters);
         }
 
         public void OnNavigatedFrom()

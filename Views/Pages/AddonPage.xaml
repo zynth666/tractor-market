@@ -241,9 +241,9 @@
                                                                 <RowDefinition Height="0.972*"/>
                                                             </Grid.RowDefinitions>
                                                             <ui:SymbolIcon  Grid.Row="1" Grid.Column="0" FontSize="15" Symbol="Info16"/>
-                                                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12"  Text="{Binding Stock, StringFormat={}Noch {0} Stück auf Lager}"/>
+                                                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12"  Text="{Binding Stock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
                                                         </Grid>
-                                                        <ui:NumberBox Grid.Row="1" Grid.Column="0" IntegersOnly="True" Value="0" Min="1" Max="{Binding Stock}"/>
+                                                    <ui:NumberBox Value="{Binding SelectedQuantity, Mode=TwoWay}" Grid.Row="1" Grid.Column="0" IntegersOnly="True" Min="1" Max="{Binding Stock}"/>
                                                     </Grid>
                                                 </Grid>
                                                 <Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3">
