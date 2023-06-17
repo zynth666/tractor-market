@@ -26,7 +26,7 @@ namespace TractorMarket.ViewModels
         private int _minKmhSlider = 40;
 
         [ObservableProperty]
-        private int _maxKmhSlider = 65;
+        private int _maxKmhSlider = 80;
 
         [ObservableProperty]
         private int _minPsSlider = 100;
@@ -75,6 +75,15 @@ namespace TractorMarket.ViewModels
         }
 
         [RelayCommand]
+        private void ShowRelatedAddons(Tractor tractor_in)
+        {
+            AddonService.RelatedMarketProduct = tractor_in.Manufacturer;
+
+            _navigationService.Navigate(typeof(AddonPage));
+        }
+
+
+        [RelayCommand]
         public static void AddToCart(Tractor tractor)
         {
             CartItem<ItemisableBaseEntity> cartItem = new(tractor, tractor.SelectedQuantity);
@@ -99,7 +108,16 @@ namespace TractorMarket.ViewModels
             {
                 MinJahrSlider = MaxJahrSlider;
             }
-            Tractors = _tractorService.GetFilteredTractorsForCustomers(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
+            if (IsAdmin)
+            {
+                Tractors = _tractorService.GetFilteredTractorsForAdmin(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
+
+            }
+            else
+            {
+                Tractors = _tractorService.GetFilteredTractorsForCustomers(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
+
+            }
         }
 
         [RelayCommand]
@@ -108,12 +126,21 @@ namespace TractorMarket.ViewModels
             MinEurSlider = 95000;
             MaxEurSlider = 388000;
             MinKmhSlider = 40;
-            MaxKmhSlider = 65;
+            MaxKmhSlider = 80;
             MinPsSlider = 100;
             MaxPsSlider = 700;
             MinJahrSlider = 1999;
             MaxJahrSlider = 2021;
-            Tractors = _tractorService.GetFilteredTractorsForCustomers(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
+            if (IsAdmin)
+            {
+                Tractors = _tractorService.GetFilteredTractorsForAdmin(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
+
+            }
+            else
+            {
+                Tractors = _tractorService.GetFilteredTractorsForCustomers(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
+
+            }
         }
 
         private void UpdateTractorList()
