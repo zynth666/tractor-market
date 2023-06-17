@@ -72,6 +72,14 @@ public partial class CartViewModel : ObservableObject, INavigationAware
     public void OnNavigatedTo()
     {
         Cart = UserService.LoggedInUser!.Cart;
+
+        TotalPrice = GetTotalByAccount();
+
+        Cart.CollectionChanged += (_, _) =>
+        {
+            TotalPrice = GetTotalByAccount();
+            OnPropertyChanged(nameof(TotalPrice));
+        };
     }
 
     public void OnNavigatedFrom()
