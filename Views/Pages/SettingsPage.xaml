@@ -43,5 +43,13 @@
             FontWeight="Medium"
             Text="Über TractorMarket" />
         <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+        <TextBlock
+            Margin="0,24,0,10"
+            FontSize="20"
+            FontWeight="Medium"
+            Text="Gefahrenzone" />
+        <ui:Button Grid.Row="2" Command="{Binding ViewModel.RefreshDatabaseCommand}" Content="Datenbank zurücksetzen" Appearance="Danger" />
+
+        <ui:Snackbar Title="Title" Appearance="Secondary" />
     </StackPanel>
 </ui:UiPage>

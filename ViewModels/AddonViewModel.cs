@@ -235,8 +235,6 @@ namespace TractorMarket.ViewModels
             }
 
 
-        
-
             if (ClaasIsChecked == true || DeutzIsChecked == true || FendtIsChecked == true || JCBIsChecked == true || JohnDeereIsChecked == true || KubotaIsChecked == true || LindnerIsChecked == true || MasseyFergusonIsChecked == true || NewHollandIsChecked == true || SteyrIsChecked == true || ValtraIsChecked == true)
             {
 

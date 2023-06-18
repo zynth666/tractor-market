@@ -39,12 +39,6 @@ namespace TractorMarket.ViewModels
         }
 
         [RelayCommand]
-        private void OnRefreshDatabase()
-        {
-            _refreshDatabaseHelper.Execute();
-        }
-
-        [RelayCommand]
         private void OnDoLogin()
         {
             if (!_userService.LoginUser(UsernameInput, PasswordInput)) {

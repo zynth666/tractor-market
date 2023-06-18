@@ -17,12 +17,13 @@ namespace TractorMarket.Views.Windows
             get;
         }
 
-        public MainWindow(MainWindowViewModel viewModel, LoginViewModel loginViewModel, RegisterViewModel registerViewModel, ImageViewerViewModel imageviewerViewModel, IPageService pageService, INavigationService navigationService)
+        public MainWindow(MainWindowViewModel viewModel, LoginViewModel loginViewModel, RegisterViewModel registerViewModel, ImageViewerViewModel imageviewerViewModel, SettingsViewModel settingsViewModel, IPageService pageService, INavigationService navigationService)
         {
             ViewModel = viewModel;
             DataContext = this;
             loginViewModel.ShowNavigation += ShowNavigation;
             registerViewModel.ShowNavigation += ShowNavigation;
+            settingsViewModel.HideNavigation += HideNavigation;
             viewModel.HideNavigation += HideNavigation;
             imageviewerViewModel.ShowNavigation += ShowNavigation;
             imageviewerViewModel.HideNavigation += HideNavigation;

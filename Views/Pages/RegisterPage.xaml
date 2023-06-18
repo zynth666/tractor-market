@@ -28,16 +28,16 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*"/>
                 <ColumnDefinition Width="0.4*"/>
-                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.4*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*" />
-                <RowDefinition Height="0.2*" />
-                <RowDefinition Height="0.2*" />
-                <RowDefinition Height="0.2*" />
-                <RowDefinition Height="0.2*" />
+                <RowDefinition MaxHeight="50" Height="0.2*" />
+                <RowDefinition MaxHeight="50"  Height="0.2*" />
+                <RowDefinition MaxHeight="50"  Height="0.2*" />
+                <RowDefinition MaxHeight="50"  Height="0.2*" />
+                <RowDefinition MaxHeight="50"  Height="0.2*" />
             </Grid.RowDefinitions>
             <ui:TextBox Text="{Binding ViewModel.UsernameInput}" Grid.Column="1" Grid.Row="0" PlaceholderText="Benutzername" />
             <ui:PasswordBox Password="{Binding ViewModel.PasswordInput, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" PlaceholderText="Passwort" />
@@ -45,6 +45,5 @@
             <ui:Hyperlink Command="{Binding ViewModel.NavigateToLoginPageCommand}" Content="Zum Login" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" />
             <ui:Button Command="{Binding ViewModel.RegisterCommand}" Grid.Column="1" Grid.Row="4" Content="Registrieren" HorizontalAlignment="Center"/>
         </Grid>
-        <ui:Button Grid.Row="2" Command="{Binding ViewModel.RefreshDatabaseCommand}" Content="Datenbank zurücksetzen" Appearance="Danger" />
     </Grid>
 </ui:UiPage>

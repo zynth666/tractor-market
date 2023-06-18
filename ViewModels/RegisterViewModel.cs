@@ -11,7 +11,6 @@ namespace TractorMarket.ViewModels
 {
     public partial class RegisterViewModel : ObservableObject, INavigationAware
     {
-        private RefreshDatabase _refreshDatabaseHelper;
         private INavigationService _navigationService;
         private UserService _userService;
 
@@ -24,9 +23,8 @@ namespace TractorMarket.ViewModels
         [ObservableProperty]
         private int _budgetInput = 0;
 
-        public RegisterViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService, UserService userService)
+        public RegisterViewModel(INavigationService navigationService, UserService userService)
         {
-            _refreshDatabaseHelper = refreshDatabaseHelper;
             _navigationService = navigationService;
             _userService = userService;
         }
@@ -37,12 +35,6 @@ namespace TractorMarket.ViewModels
 
         public void OnNavigatedFrom()
         {
-        }
-
-        [RelayCommand]
-        private void OnRefreshDatabase()
-        {
-            _refreshDatabaseHelper.Execute();
         }
 
         [RelayCommand]
