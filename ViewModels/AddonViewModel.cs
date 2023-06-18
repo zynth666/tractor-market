@@ -225,22 +225,6 @@ public partial class AddonViewModel : ObservableObject, INavigationAware
         {
             ValtraIsChecked = true;
         }
-
-        if (
-            ClaasIsChecked ||
-            DeutzIsChecked ||
-            FendtIsChecked ||
-            JCBIsChecked ||
-            JohnDeereIsChecked ||
-            KubotaIsChecked ||
-            LindnerIsChecked ||
-            MasseyFergusonIsChecked ||
-            NewHollandIsChecked ||
-            SteyrIsChecked ||
-            ValtraIsChecked
-        ) {
-            return;
-        }
        
         if (IsAdmin)
         {

@@ -17,6 +17,7 @@
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
+    
     <Page.Resources>
         <helpers:ImagePathHelper x:Key="ImagePathHelper" />
         <helpers:StringListConverter x:Key="StringListConverter" />
@@ -40,8 +41,8 @@
             </Setter>
         </Style>
     </Page.Resources>
+    
     <Grid Margin="56,0">
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -58,11 +59,7 @@
                         <RowDefinition Height="0.175*"/>
                     </Grid.RowDefinitions>
 
-
-
-
                     <Grid Grid.Row="1">
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -89,8 +86,6 @@
                         <CheckBox Grid.Column="9" IsChecked="{Binding ViewModel.SteyrIsChecked}" Content="Steyr"/>
                         <CheckBox Grid.Column="10" IsChecked="{Binding ViewModel.ValtraIsChecked}" Content="Valtra"/>
                     </Grid>
-
-
                 </Grid>
             </Expander>
         </Grid>
@@ -187,7 +182,6 @@
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-
                                         <ContentControl 
                                             Grid.Column="2" Grid.Row="0"  Grid.RowSpan="3"
                                         >
@@ -198,8 +192,7 @@
                                                             <Setter Property="Template">
                                                                 <Setter.Value>
                                                                     <ControlTemplate>
-
-                                                                        <Grid  >
+                                                                        <Grid>
                                                                             <Grid.RowDefinitions>
                                                                                 <RowDefinition Height="0.2*"/>
                                                                                 <RowDefinition Height="0.7*"/>
@@ -254,7 +247,7 @@
                                                                                             <RowDefinition Height="0.972*"/>
                                                                                         </Grid.RowDefinitions>
                                                                                         <ui:SymbolIcon  Grid.Row="1" Grid.Column="0" FontSize="15" Symbol="Info16"/>
-                                                                                        <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12"  Text="{Binding Stock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
+                                                                                        <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" Text="{Binding Stock, Mode=TwoWay, StringFormat={}Noch {0} Stück auf Lager}"/>
                                                                                     </Grid>
                                                                                     <ui:NumberBox Value="{Binding SelectedQuantity, Mode=TwoWay}" Grid.Row="1" Grid.Column="0" IntegersOnly="True" Min="1" Max="{Binding Stock}"/>
                                                                                 </Grid>
@@ -282,7 +275,7 @@
                                                             <Setter Property="Template">
                                                                 <Setter.Value>
                                                                     <ControlTemplate>
-                                                                        <Grid  >
+                                                                        <Grid>
                                                                             <Grid.RowDefinitions>
                                                                                 <RowDefinition Height="0.2*"/>
                                                                                 <RowDefinition Height="0.7*"/>
@@ -357,10 +350,6 @@
                                                                                 </Grid>
                                                                             </Grid>
                                                                         </Grid>
-                                                                        
-                                                                        
-                                                                        
-                                                                        
                                                                     </ControlTemplate>
                                                                 </Setter.Value>
                                                             </Setter>
@@ -369,9 +358,6 @@
                                                 </Style>
                                             </ContentControl.Style>
                                         </ContentControl>
-
-
-                                        
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -381,9 +367,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-
-
-
     </Grid>
 </ui:UiPage>
