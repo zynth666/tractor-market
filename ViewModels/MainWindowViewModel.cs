@@ -40,6 +40,9 @@ public partial class MainWindowViewModel : ObservableObject
         _navigationService = navigationService;
     }
 
+    /// <summary>
+    /// Defines application wide data like title and navigation items and their actions.
+    /// </summary>
     private void InitializeViewModel()
     {
         ApplicationTitle = "Big Boys - TractorMarket";
@@ -80,18 +83,18 @@ public partial class MainWindowViewModel : ObservableObject
         {
             new NavigationItem()
             {
+                Content = "Einstellungen",
+                PageTag = "settings",
+                Icon = SymbolRegular.Settings24,
+                PageType = typeof(SettingsPage)
+            },
+            new NavigationItem()
+            {
                 Content = "Logout",
                 PageTag = "logout",
                 Icon = SymbolRegular.ArrowExit20,
                 Command = LogOutCommand
             },
-            new NavigationItem()
-            {
-                Content = "Einstellungen",
-                PageTag = "settings",
-                Icon = SymbolRegular.Settings24,
-                PageType = typeof(SettingsPage)
-            }
         };
 
         TrayMenuItems = new ObservableCollection<MenuItem>
@@ -107,6 +110,9 @@ public partial class MainWindowViewModel : ObservableObject
         _isInitialized = true;
     }
 
+    /// <summary>
+    /// Logs out currently logged in user and navigates back to the login page.
+    /// </summary>
     [RelayCommand]
     public void LogOut()
     {
