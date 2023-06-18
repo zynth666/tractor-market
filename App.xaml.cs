@@ -38,6 +38,9 @@ namespace TractorMarket
                 // Theme manipulation
                 services.AddSingleton<IThemeService, ThemeService>();
 
+                // Snackbar service
+                services.AddSingleton<ISnackbarService, SnackbarService>();
+
                 // TaskBar manipulation
                 services.AddSingleton<ITaskBarService, TaskBarService>();
 

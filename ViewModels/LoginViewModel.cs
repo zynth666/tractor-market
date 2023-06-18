@@ -12,7 +12,6 @@ namespace TractorMarket.ViewModels;
 public partial class LoginViewModel : ObservableObject, INavigationAware
 {
     private UserService _userService;
-    private RefreshDatabase _refreshDatabaseHelper;
     private INavigationService _navigationService;
 
     public event Action? ShowNavigation;
@@ -26,9 +25,8 @@ public partial class LoginViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private bool _hadErrorLoggingIn;
 
-    public LoginViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService, UserService userService)
+    public LoginViewModel(INavigationService navigationService, UserService userService)
     {
-        _refreshDatabaseHelper = refreshDatabaseHelper;
         _userService = userService;
         _navigationService = navigationService;
     }
@@ -40,12 +38,6 @@ public partial class LoginViewModel : ObservableObject, INavigationAware
     public void OnNavigatedFrom()
     {
 
-    }
-
-    [RelayCommand]
-    private void OnRefreshDatabase()
-    {
-        _refreshDatabaseHelper.Execute();
     }
 
     /// <summary>
