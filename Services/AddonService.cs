@@ -26,8 +26,6 @@ public class AddonService
     /// <returns>A list of TractorAddons.</returns>
     public List<TractorAddon> GetAllAddons()
     {
-        Debug.WriteLine("GET ALL ADDONS");
-
         return _context.TractorAddons
             .Where(TractorAddon => TractorAddon.Stock > 0)
             .ToList();
@@ -35,8 +33,6 @@ public class AddonService
 
     public List<TractorAddon> GetAllAdminAddons()
     {
-        Debug.WriteLine("GET ALL ADMIN ADDONS");
-
         return _context.TractorAddons
             .ToList();
     }
@@ -52,8 +48,6 @@ public class AddonService
         
         GetFilteredAddons(List<string> ManufacturerFilter) 
     {
-        Debug.WriteLine("GET ALL FILTERED ADDONS");
-
         var filteredAddons = _context.TractorAddons
             .AsEnumerable()
             .Where(addons => addons.AssociatedTractors.Intersect(ManufacturerFilter).Count() == ManufacturerFilter.Count)
@@ -65,8 +59,6 @@ public class AddonService
 
     public List<TractorAddon> GetFilteredAdminAddons(List<string> ManufacturerFilter)
     {
-        Debug.WriteLine("GET ALL FILTERED ADMIN ADDONS");
-
         var filteredAddons = _context.TractorAddons
             .AsEnumerable()
             .Where(addons => addons.AssociatedTractors.Intersect(ManufacturerFilter).Count() == ManufacturerFilter.Count)
@@ -74,5 +66,4 @@ public class AddonService
 
         return filteredAddons;
     }
-
 }

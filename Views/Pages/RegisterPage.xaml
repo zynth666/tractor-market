@@ -38,16 +38,16 @@
                 <ColumnDefinition Width="0.35*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.275*" />
-                <RowDefinition Height="0.275*" />
-                <RowDefinition Height="0.15*" />
-                <RowDefinition Height="0.15*" />
-                <RowDefinition Height="0.15*" />
+                <RowDefinition MaxHeight="60" Height="0.25*" />
+                <RowDefinition MaxHeight="60" Height="0.25*" />
+                <RowDefinition MaxHeight="60" Height="0.2*" />
+                <RowDefinition MaxHeight="60" Height="0.15*" />
+                <RowDefinition MaxHeight="60" Height="0.15*" />
             </Grid.RowDefinitions>
             <Grid Grid.Column="1" Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="0.3*"/>
                 </Grid.RowDefinitions>
                 
                 <ui:TextBox Grid.Row="0" Text="{Binding ViewModel.UsernameInput}" PlaceholderText="Benutzername" />
@@ -55,8 +55,8 @@
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="0.3*"/>
                 </Grid.RowDefinitions>
 
                 <ui:PasswordBox Grid.Row="0" Password="{Binding ViewModel.PasswordInput, Mode=TwoWay}" PlaceholderText="Passwort" />
