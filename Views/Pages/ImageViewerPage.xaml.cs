@@ -18,7 +18,7 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
     {
         get;
     }
-
+  
     public ImageViewerPage(ViewModels.ImageViewerViewModel viewModel)
     {
         ViewModel = viewModel;
@@ -30,6 +30,11 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
         ImageViewerIMG.LayoutUpdated += ImageViewerIMG_LayoutUpdated;
     }
 
+    /// <summary>
+    /// Saves initialized dimmensions of the image on load.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void ImageViewerIMG_Loaded(object sender, RoutedEventArgs e)
     {
         if (ViewerImgDimensionsLoaded == false)
@@ -42,6 +47,11 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
         }
     }
 
+    /// <summary>
+    /// Converts slider value and applies zoom.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void ImageViewerSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
         double newValue = 1 + (e.NewValue / 100);
@@ -50,7 +60,6 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
         {
             zoomGrid.Width = OuterGridImageViewer.ActualWidth * newValue;
             zoomGrid.Height = OuterGridImageViewer.ActualHeight * newValue;
-
         }
     }
 
@@ -58,6 +67,11 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
     {
     }
 
+    /// <summary>
+    /// Saves last mouse position and starts mouse capture on image click.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void ImageViewerScrollViewer_PreviewMouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Pressed)
@@ -68,6 +82,11 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
         }
     }
 
+    /// <summary>
+    /// Handles moving on zommed image relative to mouse drag.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void ImageViewerScrollViewer_PreviewMouseMove(object sender, MouseEventArgs e)
     {
         if (isDragging)
@@ -82,6 +101,11 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
         }
     }
 
+    /// <summary>
+    /// Stops dragging process on mouseup.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void ImageViewerScrollViewer_PreviewMouseUp(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Released)
