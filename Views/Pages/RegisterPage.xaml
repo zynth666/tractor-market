@@ -12,6 +12,11 @@
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
+    </Page.Resources>
+
     <Grid Margin="56,0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.4*" />
@@ -28,19 +33,35 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.4*"/>
-                <ColumnDefinition Width="0.2*"/>
-                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.35*"/>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.35*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition MaxHeight="50" Height="0.2*" />
-                <RowDefinition MaxHeight="50"  Height="0.2*" />
-                <RowDefinition MaxHeight="50"  Height="0.2*" />
-                <RowDefinition MaxHeight="50"  Height="0.2*" />
-                <RowDefinition MaxHeight="50"  Height="0.2*" />
+                <RowDefinition Height="0.275*" />
+                <RowDefinition Height="0.275*" />
+                <RowDefinition Height="0.15*" />
+                <RowDefinition Height="0.15*" />
+                <RowDefinition Height="0.15*" />
             </Grid.RowDefinitions>
-            <ui:TextBox Text="{Binding ViewModel.UsernameInput}" Grid.Column="1" Grid.Row="0" PlaceholderText="Benutzername" />
-            <ui:PasswordBox Password="{Binding ViewModel.PasswordInput, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" PlaceholderText="Passwort" />
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                
+                <ui:TextBox Grid.Row="0" Text="{Binding ViewModel.UsernameInput}" PlaceholderText="Benutzername" />
+                <TextBlock Grid.Row="1" TextAlignment="Center" Foreground="Red" Text="Benutzername muss mind. 3 Zeichen lang sein." Visibility="{Binding ViewModel.IsInvalidUsername, Converter={StaticResource VisibilityOfBool}}"/>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <ui:PasswordBox Grid.Row="0" Password="{Binding ViewModel.PasswordInput, Mode=TwoWay}" PlaceholderText="Passwort" />
+                <TextBlock Grid.Row="1" TextAlignment="Center" Foreground="Red" Text="Passwort muss mind. 8 Zeichen lang sein." Visibility="{Binding ViewModel.IsInvalidPassword, Converter={StaticResource VisibilityOfBool}}"/>
+            </Grid>
             <ui:NumberBox Value="{Binding ViewModel.BudgetInput, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" PlaceholderText="Initiales Budget" Max="999999999" IntegersOnly="True" SpinButtonsEnabled="False" />
             <ui:Hyperlink Command="{Binding ViewModel.NavigateToLoginPageCommand}" Content="Zum Login" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" />
             <ui:Button Command="{Binding ViewModel.RegisterCommand}" Grid.Column="1" Grid.Row="4" Content="Registrieren" HorizontalAlignment="Center"/>

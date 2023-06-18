@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Linq;
 using TractorMarket.Helpers;
 using TractorMarket.Services;
 using TractorMarket.Views.Pages;
@@ -18,10 +19,18 @@ namespace TractorMarket.ViewModels
 
         [ObservableProperty]
         private string _usernameInput = "";
+
         [ObservableProperty]
         private string _passwordInput = "";
+
         [ObservableProperty]
         private int _budgetInput = 0;
+
+        [ObservableProperty]
+        private bool _isInvalidUsername;
+
+        [ObservableProperty]
+        private bool _isInvalidPassword;
 
         public RegisterViewModel(INavigationService navigationService, UserService userService)
         {
@@ -37,10 +46,26 @@ namespace TractorMarket.ViewModels
         {
         }
 
+        /// <summary>
+        /// Attempts to register a new user, logs them in and navigates to their account page if user input is valid.
+        /// </summary>
         [RelayCommand]
         private void OnRegister()
         {
+            IsInvalidUsername = UsernameInput.Length < 3;
+            IsInvalidPassword = PasswordInput.Length < 8;
+
+            if (IsInvalidUsername ||  IsInvalidPassword)
+            {
+                return;
+            }
+
             _userService.RegisterUser(UsernameInput, PasswordInput, BudgetInput);
+
+            UsernameInput = string.Empty;
+            PasswordInput = string.Empty;
+            BudgetInput = 0;
+
             ShowNavigation?.Invoke();
             _navigationService.Navigate(typeof(AccountPage));
         }
