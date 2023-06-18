@@ -64,6 +64,8 @@ public partial class CartViewModel : ObservableObject, INavigationAware
     public void OnNavigatedTo()
     {
         Cart = UserService.LoggedInUser!.Cart;
+        IsAdmin = UserService.LoggedInUser!.IsAdmin;
+        IsNotAdmin = !UserService.LoggedInUser!.IsAdmin;
 
         TotalPrice = GetTotalByAccount();
 
