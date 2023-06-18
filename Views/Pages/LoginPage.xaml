@@ -14,6 +14,11 @@
     d:Background="{DynamicResource ApplicationBackgroundBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
+    </Page.Resources>
+
     <Grid Margin="56,0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />
@@ -38,9 +43,9 @@
         </Grid>
         <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.4*"/>
-                <ColumnDefinition Width="0.2*"/>
-                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.375*"/>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.375*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*" />
@@ -52,12 +57,14 @@
                     <RowDefinition MaxHeight="60"/>
                     <RowDefinition MaxHeight="60"/>
                     <RowDefinition MaxHeight="60"/>
+                    <RowDefinition MaxHeight="60"/>
                 </Grid.RowDefinitions>
 
                 <ui:TextBox Grid.Row="0" Text="{Binding ViewModel.UsernameInput}" x:Name="UserNameInput" PlaceholderText="Benutzername" />
                 <ui:PasswordBox Grid.Row="1" Password="{Binding ViewModel.PasswordInput, Mode=TwoWay}" PlaceholderText="Passwort" />
                 <ui:Hyperlink  Grid.Row="2" Command="{Binding ViewModel.NavigateToRegisterPageCommand}" Content="Hier registrieren" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <ui:Button Grid.Row="3" Command="{Binding ViewModel.DoLoginCommand}" Content="Login" HorizontalAlignment="Center"/>
+                <TextBlock TextAlignment="Center" Grid.Row="4" Foreground="Red" Text="Benutzername oder Passwort ungültig." Visibility="{Binding ViewModel.HadErrorLoggingIn, Converter={StaticResource VisibilityOfBool}}"/>
             </Grid>
         </Grid>
     </Grid>
