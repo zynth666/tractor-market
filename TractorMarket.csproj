@@ -11,7 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="applicationIcon.ico" />
     <Content Include="Data\TractorAddons.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
