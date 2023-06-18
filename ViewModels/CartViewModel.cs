@@ -53,14 +53,21 @@ public partial class CartViewModel : ObservableObject, INavigationAware
         return CartService.GetTotalPrice(Cart);
     }
 
+    /// <summary>
+    /// Checks if user has enough budget to checkout.
+    /// Also sets a helper flag (HasNotEnoughBudget) for the view, since you can't negate values in Binding expressions.
+    /// </summary>
+    /// <returns>Boolean if user has enough budget.</returns>
     private bool HasEnoughBudgetToCheckout()
     {
-        double totalPrice = GetTotalByAccount();
-        bool hasNotEnoughBudget = totalPrice >= UserService.LoggedInUser!.Budget && totalPrice != 0;
+        bool hasNotEnoughBudget = TotalPrice >= UserService.LoggedInUser!.Budget && TotalPrice != 0;
         HasNotEnoughBudget = hasNotEnoughBudget;
         return !hasNotEnoughBudget;
     }
 
+    /// <summary>
+    /// Reset certain Bindings when navigating to this view to get rid of stale data in case the logged in user has changed.
+    /// </summary>
     public void OnNavigatedTo()
     {
         Cart = UserService.LoggedInUser!.Cart;

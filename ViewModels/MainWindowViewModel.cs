@@ -10,109 +10,108 @@ using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
-namespace TractorMarket.ViewModels
+namespace TractorMarket.ViewModels;
+
+public partial class MainWindowViewModel : ObservableObject
 {
-    public partial class MainWindowViewModel : ObservableObject
+    private bool _isInitialized = false;
+    private INavigationService _navigationService;
+
+    [ObservableProperty]
+    private string _applicationTitle = string.Empty;
+
+    [ObservableProperty]
+    private ObservableCollection<INavigationControl> _navigationItems = new();
+
+    [ObservableProperty]
+    private ObservableCollection<INavigationControl> _navigationFooter = new();
+
+    [ObservableProperty]
+    private ObservableCollection<MenuItem> _trayMenuItems = new();
+
+    public event Action? HideNavigation;
+
+    public MainWindowViewModel(INavigationService navigationService, RefreshDatabase refreshDatabaseHelper)
     {
-        private bool _isInitialized = false;
-        private INavigationService _navigationService;
+        if (!_isInitialized)
+            InitializeViewModel();
 
-        [ObservableProperty]
-        private string _applicationTitle = string.Empty;
+        refreshDatabaseHelper.Execute();
+        _navigationService = navigationService;
+    }
 
-        [ObservableProperty]
-        private ObservableCollection<INavigationControl> _navigationItems = new();
+    private void InitializeViewModel()
+    {
+        ApplicationTitle = "Big Boys - TractorMarket";
 
-        [ObservableProperty]
-        private ObservableCollection<INavigationControl> _navigationFooter = new();
-
-        [ObservableProperty]
-        private ObservableCollection<MenuItem> _trayMenuItems = new();
-
-        public event Action? HideNavigation;
-
-        public MainWindowViewModel(INavigationService navigationService, RefreshDatabase refreshDatabaseHelper)
+        NavigationItems = new ObservableCollection<INavigationControl>
         {
-            if (!_isInitialized)
-                InitializeViewModel();
+            new NavigationItem()
+            {
+                Content = "Account",
+                PageTag = "account",
+                Icon = SymbolRegular.Person24,
+                PageType = typeof(AccountPage)
+            },
+            new NavigationItem()
+            {
+                Content = "Markt",
+                PageTag = "market",
+                Icon = SymbolRegular.VehicleTruckBag24,
+                PageType = typeof(MarketPage),
+            },
+            new NavigationItem()
+            {
+                Content = "Addon",
+                PageTag = "addon",
+                Icon = SymbolRegular.VehicleTruckCube24,
+                PageType = typeof(Views.Pages.AddonPage)
+            },
+            new NavigationItem()
+            {
+                Content = "Warenkorb",
+                PageTag = "cart",
+                Icon = SymbolRegular.Cart24,
+                PageType = typeof(CartPage),
+            }
+        };
 
-            refreshDatabaseHelper.Execute();
-            _navigationService = navigationService;
-        }
-
-        private void InitializeViewModel()
+        NavigationFooter = new ObservableCollection<INavigationControl>
         {
-            ApplicationTitle = "Big Boys - TractorMarket";
-
-            NavigationItems = new ObservableCollection<INavigationControl>
+            new NavigationItem()
             {
-                new NavigationItem()
-                {
-                    Content = "Account",
-                    PageTag = "account",
-                    Icon = SymbolRegular.Person24,
-                    PageType = typeof(AccountPage)
-                },
-                new NavigationItem()
-                {
-                    Content = "Markt",
-                    PageTag = "market",
-                    Icon = SymbolRegular.VehicleTruckBag24,
-                    PageType = typeof(MarketPage),
-                },
-                new NavigationItem()
-                {
-                    Content = "Addon",
-                    PageTag = "addon",
-                    Icon = SymbolRegular.VehicleTruckCube24,
-                    PageType = typeof(Views.Pages.AddonPage)
-                },
-                new NavigationItem()
-                {
-                    Content = "Warenkorb",
-                    PageTag = "cart",
-                    Icon = SymbolRegular.Cart24,
-                    PageType = typeof(CartPage),
-                }
-            };
-
-            NavigationFooter = new ObservableCollection<INavigationControl>
+                Content = "Logout",
+                PageTag = "logout",
+                Icon = SymbolRegular.ArrowExit20,
+                Command = LogOutCommand
+            },
+            new NavigationItem()
             {
-                new NavigationItem()
-                {
-                    Content = "Logout",
-                    PageTag = "logout",
-                    Icon = SymbolRegular.ArrowExit20,
-                    Command = LogOutCommand
-                },
-                new NavigationItem()
-                {
-                    Content = "Einstellungen",
-                    PageTag = "settings",
-                    Icon = SymbolRegular.Settings24,
-                    PageType = typeof(SettingsPage)
-                }
-            };
+                Content = "Einstellungen",
+                PageTag = "settings",
+                Icon = SymbolRegular.Settings24,
+                PageType = typeof(SettingsPage)
+            }
+        };
 
-            TrayMenuItems = new ObservableCollection<MenuItem>
-            {
-                new MenuItem
-                {
-                    Header = "Account",
-                    Tag = "tray_account",
-                    Icon = SymbolRegular.Person24
-                }
-            };
-
-            _isInitialized = true;
-        }
-
-        [RelayCommand]
-        public void LogOut()
+        TrayMenuItems = new ObservableCollection<MenuItem>
         {
-            UserService.LoggedInUser = null;
-            HideNavigation?.Invoke();
-            _navigationService.Navigate(typeof(LoginPage));
-        }
+            new MenuItem
+            {
+                Header = "Account",
+                Tag = "tray_account",
+                Icon = SymbolRegular.Person24
+            }
+        };
+
+        _isInitialized = true;
+    }
+
+    [RelayCommand]
+    public void LogOut()
+    {
+        UserService.LoggedInUser = null;
+        HideNavigation?.Invoke();
+        _navigationService.Navigate(typeof(LoginPage));
     }
 }

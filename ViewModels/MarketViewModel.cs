@@ -55,6 +55,9 @@ namespace TractorMarket.ViewModels
             _navigationService = navigationService;
         }
 
+        /// <summary>
+        /// Reset certain Bindings when navigating to this view to get rid of stale data in case the logged in user has changed.
+        /// </summary>
         public void OnNavigatedTo()
         {
             IsAdmin = UserService.LoggedInUser!.IsAdmin;
@@ -89,24 +92,29 @@ namespace TractorMarket.ViewModels
             CartService.AddToCart(UserService.LoggedInUser!.Cart, cartItem);
         }
 
+        /// <summary>
+        /// Applies all filters and refetches a filtered list of tractors depending on the currently logged in user.
+        /// </summary>
         [RelayCommand]
         public void ApplyFilter()
         {
-            if(MinEurSlider >= MaxEurSlider)
+            if (MinEurSlider >= MaxEurSlider)
             {
                 MinEurSlider = MaxEurSlider;
             }
-            else if(MinKmhSlider >= MaxKmhSlider)
+            else if (MinKmhSlider >= MaxKmhSlider)
             {
                 MinKmhSlider = MaxKmhSlider;
             }
-            else if(MinPsSlider >= MaxPsSlider)
+            else if (MinPsSlider >= MaxPsSlider)
             {
                 MinPsSlider = MaxPsSlider;
-            }else if(MinJahrSlider >= MaxJahrSlider)
+            }
+            else if (MinJahrSlider >= MaxJahrSlider)
             {
                 MinJahrSlider = MaxJahrSlider;
             }
+
             if (IsAdmin)
             {
                 Tractors = _tractorService.GetFilteredTractorsForAdmin(MinEurSlider, MaxEurSlider, MinKmhSlider, MaxKmhSlider, MinPsSlider, MaxPsSlider, MinJahrSlider, MaxJahrSlider);
@@ -117,6 +125,9 @@ namespace TractorMarket.ViewModels
             }
         }
 
+        /// <summary>
+        /// Resets all filters to their original values and refetches a filtered list of tractors depending on the currently logged in user.
+        /// </summary>
         [RelayCommand]
         public void ResetFilter()
         {
@@ -138,6 +149,9 @@ namespace TractorMarket.ViewModels
             }
         }
 
+        /// <summary>
+        /// Refetches a list of tractors depending on the currently logged in user.
+        /// </summary>
         private void UpdateTractorList()
         {
             if (IsAdmin)

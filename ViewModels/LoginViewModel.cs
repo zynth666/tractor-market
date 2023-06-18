@@ -7,58 +7,70 @@ using TractorMarket.Views.Pages;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
-namespace TractorMarket.ViewModels
+namespace TractorMarket.ViewModels;
+
+public partial class LoginViewModel : ObservableObject, INavigationAware
 {
-    public partial class LoginViewModel : ObservableObject, INavigationAware
+    private UserService _userService;
+    private RefreshDatabase _refreshDatabaseHelper;
+    private INavigationService _navigationService;
+
+    public event Action? ShowNavigation;
+
+    [ObservableProperty]
+    private string _usernameInput = "";
+
+    [ObservableProperty]
+    private string _passwordInput = "";
+
+    [ObservableProperty]
+    private bool _hadErrorLoggingIn;
+
+    public LoginViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService, UserService userService)
     {
-        private UserService _userService;
-        private RefreshDatabase _refreshDatabaseHelper;
-        private INavigationService _navigationService;
+        _refreshDatabaseHelper = refreshDatabaseHelper;
+        _userService = userService;
+        _navigationService = navigationService;
+    }
 
-        public event Action? ShowNavigation;
+    public void OnNavigatedTo()
+    {
+    }
 
-        [ObservableProperty]
-        private string _usernameInput = "";
-        [ObservableProperty]
-        private string _passwordInput = "";
+    public void OnNavigatedFrom()
+    {
 
-        public LoginViewModel(RefreshDatabase refreshDatabaseHelper, INavigationService navigationService, UserService userService)
-        {
-            _refreshDatabaseHelper = refreshDatabaseHelper;
-            _userService = userService;
-            _navigationService = navigationService;
+    }
+
+    [RelayCommand]
+    private void OnRefreshDatabase()
+    {
+        _refreshDatabaseHelper.Execute();
+    }
+
+    /// <summary>
+    /// Attempts to login the user and redirects them to the account page on success.
+    /// </summary>
+    [RelayCommand]
+    private void OnDoLogin()
+    {
+        if (!_userService.LoginUser(UsernameInput, PasswordInput)) {
+            HadErrorLoggingIn = true;
+            return;
         }
 
-        public void OnNavigatedTo()
-        {
-        }
+        HadErrorLoggingIn = false;
 
-        public void OnNavigatedFrom()
-        {
+        UsernameInput = string.Empty;
+        PasswordInput = string.Empty;
 
-        }
+        ShowNavigation?.Invoke();
+        _navigationService.Navigate(typeof(AccountPage));
+    }
 
-        [RelayCommand]
-        private void OnRefreshDatabase()
-        {
-            _refreshDatabaseHelper.Execute();
-        }
-
-        [RelayCommand]
-        private void OnDoLogin()
-        {
-            if (!_userService.LoginUser(UsernameInput, PasswordInput)) {
-                return;
-            }
-
-            ShowNavigation?.Invoke();
-            _navigationService.Navigate(typeof(AccountPage));
-        }
-
-        [RelayCommand]
-        private void OnNavigateToRegisterPage()
-        {
-            _navigationService.Navigate(typeof(RegisterPage));
-        }
+    [RelayCommand]
+    private void OnNavigateToRegisterPage()
+    {
+        _navigationService.Navigate(typeof(RegisterPage));
     }
 }

@@ -1,9 +1,7 @@
 ﻿using System.Windows;
-using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Wpf.Ui.Common.Interfaces;
-using System.Diagnostics;
 using System;
 
 namespace TractorMarket.Views.Pages;
@@ -14,7 +12,6 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
     private Point lastMousePosition;
     private double InitialViewerImgHeight;
     private double InitialViewerImgWidth;
-    private bool ImageViewerInitialized = false;
     private bool ViewerImgDimensionsLoaded = false;
 
     public ViewModels.ImageViewerViewModel ViewModel
@@ -41,8 +38,6 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
             zoomGrid.Width = OuterGridImageViewer.ActualWidth;
             InitialViewerImgHeight = zoomGrid.ActualHeight;
             InitialViewerImgWidth = zoomGrid.ActualWidth;
-            ViewModel.InitialViewerImgHeight = zoomGrid.ActualHeight;
-            ViewModel.InitialViewerImgWidth = zoomGrid.ActualWidth;
             ViewModel.inviewer = true;
         }
     }
@@ -98,8 +93,8 @@ public partial class ImageViewerPage : INavigableView<ViewModels.ImageViewerView
 
     private void Unloaded_ImageView(object sender, RoutedEventArgs e)
     {
-        zoomGrid.Width = ViewModel.InitialViewerImgWidth;
-        zoomGrid.Height = ViewModel.InitialViewerImgHeight;
+        zoomGrid.Width = InitialViewerImgWidth;
+        zoomGrid.Height = InitialViewerImgHeight;
         ImageViewerSlider.Value = 1;
     }
 
