@@ -41,14 +41,6 @@ public partial class CartViewModel : ObservableObject, INavigationAware
         _tractorService = tractorService;
         _cartService = cartService;
         _navigationService = navigationService;
-
-        TotalPrice = GetTotalByAccount();
-
-        Cart.CollectionChanged += (_, _) =>
-        {
-            TotalPrice = GetTotalByAccount();
-            OnPropertyChanged(nameof(TotalPrice));
-        };
     }
 
     private double GetTotalByAccount()
@@ -78,7 +70,6 @@ public partial class CartViewModel : ObservableObject, INavigationAware
         Cart.CollectionChanged += (_, _) =>
         {
             TotalPrice = GetTotalByAccount();
-            OnPropertyChanged(nameof(TotalPrice));
         };
     }
 
