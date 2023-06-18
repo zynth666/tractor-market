@@ -51,7 +51,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             new NavigationItem()
             {
-                Content = "Account",
+                Content = "Profil",
                 PageTag = "account",
                 Icon = SymbolRegular.Person24,
                 PageType = typeof(AccountPage)
@@ -65,7 +65,7 @@ public partial class MainWindowViewModel : ObservableObject
             },
             new NavigationItem()
             {
-                Content = "Addon",
+                Content = "Zubehör",
                 PageTag = "addon",
                 Icon = SymbolRegular.VehicleTruckCube24,
                 PageType = typeof(Views.Pages.AddonPage)
@@ -90,7 +90,7 @@ public partial class MainWindowViewModel : ObservableObject
             },
             new NavigationItem()
             {
-                Content = "Logout",
+                Content = "Abmelden",
                 PageTag = "logout",
                 Icon = SymbolRegular.ArrowExit20,
                 Command = LogOutCommand
@@ -101,7 +101,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             new MenuItem
             {
-                Header = "Account",
+                Header = "Profil",
                 Tag = "tray_account",
                 Icon = SymbolRegular.Person24
             }
